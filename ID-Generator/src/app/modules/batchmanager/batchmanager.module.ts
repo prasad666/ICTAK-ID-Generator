@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SharedModule } from 'src/app/shared/shared.module';
 
-import { AdminRoutingModule } from './admin-routing.module';
+import { BatchmanagerRoutingModule } from './batchmanager-routing.module';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 
@@ -12,8 +11,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
   ],
   imports: [
     CommonModule,
-    AdminRoutingModule,
-    SharedModule
+    BatchmanagerRoutingModule
   ]
 })
-export class AdminModule { }
+export class BatchmanagerModule { }

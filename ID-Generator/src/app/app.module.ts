@@ -5,29 +5,26 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { GuestHeaderComponent } from './shared/guest-header/guest-header.component';
-import { GuestFooterComponent } from './shared/guest-footer/guest-footer.component';
-import { GuestNavComponent } from './shared/guest-nav/guest-nav.component';
-import { AuthNavComponent } from './shared/auth-nav/auth-nav.component';
-import { AuthHeaderComponent } from './shared/auth-header/auth-header.component';
-import { AuthFooterComponent } from './shared/auth-footer/auth-footer.component';
-
+import { SharedModule } from './shared/shared.module';
+import { CommonModule } from '@angular/common';
+import { PagesModule } from './modules/pages/pages.module';
+import { AdminModule } from './modules/admin/admin.module';
 @NgModule({
   declarations: [
     AppComponent,
-    GuestHeaderComponent,
-    GuestFooterComponent,
-    GuestNavComponent,
-    AuthNavComponent,
-    AuthHeaderComponent,
-    AuthFooterComponent,
+    
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    SharedModule,
+    PagesModule,
+    AdminModule,
+    CommonModule
   ],
+  exports: [SharedModule],
   providers: [],
   bootstrap: [AppComponent]
 })
