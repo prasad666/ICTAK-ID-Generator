@@ -9,28 +9,33 @@ import { AuthService } from '../services/auth.service';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private auth: AuthService) { }
+  constructor(private auth: AuthService) { 
+    const body = document.getElementsByTagName('body')[0];
+    body.classList.add('bg-primary');
+   }
 
   ngOnInit(): void {
   }
 
-  // form = new FormGroup({
-  //   email: new FormControl(null, [Validators.required, Validators.email]),
-  //   password: new FormControl(null, Validators.required)
-  // });
+  form = new FormGroup({
+    email: new FormControl(null, [Validators.required, Validators.email]),
+    password: new FormControl(null, Validators.required),
+    remember: new FormControl(false)
 
-  // onSubmit(){
-  //   this.auth.login(this.form.value).subscribe({
-  //     next: (data:any) => {
-  //       this.auth.storeUserData(data.token, data.user);
-  //       console.log(data);
-  //       alert('success')   //change this..redirect to home     
-  //     },
-  //     error: (err:any) => {
-  //       console.log(err);
-  //       alert('failed')// change this
+  });
+
+  onSubmit(){
+    this.auth.login(this.form.value).subscribe({
+      next: (data:any) => {
+        this.auth.storeUserData(data.token, data.user);
+        console.log(data);
+        alert('success')   //change this..redirect to home     
+      },
+      error: (err:any) => {
+        console.log(err);
+        alert('failed')// change this
         
-  //     }
-  //   })
-  // }
+      }
+    })
+  }
 }

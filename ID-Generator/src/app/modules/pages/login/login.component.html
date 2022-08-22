@@ -9,7 +9,7 @@
                 <h3 class="text-center font-weight-light my-4">Login</h3>
               </div>
               <div class="card-body">
-                <form >
+                <form [formGroup]="form" (ngSubmit)="onSubmit()">
                   <div class="form-floating mb-3">
                     <input
                       class="form-control"
@@ -36,6 +36,7 @@
                       id="inputRememberPassword"
                       type="checkbox"
                       value=""
+                      formControlName="remember"
                     />
                     <label class="form-check-label" for="inputRememberPassword"
                       >Remember Password</label
@@ -45,7 +46,7 @@
                     class="d-flex align-items-center justify-content-between mt-4 mb-0"
                   >
                     <a class="small" href="password.html">Forgot Password?</a>
-                    <a class="btn btn-primary" href="index.html">Login</a>
+                    <button type="submit" class="btn btn-primary" >Login</button>
                   </div>
                 </form>
               </div>
