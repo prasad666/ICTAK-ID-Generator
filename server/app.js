@@ -1,3 +1,6 @@
+const dotenv = require('dotenv');
+dotenv.config({ path:'./config.env' })
+const cors = require('cors')
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -18,6 +21,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(cors())
+
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
@@ -37,5 +42,10 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+mongoose
+  .connect('mongodb://localhost:27017/IDGenerator')//process.env.DB
+  .then(() => console.log("Db connected"))
+  .catch((err) => console.log(err))
 
 module.exports = app;
