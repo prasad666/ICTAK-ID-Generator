@@ -10,6 +10,7 @@ import { ContactusComponent } from './contactus/contactus.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
 import { LoginComponent } from './login/login.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { LoginComponent } from './login/login.component';
   imports: [
     CommonModule,
     PagesRoutingModule,
-    SharedModule
+    SharedModule,
+    ReactiveFormsModule
   ],
   exports:[
 

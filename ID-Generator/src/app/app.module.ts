@@ -9,6 +9,8 @@ import { SharedModule } from './shared/shared.module';
 import { CommonModule } from '@angular/common';
 import { PagesModule } from './modules/pages/pages.module';
 import { AdminModule } from './modules/admin/admin.module';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthHttpInterceptor } from './shared/services/auth-http.interceptor';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,9 @@ import { AdminModule } from './modules/admin/admin.module';
     CommonModule
   ],
   exports: [SharedModule],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor , multi:true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
