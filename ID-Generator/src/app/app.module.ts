@@ -9,9 +9,11 @@ import { SharedModule } from './shared/shared.module';
 import { CommonModule } from '@angular/common';
 import { PagesModule } from './modules/pages/pages.module';
 import { AdminModule } from './modules/admin/admin.module';
+
 @NgModule({
   declarations: [
     AppComponent,
+
     
   ],
   imports: [
