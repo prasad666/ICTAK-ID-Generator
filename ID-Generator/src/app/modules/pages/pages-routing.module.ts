@@ -9,12 +9,12 @@ import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
 
-  {path: "home", component: HomeComponent},
-  {path: "about-us", component: AboutusComponent},
-  {path: "faqs", component: FaqsComponent},
-  {path: "contact-us", component: ContactusComponent},
-  {path: "login", component: LoginComponent},
-  {path: "forgot-password", component: ForgotpasswordComponent},
+  {path: "home", component: HomeComponent, title: 'Home'},
+  {path: "about-us", component: AboutusComponent, title: 'About Us'},
+  {path: "faqs", component: FaqsComponent, title: 'FAQs'},
+  {path: "contact-us", component: ContactusComponent, title: 'Contact Us'},
+  {path: "login", component: LoginComponent, title: 'Login'},
+  {path: "forgot-password", component: ForgotpasswordComponent, title: 'Forgot Password'},
 ];
 
 @NgModule({
