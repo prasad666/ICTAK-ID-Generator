@@ -1,6 +1,6 @@
 mongoose = require('mongoose')
 
-const userSchema = new mongoose.Schema({
+const studentSchema = new mongoose.Schema({
     name:{
         type:String,
         required:true
@@ -18,7 +18,7 @@ const userSchema = new mongoose.Schema({
         type:String,
         required:true,
         default:'student',
-        enum:['student','batchManager','admin']
+        enum:['student']
     },
     course:{
         type:String,
@@ -44,6 +44,6 @@ const userSchema = new mongoose.Schema({
 
 })
 
-const User = mongoose.model('User',userSchema)
+const Student = mongoose.model('Student',studentSchema)
 
-module.exports = User;
+module.exports = Student;
