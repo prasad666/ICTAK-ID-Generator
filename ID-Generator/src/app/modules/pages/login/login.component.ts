@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
@@ -9,9 +10,11 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private auth: AuthService) { 
-    const body = document.getElementsByTagName('body')[0];
-    body.classList.add('bg-primary');
+  loginError:any;
+
+  constructor(private auth: AuthService, private router:Router) { 
+    // const body = document.getElementsByTagName('body')[0];
+    // body.classList.add('bg-primary');
    }
 
   ngOnInit(): void {
@@ -31,12 +34,11 @@ export class LoginComponent implements OnInit {
         if(this.form.value.remember){
           this.auth.storeUser(data.token, data.user);
         }
-        console.log(data);
-        alert('success')   //change this..redirect to home     
+        this.router.navigate(['student']);     
       },
       error: (err:any) => {
         console.log(err);
-        alert('failed')// change this
+        this.loginError = err.message;
         
       }
     })
