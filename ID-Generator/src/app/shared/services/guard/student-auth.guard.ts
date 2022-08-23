@@ -14,7 +14,9 @@ export class StudentAuthGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    if(this.auth.isLoggedIn() && this.auth.currentUser.role==='student') return true;
+    if(this.auth.isLoggedIn() && this.auth.currentUser.role==='student') {
+      return true
+    };
     this.router.navigate(['pages/login'])
     return false;  
   }

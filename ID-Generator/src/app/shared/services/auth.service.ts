@@ -15,11 +15,11 @@ export class AuthService {
   constructor(private http: HttpClient) { }
 
   register(formData:any){
-    return this.http.post(`${this.root}users/signup`, formData);
+    return this.http.post(`${this.root}students/signup`, formData);
   }
 
   login(formData:any){
-    return this.http.post(`${this.root}users/signin`, formData);
+    return this.http.post(`${this.root}students/signin`, formData);
   }
 
   setUser (token:string, user:any) {
