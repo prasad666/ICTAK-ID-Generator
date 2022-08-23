@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from '../services/auth.service';
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -27,7 +27,10 @@ export class LoginComponent implements OnInit {
   onSubmit(){
     this.auth.login(this.form.value).subscribe({
       next: (data:any) => {
-        this.auth.storeUserData(data.token, data.user);
+        this.auth.setUser(data.token, data.user);
+        if(this.form.value.remember){
+          this.auth.storeUser(data.token, data.user);
+        }
         console.log(data);
         alert('success')   //change this..redirect to home     
       },

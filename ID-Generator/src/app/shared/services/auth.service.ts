@@ -7,8 +7,8 @@ import { Injectable } from '@angular/core';
 export class AuthService {
 
   root = 'http://localhost:3000/'
-  currentUser:any= this.getCurrentUser;
-  token:any;
+  currentUser:any = this.getCurrentUser();
+  token:any = this.getToken();
 
   constructor(private http: HttpClient) { }
 
@@ -20,20 +20,31 @@ export class AuthService {
     return this.http.post(`${this.root}users/signin`, formData);
   }
 
-  storeUserData (token:string, user:any) {
-    localStorage.setItem('token', token);
-    localStorage.setItem('currentUser', JSON.stringify(user));
+  setUser (token:string, user:any) {
     this.currentUser = user;
     this.token = token;
+  }
+  storeUser (token:string, user:any) {
+    localStorage.setItem('token', token);
+    localStorage.setItem('currentUser', JSON.stringify(user));
+    
   }
 
   getCurrentUser(){
     if(!this.currentUser){
       let user= localStorage.getItem('currentUser');
-      user ? this.currentUser= JSON.parse(user) : null;
+      if(user) return JSON.parse(user);
+      return undefined;     
     }
     return this.currentUser
   }
+
+  getToken(){
+    if(!this.token) return localStorage.getItem('token');
+    return this.token;
+  }
+
+  
   
   logout(){
     this.currentUser = undefined;
