@@ -13,8 +13,8 @@ export class LoginComponent implements OnInit {
   loginError:any;
 
   constructor(private auth: AuthService, private router:Router) { 
-    // const body = document.getElementsByTagName('body')[0];
-    // body.classList.add('bg-primary');
+    const body = document.getElementsByTagName('body')[0];
+    body.classList.add('bg-primary');
    }
 
   ngOnInit(): void {

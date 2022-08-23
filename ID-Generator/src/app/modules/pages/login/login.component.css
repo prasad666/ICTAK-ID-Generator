@@ -1,5 +1,11 @@
-.error{
+.loginError{
     padding: 1rem;
     text-align: center;
     color: rgb(211, 57, 57);
+}
+.error{
+    text-align: right;
+    color: rgb(211, 57, 57);
+    padding-bottom: 1rem;
+    padding-right: .5rem;
 }

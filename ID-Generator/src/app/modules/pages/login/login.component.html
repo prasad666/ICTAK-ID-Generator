@@ -20,6 +20,14 @@
                     />
                     <label for="inputEmail">Email address</label>
                   </div>
+
+                  <div class="error" *ngIf="form.controls['email'].dirty && form.controls['email'].errors?.['required']">
+                    Email is required
+                  </div>
+                  <div class="error" *ngIf="form.controls['email'].dirty && form.controls['email'].errors?.['email']">
+                      Email is invalid
+                  </div>
+
                   <div class="form-floating mb-3">
                     <input
                       class="form-control"
@@ -30,6 +38,11 @@
                     />
                     <label for="inputPassword">Password</label>
                   </div>
+
+                  <div class="error" *ngIf="form.controls['password'].dirty && form.controls['password'].errors?.['required']">
+                    Password is required
+                  </div>
+
                   <div class="form-check mb-3">
                     <input
                       class="form-check-input"
@@ -45,15 +58,15 @@
                   <div
                     class="d-flex align-items-center justify-content-between mt-4 mb-0"
                   >
-                    <a class="small" href="password.html">Forgot Password?</a>
-                    <button type="submit" class="btn btn-primary" >Login</button>
+                    <a class="small" routerLink="/pages/forgot-password">Forgot Password?</a>
+                    <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Login</button>
                   </div>
                 </form>
               </div>
-              <div class="error">{{loginError}}</div>
+              <div class="loginError">{{loginError}}</div>
               <div class="card-footer text-center py-3">
                 <div class="small">
-                  <a href="register.html">Need an account? Sign up!</a>
+                  <a routerLink="/pages/register">Need an account? Sign up!</a>
                 </div>
               </div>
             </div>
