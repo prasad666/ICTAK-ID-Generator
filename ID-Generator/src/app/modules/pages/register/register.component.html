@@ -1,6 +1,53 @@
 <app-guest-header></app-guest-header>
 
 <main>
-  <p>Register works!</p>
+
+  <h2>Register</h2>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" >
+
+    <div>
+      <label for="name">Name</label>
+      <input type="text" id="name" formControlName="name">
+      <div class="error" *ngIf="form.controls['name'].dirty && form.controls['name'].errors?.['required']">
+        Name is required
+      </div>
+    </div>
+  
+    <div>
+      <label for="email">Email</label>
+      <input type="text" id="email" formControlName="email">
+      <div class="error" *ngIf="form.controls['email'].dirty && form.controls['email'].errors?.['required']">
+        Email is required
+      </div>
+      <div class="error" *ngIf="form.controls['email'].dirty && form.controls['email'].errors?.['email']">
+        Email is invalid
+      </div>
+    </div>
+  
+    <div>
+      <label for="password">password</label>
+      <input type="password" id="password" formControlName="password">
+      <div class="error" *ngIf="form.controls['password'].dirty && form.controls['password'].errors?.['required']">
+        Password is required
+      </div>
+    </div>
+  
+    <div>
+      <label for="confirmPassword">Confirm Password</label>
+      <input type="password" id="confirmPassword" formControlName="confirmPassword">
+      <div class="error" *ngIf="form.controls['confirmPassword'].dirty && form.controls['confirmPassword'].errors?.['required']">
+        Password confirmation is required
+      </div>
+      <div class="error" *ngIf="form.controls['confirmPassword'].dirty &&form.errors?.['passwordMismatch']">
+        Passwords do not match
+    </div>
+    </div>
+  
+    <input type="submit" [disabled]="form.invalid">
+
+  </form>
+  <div class="error">{{registrationError}}</div>
+
 </main>
 <app-guest-footer></app-guest-footer>

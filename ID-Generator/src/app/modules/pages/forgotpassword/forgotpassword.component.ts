@@ -8,8 +8,8 @@ import { Component, OnInit } from '@angular/core';
 export class ForgotpasswordComponent implements OnInit {
 
   constructor() {
-    const body = document.getElementsByTagName('body')[0];
-    body.classList.add('bg-primary');
+    // const body = document.getElementsByTagName('body')[0];
+    // body.classList.add('bg-primary');
    }
 
   ngOnInit(): void {
