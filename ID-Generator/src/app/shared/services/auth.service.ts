@@ -1,5 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { JwtHelperService } from "@auth0/angular-jwt";
+
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +26,7 @@ export class AuthService {
     this.currentUser = user;
     this.token = token;
   }
+  
   storeUser (token:string, user:any) {
     localStorage.setItem('token', token);
     localStorage.setItem('currentUser', JSON.stringify(user));
@@ -44,8 +47,12 @@ export class AuthService {
     return this.token;
   }
 
-  
-  
+  isLoggedIn(){
+    if(!this.token) this.token = localStorage.getItem('token');
+    const helper = new JwtHelperService();
+    return !helper.isTokenExpired(this.token);
+  }
+    
   logout(){
     this.currentUser = undefined;
     this.token = undefined;
