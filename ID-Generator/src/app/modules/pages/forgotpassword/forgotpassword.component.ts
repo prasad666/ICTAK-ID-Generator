@@ -9,6 +9,8 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 })
 export class ForgotpasswordComponent implements OnInit {
 
+  message = '';
+
   constructor(private auth: AuthService) {
     // const body = document.getElementsByTagName('body')[0];
     // body.classList.add('bg-primary');
@@ -18,17 +20,16 @@ export class ForgotpasswordComponent implements OnInit {
   }
 
   form = new FormGroup({
-    email: new FormControl(null, Validators.required)
+    email: new FormControl('', Validators.required)
   })
 
   onSubmit(){
     this.auth.forgotPassword(this.form.value).subscribe({
       next: (data)=>{
-        console.log(data);
+        this.message = `Password reset link has been sent to ${this.form.value.email} (If not found in inbox, check spam folder.)`
       },
       error: (error)=>{
-        console.log(error);
-        
+        this.message = error.message;
       }
     })
   }
