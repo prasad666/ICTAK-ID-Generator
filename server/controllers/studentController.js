@@ -92,7 +92,7 @@ exports.forgotPassword = async (req,res,next) => {
         //create a random pass reset token and encrypt it
         const resetToken = crypto.randomBytes(32).toString('hex');
         const encryptedResetToken= crypto.createHash('sha256').update(resetToken).digest('hex') 
-        const passwordResetExpiry = Date.now()+ 10*60*1000;
+        const passwordResetExpiry = Date.now()+ 60*60*1000;
         //save encrypted token and expiry time to db
         user.encryptedResetToken = encryptedResetToken;
         user.passwordResetExpiry = passwordResetExpiry;
@@ -100,7 +100,7 @@ exports.forgotPassword = async (req,res,next) => {
 
         //create url with un-encrypted token & send url to user's mail
         const passResetLink = `${req.protocol}://${req.get('host')}/students/resetPassword/${resetToken}`
-        const message = `Password reset link for ICTAK ID : <a href = "${passResetLink}">reset password</a>`
+        const message = `Password reset link for ICTAK ID(valid for 60 minutes) : <a href = "${passResetLink}">reset password</a>`
         await sendMail({
             mail: req.body.email,
             subject: 'ICTAK password reset link',
@@ -117,7 +117,32 @@ exports.forgotPassword = async (req,res,next) => {
     }
 }
 
-exports.resetPassword = async (req,res,next) => {}
+exports.resetPassword = async (req,res,next) => {
+    try {
+        //encrypt the recieved token
+        const recievedTokenEncrypted= crypto.createHash('sha256').update(req.params.token).digest('hex') 
+
+        //match it with stored one
+        const user= await Student.findOne({encryptedResetToken: recievedTokenEncrypted});
+        if(!user){throw new Error('No user found')}
+        //check whether expired
+        if(user.passwordResetExpiry < Date.now()){
+            throw new Error('Password reset link expired')
+        }
+        //update new password
+        user.password = await bcrypt.hash(req.body.password, 12);
+        user.encryptedResetToken = undefined;
+        user.passwordResetExpiry = undefined;
+        await user.save();
+
+        //send  response
+        res.status(200).json({status:'success'});
+        
+    } catch (error) {
+        next(error)
+    }
+    
+}
 
 
 
