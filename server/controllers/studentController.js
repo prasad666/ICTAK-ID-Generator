@@ -1,8 +1,10 @@
 const multer  = require('multer');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const crypto = require('crypto')
 
 const Student = require('../models/studentModel');
+const sendMail = require('../others/email');
 
 
 //signup student
@@ -77,6 +79,46 @@ exports.signIn = async (req,res,next) =>{
         next(error)
     }
 }
+
+//password reset
+exports.forgotPassword = async (req,res,next) => {
+    try {
+        //get user
+        const user = await Student.findOne({email: req.body.email}); 
+        if(!user){
+            throw new Error('No user found');
+        } 
+
+        //create a random pass reset token and encrypt it
+        const resetToken = crypto.randomBytes(32).toString('hex');
+        const encryptedResetToken= crypto.createHash('sha256').update(resetToken).digest('hex') 
+        const passwordResetExpiry = Date.now()+ 10*60*1000;
+        //save encrypted token and expiry time to db
+        user.encryptedResetToken = encryptedResetToken;
+        user.passwordResetExpiry = passwordResetExpiry;
+        await user.save();
+
+        //create url with un-encrypted token & send url to user's mail
+        const passResetLink = `${req.protocol}://${req.get('host')}/students/resetPassword/${resetToken}`
+        const message = `Password reset link for ICTAK ID : <a href = "${passResetLink}">reset password</a>`
+        await sendMail({
+            mail: req.body.email,
+            subject: 'ICTAK password reset link',
+            message:message
+        })
+
+        res.status(200).json({
+            status:'success'
+        })
+    
+
+    } catch (error) {
+        next(error);
+    }
+}
+
+exports.resetPassword = async (req,res,next) => {}
+
 
 
 //application for id

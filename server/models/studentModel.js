@@ -20,16 +20,8 @@ const studentSchema = new mongoose.Schema({
         default:'student',
         enum:['student']
     },
-    course:{
-        type:String,
-        // required:true,
-        // default:undefined
-    },
-    batch:{
-        type:String,
-        // required:true,
-        // default:undefined
-    },
+    course:String,
+    batch:String,
     photo:{
         type:String,
         required:true,
@@ -40,7 +32,9 @@ const studentSchema = new mongoose.Schema({
         required:true,
         default:'not applied',
         enum:['not applied','applied','issued','rejected']
-    }
+    },
+    encryptedResetToken: String,
+    passwordResetExpiry: Date,
 
 })
 

@@ -6,6 +6,11 @@ const studentController = require('../controllers/studentController')
 
 router.post('/signup', studentController.signUp);
 router.post('/signin', studentController.signIn);
+
+router.post('/forgotPassword', studentController.forgotPassword);
+router.patch('/resetPassword/:token', studentController.resetPassword);
+
+
 router.post('/:id/apply',authController.protect, studentController.upload.single('photo'), studentController.applyForId)
 
 /* GET users listing. */
