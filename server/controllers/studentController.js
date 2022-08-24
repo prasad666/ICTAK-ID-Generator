@@ -100,7 +100,7 @@ exports.forgotPassword = async (req,res,next) => {
 
         //create url with un-encrypted token & send url to user's mail
         const passResetLink = `${req.protocol}://${req.get('host')}/students/resetPassword/${resetToken}`
-        const message = `Password reset link for ICTAK ID(valid for 60 minutes) : <a href = "${passResetLink}">reset password</a>`
+        const message = `Password reset link for ICTAK ID Generator (expires in 60 minutes) : <a href = "${passResetLink}">reset password</a>`
         await sendMail({
             mail: req.body.email,
             subject: 'ICTAK password reset link',
@@ -137,7 +137,7 @@ exports.resetPassword = async (req,res,next) => {
 
         //send  response
         res.status(200).json({status:'success'});
-        
+
     } catch (error) {
         next(error)
     }

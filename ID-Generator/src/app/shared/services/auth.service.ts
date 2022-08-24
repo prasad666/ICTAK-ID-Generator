@@ -59,4 +59,12 @@ export class AuthService {
     localStorage.clear();
   }
 
+  forgotPassword(email:any){
+    return this.http.post(`${this.root}students/forgotPassword`, email);
+  }
+
+  resetPassword(password:any,token:string){
+    return this.http.patch(`${this.root}students/resetPassword/${token}`, password);
+  }
+
 }
