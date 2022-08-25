@@ -41,7 +41,7 @@ export class RegisterComponent implements OnInit {
         this.router.navigate(['student']);     
       },
       error: (err:any) => {
-        console.log(err);
+        if(String(err.error.message).startsWith('E11000')) err.error.message = "Email id already exists"
         this.registrationError = err.error.message||'something went wrong';
       }
     })

@@ -8,7 +8,7 @@ const studentSchema = new mongoose.Schema({
     email:{
         type:String,
         required:true,
-        unique:[true, 'Email already exists']
+        unique:true
     },
     password:{
         type:String,

@@ -2,52 +2,118 @@
 
 <main>
 
-  <h2>Register</h2>
+  <div id="layoutAuthentication">
+    <div id="layoutAuthentication_content">
+      <main>
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-lg-5">
+              <div class="card shadow-lg border-0 rounded-lg mt-5">
+                <div class="card-header">
+                  <h3 class="text-center font-weight-light my-4">Register</h3>
+                </div>
+                <div class="card-body">
+                  <form [formGroup]="form" (ngSubmit)="onSubmit()">
 
-  <form [formGroup]="form" (ngSubmit)="onSubmit()" >
+                    <div class="form-floating mb-3">
+                      <input
+                        class="form-control"
+                        id="name"
+                        type="text"
+                        placeholder="Full name"
+                        formControlName="name"
+                      />
+                      <label for="name">Full name</label>
+                    </div>
+                    <div class="error" *ngIf="form.controls['name'].dirty && form.controls['name'].errors?.['required']">
+                      Name is required
+                    </div>
 
-    <div>
-      <label for="name">Name</label>
-      <input type="text" id="name" formControlName="name">
-      <div class="error" *ngIf="form.controls['name'].dirty && form.controls['name'].errors?.['required']">
-        Name is required
-      </div>
-    </div>
+                    <div class="form-floating mb-3">
+                      <input
+                        class="form-control"
+                        id="inputEmail"
+                        type="email"
+                        placeholder="name@example.com"
+                        formControlName="email"
+                      />
+                      <label for="inputEmail">Email address</label>
+                    </div>
   
-    <div>
-      <label for="email">Email</label>
-      <input type="text" id="email" formControlName="email">
-      <div class="error" *ngIf="form.controls['email'].dirty && form.controls['email'].errors?.['required']">
-        Email is required
-      </div>
-      <div class="error" *ngIf="form.controls['email'].dirty && form.controls['email'].errors?.['email']">
-        Email is invalid
-      </div>
-    </div>
+                    <div class="error" *ngIf="form.controls['email'].dirty && form.controls['email'].errors?.['required']">
+                      Email is required
+                    </div>
+                    <div class="error" *ngIf="form.controls['email'].dirty && form.controls['email'].errors?.['email']">
+                        Email is invalid
+                    </div>
   
-    <div>
-      <label for="password">password</label>
-      <input type="password" id="password" formControlName="password">
-      <div class="error" *ngIf="form.controls['password'].dirty && form.controls['password'].errors?.['required']">
-        Password is required
-      </div>
-    </div>
+                    <div class="form-floating mb-3">
+                      <input
+                        class="form-control"
+                        id="inputPassword"
+                        type="password"
+                        placeholder="password"
+                        formControlName="password"
+                      />
+                      <label for="inputPassword">Password</label>
+                    </div>
   
-    <div>
-      <label for="confirmPassword">Confirm Password</label>
-      <input type="password" id="confirmPassword" formControlName="confirmPassword">
-      <div class="error" *ngIf="form.controls['confirmPassword'].dirty && form.controls['confirmPassword'].errors?.['required']">
-        Password confirmation is required
-      </div>
-      <div class="error" *ngIf="form.controls['confirmPassword'].dirty &&form.errors?.['passwordMismatch']">
-        Passwords do not match
-      </div>
-    </div>
-  
-    <input type="submit" [disabled]="form.invalid">
+                    <div class="error" *ngIf="form.controls['password'].dirty && form.controls['password'].errors?.['required']">
+                      Password is required
+                    </div>
 
-  </form>
-  <div class="error">{{registrationError}}</div>
+                    <div class="form-floating mb-3">
+                      <input
+                        class="form-control"
+                        id="confirmPassword"
+                        type="password"
+                        placeholder="password"
+                        formControlName="confirmPassword"
+                      />
+                      <label for="confirmPassword">Confirm password</label>
+                    </div>
+                    <div class="error" *ngIf="form.controls['confirmPassword'].dirty && form.controls['confirmPassword'].errors?.['required']">
+                      Password confirmation is required
+                    </div>
+                    <div class="error" *ngIf="form.controls['confirmPassword'].dirty &&form.errors?.['passwordMismatch']">
+                      Passwords do not match
+                    </div>
+  
+                    <div
+                      class="d-flex align-items-center justify-content-end mt-4 mb-0"
+                    >
+                      <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Register</button>
+                    </div>
+                  </form>
+                </div>
+                <div class="registrationError">{{registrationError}}</div>
+                <div class="card-footer text-center py-3">
+                  <div class="small">
+                    <a routerLink="/pages/login">Have an account? Sign in!</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+    <div id="layoutAuthentication_footer">
+      <footer class="py-4 bg-light mt-auto">
+        <div class="container-fluid px-4">
+          <div class="d-flex align-items-center justify-content-between small">
+            <div class="text-muted">Copyright &copy; Your Website 2022</div>
+            <div>
+              <a href="#">Privacy Policy</a>
+              &middot;
+              <a href="#">Terms &amp; Conditions</a>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+  
 
 </main>
 <app-guest-footer></app-guest-footer>
