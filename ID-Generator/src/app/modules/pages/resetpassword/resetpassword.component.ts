@@ -38,7 +38,7 @@ export class ResetpasswordComponent implements OnInit {
         this.router.navigate(['pages/login']);     
       },
       error: (error)=>{
-        this.message = error.message;
+        this.message = error.error.message||'something went wrong';
       }
     })
   }

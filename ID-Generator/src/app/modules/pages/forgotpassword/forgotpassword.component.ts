@@ -29,7 +29,7 @@ export class ForgotpasswordComponent implements OnInit {
         this.message = `Password reset link has been sent to ${this.form.value.email} (If not found in inbox, check spam folder.)`
       },
       error: (error)=>{
-        this.message = error.message;
+        this.message = error.error.message||'something went wrong';
       }
     })
   }

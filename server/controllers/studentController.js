@@ -1,6 +1,7 @@
 const multer  = require('multer');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+var httpError = require('http-errors');
 const crypto = require('crypto')
 
 const Student = require('../models/studentModel');
@@ -49,14 +50,14 @@ exports.signIn = async (req,res,next) =>{
         
         //find user
         const user = await Student.findOne({email:req.body.email});
-        if(!user) throw new Error('No user found');
+        if(!user) throw httpError(404, 'No user found');
         
         //verify user
         const isAuthentic = await bcrypt.compare(req.body.password, user.password);
         
         //error if not authentic
         if(!isAuthentic){
-            throw new Error('Incorrect username or password');
+            throw httpError(401, 'Incorrect username or password');
         }
 
         //create token
@@ -86,7 +87,7 @@ exports.forgotPassword = async (req,res,next) => {
         //get user
         const user = await Student.findOne({email: req.body.email}); 
         if(!user){
-            throw new Error('No user found');
+            throw httpError(404, 'No user found');
         } 
 
         //create a random pass reset token and encrypt it
@@ -99,7 +100,8 @@ exports.forgotPassword = async (req,res,next) => {
         await user.save();
 
         //create url with un-encrypted token & send url to user's mail
-        const passResetLink = `${req.protocol}://${req.get('host')}/students/resetPassword/${resetToken}`
+        const rootUrl = 'localhost:4200'             ////////////change this in production   proc.env  ||||or use   req.get('host')
+        const passResetLink = `${req.protocol}://${rootUrl}/pages/reset-password/${resetToken}`
         const message = `Password reset link for ICTAK ID Generator (expires in 60 minutes) : <a href = "${passResetLink}">reset password</a>`
         await sendMail({
             mail: req.body.email,
@@ -124,10 +126,10 @@ exports.resetPassword = async (req,res,next) => {
 
         //match it with stored one
         const user= await Student.findOne({encryptedResetToken: recievedTokenEncrypted});
-        if(!user){throw new Error('No user found')}
+        if(!user){throw httpError(404, 'Not found')}
         //check whether expired
         if(user.passwordResetExpiry < Date.now()){
-            throw new Error('Password reset link expired')
+            throw httpError(406, 'Password reset link expired')
         }
         //update new password
         user.password = await bcrypt.hash(req.body.password, 12);
@@ -171,7 +173,7 @@ const multerFilter = (req,file,cb)=>{
     if (file.mimetype.startsWith('image')){
         cb(null,true);
     }else{
-        cb(new Error('Please upload an image'),false)
+        cb(httpError(406,'Please upload an image'),false)
     }
 }
 
