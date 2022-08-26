@@ -1,5 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from "@angular/forms";
+import{HttpClientModule,HttpClient} from '@angular/common/http';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -9,6 +12,7 @@ import { SharedModule } from './shared/shared.module';
 import { CommonModule } from '@angular/common';
 import { PagesModule } from './modules/pages/pages.module';
 import { AdminModule } from './modules/admin/admin.module';
+import { StudentModule } from './modules/student/student.module';
 
 @NgModule({
   declarations: [
@@ -24,7 +28,11 @@ import { AdminModule } from './modules/admin/admin.module';
     SharedModule,
     PagesModule,
     AdminModule,
-    CommonModule
+    CommonModule,
+    FormsModule,
+    StudentModule,
+    HttpClientModule,
+  
   ],
   exports: [SharedModule],
   providers: [],

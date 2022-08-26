@@ -3,56 +3,50 @@
 <body>
 <div class="container">
     
-<form >
+<form (ngSubmit)="Registration()">
 
 <div class="form-group" id="text">
-    <label for="name">Name</label>
-    <input type="text" class="form-control" id="name">
-           <!-- required -->
-           <!-- [(ngModel)]="model.name" name="name"> -->
+    <label for="name">Student Name</label>
+    <input type="text" class="form-control" name="name" [(ngModel)]="studentDetails.name" >
   </div>
   
   <div class="form-group" id="text">
     <label for="alterEgo">Course Type</label>
-    <input type="text"  class="form-control" id="alterEgo">
-           <!-- [(ngModel)]="model.alterEgo" name="alterEgo"> -->
+    <input type="text"  class="form-control"  [(ngModel)]="studentDetails.courseType" name="courseType"> 
   </div>
   <div class="form-group" id="text">
     <label for="alterEgo">Photo</label>
-    <input type="text"  class="form-control" id="alterEgo">
-           <!-- [(ngModel)]="model.alterEgo" name="alterEgo"> -->
+    <input type="file"  class="form-control" 
+            [(ngModel)]="studentDetails.photo" name="photo"> 
   </div>
   <div class="form-group" id="text">
     <label for="alterEgo">Email Id</label>
-    <input type="text"  class="form-control" id="alterEgo">
-           <!-- [(ngModel)]="model.alterEgo" name="alterEgo"> -->
+    <input type="email"  class="form-control" 
+            [(ngModel)]="studentDetails.emailId" name="emailId"> 
   </div>
   <div class="form-group" id="text">
     <label for="alterEgo">Phone Number</label>
-    <input type="text"  class="form-control" id="alterEgo">
-           <!-- [(ngModel)]="model.alterEgo" name="alterEgo"> -->
+    <input type="text"  class="form-control"  [(ngModel)]="studentDetails.phoneno" name="phoneno"> 
   </div>
   <div class="form-group" id="text">
-    <label for="power">Hero Power</label>
-    <select class="form-control"  id="power"
+    <label for="power">Batch</label>
+    <select class="form-control"  id="power" name="batch"
             required>>
-            <!-- [(ngModel)]="model.power" name="power"> -->
+            <!-- [(ngModel)]="studentDetails.power" name="power"> -->
       <!-- <option *ngFor="let pow of powers" [value]="pow">{{pow}}</option> -->
     </select>
   </div>
   <div class="form-group" id="text">
     <label for="alterEgo">course starting date</label>
-    <input type="text"  class="form-control" id="alterEgo">
-           <!-- [(ngModel)]="model.alterEgo" name="alterEgo"> -->
+    <input type="date"  class="form-control" [(ngModel)]="studentDetails.courseStartDate" name="courseStartDate"> 
   </div>
   <div class="form-group" id="text">
     <label for="alterEgo">course ending date</label>
-    <input type="text"  class="form-control" id="alterEgo">
-           <!-- [(ngModel)]="model.alterEgo" name="alterEgo"> -->
+    <input type="date"  class="form-control"  [(ngModel)]="studentDetails. courseEndDate" name="courseEndDate"> 
   </div>
   
   <div class="btn">
-  <button class="btn btn-primary" > REGISTER</button>
+  <button class="btn btn-primary" type="submit"> REGISTER</button>
   </div>
 
   
