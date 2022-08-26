@@ -18,7 +18,7 @@ export class IdApplicationComponent implements OnInit {
     },
     {
       name:'ML',
-      batches:['B1','B2']
+      batches:['c1','c2']
     },
   ];               /////fetch courses from db    TO DO
 
@@ -61,7 +61,7 @@ export class IdApplicationComponent implements OnInit {
     formData.append('photo', this.file);
 
 
-    this.http.post(`http://localhost:3000/users/${this.auth.currentUser._id}/apply`, formData)
+    this.http.post(`http://localhost:3000/students/application/${this.auth.currentUser._id}`, formData)
     .subscribe({
       next: (data)=>{
         console.log(data);      /////TO DO

@@ -31,6 +31,7 @@ exports.signUp = async (req,res,next) =>{
     
         //prevent password sending back 
         user.password = undefined;
+        user.encryptedResetToken= undefined;
     
         //send response with token
         res.status(201).json({
@@ -69,6 +70,7 @@ exports.signIn = async (req,res,next) =>{
 
         //prevent password sending back
         user.password = undefined;
+        user.encryptedResetToken= undefined;
 
         //send response with token
         res.status(200).json({

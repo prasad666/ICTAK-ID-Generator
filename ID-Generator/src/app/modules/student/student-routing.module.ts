@@ -6,7 +6,7 @@ import { IdApplicationComponent } from './components/id-application/id-applicati
 
 const routes: Routes = [
   {path: "", component: DashboardComponent, canActivate:[StudentAuthGuard]},
-  {path: "test", component: IdApplicationComponent },
+  {path: "application", component: IdApplicationComponent },
 
 ];
 
