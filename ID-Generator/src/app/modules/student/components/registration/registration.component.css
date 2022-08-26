@@ -1,0 +1,20 @@
+.container{
+    width: 45rem;
+}
+body{
+    background-color: plum;
+    
+}
+P{
+    text-align: center;
+    color: black;
+    size: 10px;
+}
+#text{
+    color: black;
+}
+.btn
+{
+    text-align: center;
+    /* text-decoration: double; */
+}

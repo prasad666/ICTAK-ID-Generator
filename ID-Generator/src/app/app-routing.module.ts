@@ -18,6 +18,14 @@ const routes: Routes = [
           m => m.AdminRoutingModule
       ),
 },
+{
+  path:'student',
+  loadChildren:() =>
+       import('./modules/student/student-routing.module').then(
+        m =>m.StudentRoutingModule
+       ),
+
+},
 
 {
   path: 'backend/batchmanager',
@@ -26,6 +34,7 @@ const routes: Routes = [
           m => m.BatchmanagerRoutingModule
       ),
 },
+
 
 ];
 
