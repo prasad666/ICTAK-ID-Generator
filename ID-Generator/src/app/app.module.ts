@@ -11,6 +11,9 @@ import { PagesModule } from './modules/pages/pages.module';
 import { AdminModule } from './modules/admin/admin.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthHttpInterceptor } from './shared/services/auth-http.interceptor';
+import { ReactiveFormsModule } from '@angular/forms';
+import { BatchmanagerModule } from './modules/batchmanager/batchmanager.module';
+import { StudentModule } from './modules/student/student.module';
 
 @NgModule({
   declarations: [
@@ -26,7 +29,10 @@ import { AuthHttpInterceptor } from './shared/services/auth-http.interceptor';
     SharedModule,
     PagesModule,
     AdminModule,
-    CommonModule
+    BatchmanagerModule,
+    StudentModule,
+    CommonModule,
+    ReactiveFormsModule
   ],
   exports: [SharedModule],
   providers: [
