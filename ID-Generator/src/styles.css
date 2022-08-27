@@ -587,3 +587,29 @@ h1.one span {
   position: relative;
   z-index: 5;
 }
+
+/*contact form*/
+.contact-info img {
+  margin-bottom: 15%;
+}
+.contact-info h2 {
+  margin-bottom: 10%;
+}
+.col-md-9 {
+  background: #fff;
+  padding: 3%;
+  border-top-right-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+}
+.contact-form label {
+  font-weight: 600;
+}
+.contact-form button {
+  background: #25274d;
+  color: #fff;
+  font-weight: 600;
+  width: 25%;
+}
+.contact-form button:focus {
+  box-shadow: none;
+}

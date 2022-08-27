@@ -11,6 +11,7 @@ import { PagesModule } from './modules/pages/pages.module';
 import { AdminModule } from './modules/admin/admin.module';
 import { StudentModule } from './modules/student/student.module';
 import { BatchmanagerModule } from './modules/batchmanager/batchmanager.module';
+import { CoreModule } from './modules/core/core.module';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { BatchmanagerModule } from './modules/batchmanager/batchmanager.module';
     AdminModule,
     StudentModule,
     BatchmanagerModule,
-    CommonModule
+    CommonModule,
+    CoreModule
   ],
   exports: [SharedModule],
   providers: [],

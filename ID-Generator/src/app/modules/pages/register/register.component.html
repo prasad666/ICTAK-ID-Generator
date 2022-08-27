@@ -8,42 +8,94 @@
         <!--Heading 1-->
         <h1 class="one"><span>Sign Up</span></h1>
       </div>
-
-      <div class="col-md-12">
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus massa
-          dui, posuere vitae velit at, dapibus gravida libero. Nulla tempus ante
-          in orci tincidunt ultrices. Aliquam quis faucibus massa. Ut eget
-          iaculis eros. Morbi tincidunt id mi non placerat. Donec malesuada
-          tellus risus, in tincidunt lacus faucibus at. Praesent accumsan magna
-          nec eros aliquet, at interdum felis facilisis.
-        </p>
-        <p>
-          Suspendisse feugiat, nisl feugiat viverra auctor, ligula nisl
-          vestibulum ipsum, at faucibus lorem tellus nec lacus. Nulla eleifend
-          libero sed odio elementum tempus. Vivamus venenatis erat ac congue
-          condimentum. Curabitur nisl nulla, vestibulum a velit non, placerat
-          venenatis dui. Aenean elementum non felis vitae fringilla. Praesent
-          finibus, nunc sit amet vulputate viverra, odio libero aliquet ex, id
-          pellentesque nibh augue sit amet quam. Suspendisse potenti. Phasellus
-          vulputate dapibus bibendum. Curabitur in rutrum nibh. Aenean at sapien
-          sollicitudin, auctor enim in, porta enim. Ut laoreet scelerisque nisl
-          porttitor hendrerit.
-        </p>
-        <p>
-          Duis cursus libero sed aliquam congue. Donec aliquam tincidunt tellus
-          in volutpat. Sed mi elit, semper eu sagittis quis, ultrices eget
-          ligula. Sed pulvinar ultrices dolor. Nulla efficitur, magna vitae
-          mattis hendrerit, sapien dui condimentum purus, eget pellentesque ex
-          dolor ac augue. Phasellus hendrerit est et lobortis vestibulum. Sed
-          nec tincidunt enim. Donec maximus, leo sollicitudin volutpat faucibus,
-          enim enim egestas enim, et ullamcorper purus arcu sit amet est. Ut
-          commodo nibh sem, sit amet cursus purus vestibulum nec. In cursus nisl
-          vitae blandit fringilla. Curabitur rutrum lacus non nisi vestibulum
-          tempor. Vivamus ut placerat mauris, sed vehicula nibh.
-        </p>
+    </div>
+    <div class="row">
+      <div class="col-md-3">
+        <div class="contact-info">
+          <h2>Register here!</h2>
+          <h4>Please fill the form and submit!</h4>
+        </div>
       </div>
-      <!-- /.col-lg-4 -->
+      <div class="col-md-9">
+        <form (ngSubmit)="Registration()">
+          <div class="form-group" id="text">
+            <label for="name">Student Name</label>
+            <input
+              type="text"
+              class="form-control"
+              name="name"
+              [(ngModel)]="studentDetails.name"
+            />
+          </div>
+
+          <div class="form-group" id="text">
+            <label for="alterEgo">Course Type</label>
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="studentDetails.courseType"
+              name="courseType"
+            />
+          </div>
+          <div class="form-group" id="text">
+            <label for="alterEgo">Photo</label>
+            <input
+              type="file"
+              class="form-control"
+              [(ngModel)]="studentDetails.photo"
+              name="photo"
+            />
+          </div>
+          <div class="form-group" id="text">
+            <label for="alterEgo">Email Id</label>
+            <input
+              type="email"
+              class="form-control"
+              [(ngModel)]="studentDetails.emailId"
+              name="emailId"
+            />
+          </div>
+          <div class="form-group" id="text">
+            <label for="alterEgo">Phone Number</label>
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="studentDetails.phoneno"
+              name="phoneno"
+            />
+          </div>
+          <div class="form-group" id="text">
+            <label for="power">Batch</label>
+            <select class="form-control" id="power" name="batch" required>
+              >
+              <!-- [(ngModel)]="studentDetails.power" name="power"> -->
+              <!-- <option *ngFor="let pow of powers" [value]="pow">{{pow}}</option> -->
+            </select>
+          </div>
+          <div class="form-group" id="text">
+            <label for="alterEgo">course starting date</label>
+            <input
+              type="date"
+              class="form-control"
+              [(ngModel)]="studentDetails.courseStartDate"
+              name="courseStartDate"
+            />
+          </div>
+          <div class="form-group" id="text">
+            <label for="alterEgo">course ending date</label>
+            <input
+              type="date"
+              class="form-control"
+              [(ngModel)]="studentDetails.courseEndDate"
+              name="courseEndDate"
+            />
+          </div>
+
+          <div class="btn">
+            <button class="btn btn-primary" type="submit">REGISTER</button>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
 </main>
