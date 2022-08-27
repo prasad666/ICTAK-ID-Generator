@@ -8,6 +8,7 @@ import { TestComponent } from './test/test.component';
 import { AuthHeaderComponent } from './auth-header/auth-header.component';
 import { AuthFooterComponent } from './auth-footer/auth-footer.component';
 import { AuthNavComponent } from './auth-nav/auth-nav.component';
+import { GuestBannerComponent } from './guest-banner/guest-banner.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { AuthNavComponent } from './auth-nav/auth-nav.component';
     AuthHeaderComponent,
     AuthFooterComponent,
     AuthNavComponent,
+    GuestBannerComponent,
   ],
   imports: [
     CommonModule,
@@ -29,6 +31,7 @@ import { AuthNavComponent } from './auth-nav/auth-nav.component';
     AuthHeaderComponent,
     AuthFooterComponent,
     AuthNavComponent,
+    GuestBannerComponent,
     ]
 })
 export class SharedModule { }

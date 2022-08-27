@@ -27,6 +27,14 @@ const routes: Routes = [
       ),
 },
 
+{
+  path: 'secure/student',
+  loadChildren: () =>
+      import('./modules/student/student-routing.module').then(
+          m => m.StudentRoutingModule
+      ),
+},
+
 ];
 
 @NgModule({

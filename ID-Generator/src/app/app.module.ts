@@ -9,6 +9,8 @@ import { SharedModule } from './shared/shared.module';
 import { CommonModule } from '@angular/common';
 import { PagesModule } from './modules/pages/pages.module';
 import { AdminModule } from './modules/admin/admin.module';
+import { StudentModule } from './modules/student/student.module';
+import { BatchmanagerModule } from './modules/batchmanager/batchmanager.module';
 
 @NgModule({
   declarations: [
@@ -24,10 +26,14 @@ import { AdminModule } from './modules/admin/admin.module';
     SharedModule,
     PagesModule,
     AdminModule,
+    StudentModule,
+    BatchmanagerModule,
     CommonModule
   ],
   exports: [SharedModule],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  public  title = 'test';
+ }
