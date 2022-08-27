@@ -12,7 +12,6 @@ import { AdminModule } from './modules/admin/admin.module';
 import { StudentModule } from './modules/student/student.module';
 import { BatchmanagerModule } from './modules/batchmanager/batchmanager.module';
 import { CoreModule } from './modules/core/core.module';
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,7 +29,7 @@ import { CoreModule } from './modules/core/core.module';
     StudentModule,
     BatchmanagerModule,
     CommonModule,
-    CoreModule
+    CoreModule,
   ],
   exports: [SharedModule],
   providers: [],
