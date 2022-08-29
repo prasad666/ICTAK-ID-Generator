@@ -53,8 +53,8 @@ module.exports = {
     var course = new CourseModel({
       course_name: req.body.course_name,
       enabled: req.body.enabled,
-      created_at: req.body.created_at,
-      updated_at: req.body.updated_at,
+      //   created_at: req.body.created_at,
+      //   updated_at: req.body.updated_at,
     });
 
     course.save(function (err, course) {
