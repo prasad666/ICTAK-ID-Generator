@@ -1,6 +1,6 @@
 const dotenv = require("dotenv").config();
 const dbConfig = require("./config/database.config.js");
-
+const cors = require("cors");
 const mongoose = require("mongoose");
 
 var createError = require("http-errors");
@@ -14,9 +14,9 @@ var usersRouter = require("./routes/users");
 var courseRouter = require("./routes/courseRoutes");
 
 var app = express();
+app.use(cors());
 
 //initial db
-console.log(dbConfig);
 mongoose.connect(dbConfig.url, {
   useNewUrlParser: true,
   useUnifiedTopology: true,

@@ -9,17 +9,21 @@ module.exports = {
   /**
    * courseController.list()
    */
-  list: function (req, res) {
-    CourseModel.find(function (err, courses) {
-      if (err) {
-        return res.status(500).json({
-          message: "Error when getting course.",
-          error: err,
-        });
-      }
+  list: async function (req, res) {
+    // CourseModel.find(function (err, courses) {
+    //   if (err) {
+    //     return res.status(500).json({
+    //       message: "Error when getting course.",
+    //       error: err,
+    //     });
+    //   }
 
-      return res.json(courses);
-    });
+    //   return res.json(courses);
+    // });
+    const { page = 1, size = 10 } = req.query;
+    const courses = await CourseModel.paginate({}, { page, limit: size });
+    console.log(courses);
+    return res.json(courses);
   },
 
   /**

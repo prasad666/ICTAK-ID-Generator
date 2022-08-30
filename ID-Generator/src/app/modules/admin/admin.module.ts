@@ -5,18 +5,31 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { AdminRoutingModule } from './admin-routing.module';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { SideNavComponent } from './components/side-nav/side-nav.component';
-
+import { CourseListComponent } from './components/courses/course-list/course-list.component';
+import { CourseEditComponent } from './components/courses/course-edit/course-edit.component';
+import { RouterModule } from '@angular/router';
+import { MatTableModule } from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatIconModule } from '@angular/material/icon';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
     DashboardComponent,
-    SideNavComponent
+    SideNavComponent,
+    CourseListComponent,
+    CourseEditComponent,
   ],
   imports: [
     CommonModule,
     AdminRoutingModule,
-    SharedModule
-  ]
+    SharedModule,
+    MatTableModule,
+    MatSortModule,
+    MatPaginatorModule,
+    MatIconModule,
+    MatProgressSpinnerModule,
+  ],
 })
-
-export class AdminModule { }
+export class AdminModule {}
