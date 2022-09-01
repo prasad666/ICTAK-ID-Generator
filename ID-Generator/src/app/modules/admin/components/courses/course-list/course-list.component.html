@@ -11,7 +11,18 @@
           <li class="breadcrumb-item active">List</li>
         </ol>
         <div class="card mb-4">
-          <div class="card-body">Course details</div>
+          <div class="card-body">
+            Total {{ dataSource.totalDocs }} items found.
+          </div>
+          <div class="row">
+            <div class="d-sm-flex col-md-12 justify-content-end">
+              <mat-form-field appearance="standard" class="col-md-2">
+                <input matInput placeholder="Search" #input />
+                <mat-icon matSuffix>search</mat-icon>
+              </mat-form-field>
+            </div>
+          </div>
+
           <div class="spinner-container" *ngIf="dataSource.loading$ | async">
             <mat-spinner></mat-spinner>
           </div>
@@ -21,8 +32,15 @@
             matSort
             [dataSource]="dataSource"
           >
-            <ng-container matColumnDef="id">
-              <div *matHeaderCellDef class="mat-header-cell" mat-sort-header>
+            <ng-container matColumnDef="_id">
+              <div
+                *matHeaderCellDef
+                class="mat-header-cell"
+                mat-sort-header
+                matSortActive="_id"
+                matSortDirection="asc"
+                matSortDisableClear
+              >
                 No.
               </div>
               <div
@@ -70,7 +88,7 @@
                 data-label="Created At"
                 class="mat-cell"
               >
-                {{ course.createdAt }}
+                {{ course.createdAt | date: "dd.MM.y HH:mm:ss" }}
               </div>
             </ng-container>
             <ng-container matColumnDef="actions">
@@ -93,7 +111,7 @@
             ></mat-row>
           </mat-table>
           <mat-paginator
-            [length]="13"
+            [length]="dataSource.totalDocs"
             [pageSize]="10"
             [pageSizeOptions]="[3, 5, 10]"
           ></mat-paginator>

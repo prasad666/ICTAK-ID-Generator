@@ -11,9 +11,14 @@ export class CourseService {
 
   constructor(private http: HttpClient) {}
 
-  getCourses(page = 1, limit = 10) {
+  getCourses(page = 1, limit = 10, filter = '', sortColumn = '', sortDir = '') {
     return this.http.get(this.API_LIST, {
-      params: new HttpParams().set('page', page).set('size', limit),
+      params: new HttpParams()
+        .set('page', page)
+        .set('size', limit)
+        .set('filter', filter)
+        .set('sort', sortColumn)
+        .set('dir', sortDir),
     });
   }
 }

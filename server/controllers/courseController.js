@@ -10,18 +10,23 @@ module.exports = {
    * courseController.list()
    */
   list: async function (req, res) {
-    // CourseModel.find(function (err, courses) {
-    //   if (err) {
-    //     return res.status(500).json({
-    //       message: "Error when getting course.",
-    //       error: err,
-    //     });
-    //   }
-
-    //   return res.json(courses);
-    // });
-    const { page = 1, size = 10 } = req.query;
-    const courses = await CourseModel.paginate({}, { page, limit: size });
+    const {
+      page = 1,
+      size = 10,
+      sort = "_id",
+      dir = "asc",
+      filter = "",
+    } = req.query;
+    let queryObj = {};
+    if (filter) {
+      queryObj = { course_name: new RegExp("^" + filter) };
+    }
+    console.log(queryObj);
+    const courses = await CourseModel.paginate(queryObj, {
+      page,
+      limit: size,
+      sort: { [sort]: dir },
+    });
     console.log(courses);
     return res.json(courses);
   },

@@ -21,6 +21,8 @@ import { BatchmanagerModule } from './modules/batchmanager/batchmanager.module';
 import { CoreModule } from './modules/core/core.module';
 import { FormsModule } from '@angular/forms';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatFormFieldModule } from '@angular/material/form-field';
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -46,6 +48,8 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     MatPaginatorModule,
     FormsModule,
     MatProgressBarModule,
+    MatInputModule,
+    MatFormFieldModule,
   ],
   exports: [SharedModule],
   providers: [],

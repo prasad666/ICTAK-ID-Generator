@@ -35,12 +35,14 @@ export class CourseDataSource implements DataSource<Course> {
     pageIndex = 0,
     pageSize = 10,
     filter = '',
+    sortColumn = '_id',
     sortDirection = 'asc'
   ) {
+    console.log(sortColumn);
     this.loadingSubject.next(true);
 
     this.coursesService
-      .getCourses(pageIndex + 1, pageSize)
+      .getCourses(pageIndex + 1, pageSize, filter, sortColumn, sortDirection)
       .pipe(
         catchError(() => of([])),
         finalize(() => this.loadingSubject.next(false))
