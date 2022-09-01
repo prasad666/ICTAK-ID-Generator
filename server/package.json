@@ -15,7 +15,6 @@
     "http-errors": "~1.6.3",
     "jade": "~1.11.0",
     "mongoose": "^6.5.3",
-    "jsonwebtoken": "^8.5.1",
     "morgan": "~1.9.1",
     "winston": "^3.1.0",
     "winston-daily-rotate-file": "^3.5.1",

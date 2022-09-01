@@ -1,6 +1,7 @@
 var mongoose = require("mongoose");
-var Schema = mongoose.Schema;
+const mongoosePaginate = require("mongoose-paginate-v2");
 
+var Schema = mongoose.Schema;
 var courseSchema = new Schema(
   {
     course_name: { type: String, required: true, unique: true },
@@ -10,5 +11,7 @@ var courseSchema = new Schema(
     timestamps: true,
   }
 );
+
+courseSchema.plugin(mongoosePaginate);
 
 module.exports = mongoose.model("course", courseSchema);

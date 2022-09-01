@@ -1,6 +1,13 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { MatInputModule } from '@angular/material/input';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSortModule } from '@angular/material/sort';
+import { MatTableModule } from '@angular/material/table';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -15,12 +22,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { BatchmanagerModule } from './modules/batchmanager/batchmanager.module';
 import { StudentModule } from './modules/student/student.module';
 import { CoreModule } from './modules/core/core.module';
-@NgModule({
-  declarations: [
-    AppComponent,
+import { FormsModule } from '@angular/forms';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
-    
-  ],
+@NgModule({
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -36,13 +43,26 @@ import { CoreModule } from './modules/core/core.module';
     CommonModule,
     ReactiveFormsModule,
     CoreModule,
+    MatInputModule,
+    MatPaginatorModule,
+    MatProgressSpinnerModule,
+    MatSortModule,
+    MatTableModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatIconModule,
+    MatPaginatorModule,
+    FormsModule,
+    MatProgressBarModule,
+    MatInputModule,
+    MatFormFieldModule,
   ],
   exports: [SharedModule],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor , multi:true }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {
-  public  title = 'test';
- }
+  public title = 'ICTAK ID Generator';
+}
