@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { JwtHelperService } from "@auth0/angular-jwt";
-
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({
   providedIn: 'root'
@@ -15,11 +14,11 @@ export class AuthService {
   constructor(private http: HttpClient) { }
 
   register(formData:any){
-    return this.http.post(`${this.root}students/signup`, formData);
+    return this.http.post(`${this.root}users/signup`, formData);
   }
 
   login(formData:any){
-    return this.http.post(`${this.root}students/signin`, formData);
+    return this.http.post(`${this.root}users/signin`, formData);
   }
 
   setUser (token:string, user:any) {
@@ -60,11 +59,11 @@ export class AuthService {
   }
 
   forgotPassword(email:any){
-    return this.http.post(`${this.root}students/forgotPassword`, email);
+    return this.http.post(`${this.root}users/forgotPassword`, email);
   }
 
   resetPassword(password:any,token:string){
-    return this.http.patch(`${this.root}students/resetPassword/${token}`, password);
+    return this.http.patch(`${this.root}users/resetPassword/${token}`, password);
   }
 
 }

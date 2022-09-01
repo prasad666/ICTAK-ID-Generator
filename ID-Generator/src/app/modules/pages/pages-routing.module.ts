@@ -16,8 +16,8 @@ const routes: Routes = [
   {path: "faqs", component: FaqsComponent, title: 'FAQs'},
   {path: "contact-us", component: ContactusComponent, title: 'Contact Us'},
   {path: "login", component: LoginComponent, title: 'Login'},
-  {path: "forgot-password", component: ForgotpasswordComponent, title: 'Forgot Password'},
   {path: "register", component: RegisterComponent, title: 'Register'},
+  {path: "forgot-password", component: ForgotpasswordComponent, title: 'Forgot Password'},
   {path: "reset-password/:token", component: ResetpasswordComponent},
 
 

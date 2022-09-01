@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthService } from 'src/app/shared/services/auth.service';
+import { AuthService } from '../../core/services/auth.service';
 
 @Component({
   selector: 'app-resetpassword',
@@ -12,7 +12,7 @@ export class ResetpasswordComponent implements OnInit {
 
   message = '';
   token:any = this.activRoute.snapshot.paramMap.get('token');
-  constructor(private auth: AuthService,private activRoute:ActivatedRoute, private router:Router) { }
+  constructor(private auth: AuthService, private activRoute:ActivatedRoute, private router:Router) { }
 
   ngOnInit(): void {
   }
