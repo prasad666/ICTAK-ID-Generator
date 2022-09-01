@@ -1,10 +1,7 @@
 const dotenv = require("dotenv").config();
 const dbConfig = require("./config/database.config.js");
-// const dotenv = require('dotenv');
-// dotenv.config({ path:'./config.env' })
 
 const mongoose = require("mongoose");
-
 const cors = require('cors')
 var createError = require("http-errors");
 var express = require("express");
@@ -13,7 +10,7 @@ var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 
 var indexRouter = require("./routes/index");
-var studentsRouter = require("./routes/students");
+var usersRouter = require("./routes/userRoutes");
 var courseRouter = require("./routes/courseRoutes");
 
 var app = express();
@@ -23,7 +20,9 @@ console.log(dbConfig);
 mongoose.connect(dbConfig.url, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-});
+})
+.then(() => console.log("Db connected"))
+.catch((err) => console.log(err))
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -38,8 +37,9 @@ app.use(cors())
 
 
 app.use("/", indexRouter);
-// app.use("/students", studentsRouter);
+app.use("/users", usersRouter);
 app.use("/courses", courseRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -53,18 +53,13 @@ app.use(function (err, req, res, next) {
   });
 
   // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get("env") === "development" ? err : {};
+  // res.locals.message = err.message;
+  // res.locals.error = req.app.get("env") === "development" ? err : {};
 
   // // render the error page
   // res.status(err.status || 500);
   // res.render("error");
 });
-
-mongoose
-  .connect('mongodb://localhost:27017/IDGenerator')//process.env.DB
-  .then(() => console.log("Db connected"))
-  .catch((err) => console.log(err))
 
 module.exports = app;
 
