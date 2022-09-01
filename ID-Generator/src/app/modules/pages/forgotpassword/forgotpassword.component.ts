@@ -10,6 +10,7 @@ import { AuthService } from '../../core/services/auth.service';
 export class ForgotpasswordComponent implements OnInit {
 
   message = '';
+  loading = false;
 
   constructor(private auth: AuthService) {
     // const body = document.getElementsByTagName('body')[0];
@@ -24,12 +25,18 @@ export class ForgotpasswordComponent implements OnInit {
   })
 
   onSubmit(){
+    this.loading = true;
+    this.message = "";
     this.auth.forgotPassword(this.form.value).subscribe({
       next: (data)=>{
+        this.loading = false;
         this.message = `Password reset link has been sent to ${this.form.value.email} (If not found in inbox, check spam folder.)`
       },
       error: (error)=>{
+        this.loading = false;
         this.message = error.error.message||'something went wrong';
+        console.log(error);
+        
       }
     })
   }
