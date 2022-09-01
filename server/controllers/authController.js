@@ -25,8 +25,8 @@ exports.register = async (req,res,next) =>{
         //sign jwt
         const token = jwt.sign(
             {id: user._id, role: user.role},
-            'somesecretkey', //process.env.JWT_SECRET,
-            {expiresIn: '5d'}
+            process.env.JWT_SECRET,
+            {expiresIn: '7d'}
         );
     
         //prevent password sending back 
@@ -64,8 +64,8 @@ exports.login = async (req,res,next) =>{
         //create token
         const token = jwt.sign(
             {id:user._id, role:user.role}, 
-            'somesecretkey', //process.env.JWT_SECRET, 
-            {expiresIn:'5d'}
+            process.env.JWT_SECRET, 
+            {expiresIn:'7d'}
         )
 
         //prevent password sending back
@@ -102,9 +102,9 @@ exports.forgotPassword = async (req,res,next) => {
         await user.save();
 
         //create url with un-encrypted token & send url to user's mail
-        const rootUrl = 'localhost:4200'             ////////////change this in production   proc.env  ||||or use   req.get('host')
+        const rootUrl = 'localhost:4200'             ////////////change this in procduction    env  |||| use   req.get('host')
         const passResetLink = `${req.protocol}://${rootUrl}/pages/reset-password/${resetToken}`
-        const message = `Password reset link for ICTAK ID Generator (expires in 60 minutes) : <a href = "${passResetLink}">reset password</a>`
+        const message = `<h2>ICTAK</h2>Password reset link for ICTAK ID Generator (expires in 60 minutes) : <a href = "${passResetLink}"><button style="padding:10px; margin:5px 0 0 0" >reset password</button></a>`
         await sendMail({
             mail: req.body.email,
             subject: 'ICTAK password reset link',
@@ -155,7 +155,7 @@ exports.protect = async (req,res,next) => {
         if(!token){
             throw httpError(401,'Not authorized');
         }
-        jwt.verify(token, 'somesecretkey'/*process.env.JWT_SECRET*/, (err,tokenData)=>{
+        jwt.verify(token, process.env.JWT_SECRET, (err,tokenData)=>{
             if(err)  throw err;   
             req.user = tokenData;
             next();

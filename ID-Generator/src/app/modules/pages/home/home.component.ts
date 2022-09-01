@@ -28,11 +28,21 @@ export class HomeComponent implements OnInit {
   onSubmit(){
     this.auth.login(this.form.value).subscribe({
       next: (data:any) => {
+        console.log(data);
+        
         this.auth.setUser(data.token, data.user);
         if(this.form.value.remember){
           this.auth.storeUser(data.token, data.user);
         }
-        this.router.navigate(['student']);     
+        if(data.user.role==='student'){
+          this.router.navigate(['student']);     
+        }else if(data.user.role==='batchManager'){
+          this.router.navigate(['backend/batchmanager']);     
+        }else if(data.user.role==='admin'){
+          this.router.navigate(['backend/admin']);     
+        }else {
+          this.loginError = "Couldn't identify user"
+        }
       },
       error: (err:any) => {
         console.log(err);
