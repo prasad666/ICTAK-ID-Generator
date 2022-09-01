@@ -2,7 +2,6 @@ const dotenv = require("dotenv").config();
 const dbConfig = require("./config/database.config.js");
 const cors = require("cors");
 const mongoose = require("mongoose");
-const cors = require('cors')
 var createError = require("http-errors");
 var express = require("express");
 var path = require("path");
