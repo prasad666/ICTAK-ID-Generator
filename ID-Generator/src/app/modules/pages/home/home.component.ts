@@ -11,6 +11,7 @@ import { AuthService } from '../../core/services/auth.service';
 
 export class HomeComponent implements OnInit {
 
+  loading = false;
   loginError:any;
 
   constructor(private auth: AuthService, private router:Router) { }
@@ -26,9 +27,9 @@ export class HomeComponent implements OnInit {
   });
 
   onSubmit(){
+    this.loading = true;
     this.auth.login(this.form.value).subscribe({
       next: (data:any) => {
-        console.log(data);
         
         this.auth.setUser(data.token, data.user);
         if(this.form.value.remember){
@@ -43,11 +44,12 @@ export class HomeComponent implements OnInit {
         }else {
           this.loginError = "Couldn't identify user"
         }
+        this.loading = false;
       },
       error: (err:any) => {
         console.log(err);
         this.loginError = err.error.message||'something went wrong';
-        
+        this.loading= false;
       }
     })
   }
