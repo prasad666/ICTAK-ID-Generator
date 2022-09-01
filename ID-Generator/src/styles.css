@@ -1,15 +1,39 @@
-/* GLOBAL STYLES
--------------------------------------------------- */
-/* Padding below the footer and lighter body text */
+.icon-list {
+  padding-left: 0;
+  list-style: none;
+}
+.icon-list li {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 0.25rem;
+}
+.icon-list li::before {
+  display: block;
+  flex-shrink: 0;
+  width: 1.5em;
+  height: 1.5em;
+  margin-right: 0.5rem;
+  content: "";
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23212529' viewBox='0 0 16 16'%3E%3Cpath d='M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z'/%3E%3C/svg%3E")
+    no-repeat center center / 100% auto;
+}
+.b-example-divider {
+  height: 3rem;
+  background-color: rgba(0, 0, 0, 0.1);
+  border: solid rgba(0, 0, 0, 0.15);
+  border-width: 1px 0;
+  box-shadow: inset 0 0.5em 1.5em rgba(0, 0, 0, 0.1),
+    inset 0 0.125em 0.5em rgba(0, 0, 0, 0.15);
+}
 
-body {
-  padding-top: 3rem;
-  padding-bottom: 3rem;
-  color: #5a5a5a;
+@media (min-width: 992px) {
+  .rounded-lg-3 {
+    border-radius: 0.3rem;
+  }
 }
 
 /* CUSTOMIZE THE CAROUSEL
-  -------------------------------------------------- */
+-------------------------------------------------- */
 
 /* Carousel base class */
 .carousel {
@@ -34,10 +58,10 @@ body {
 }
 
 /* MARKETING CONTENT
-  -------------------------------------------------- */
+-------------------------------------------------- */
 
 /* Center align the text within the three columns below the carousel */
-.marketing .col-lg-4 {
+.marketing .col-lg-3 {
   margin-bottom: 1.5rem;
   text-align: center;
 }
@@ -45,14 +69,14 @@ body {
   font-weight: 400;
 }
 /* rtl:begin:ignore */
-.marketing .col-lg-4 p {
+.marketing .col-lg-3 p {
   margin-right: 0.75rem;
   margin-left: 0.75rem;
 }
 /* rtl:end:ignore */
 
 /* Featurettes
-  ------------------------- */
+------------------------- */
 
 .featurette-divider {
   margin: 5rem 0; /* Space out the Bootstrap <hr> more */
@@ -67,7 +91,7 @@ body {
 }
 
 /* RESPONSIVE CSS
-  -------------------------------------------------- */
+-------------------------------------------------- */
 
 @media (min-width: 40em) {
   /* Bump up size of carousel content */
@@ -86,6 +110,9 @@ body {
   .featurette-heading {
     margin-top: 7rem;
   }
+}
+.bg-secondary {
+  background-color: rgb(30, 22, 55) !important;
 }
 
 /* SB Admin */
@@ -106,12 +133,18 @@ body {
 #layoutSidenav {
   display: flex;
 }
+#authnav {
+  display: flex;
+  flex-basis: 225px;
+}
 #layoutSidenav #layoutSidenav_nav {
+  display: flex;
   flex-basis: 225px;
   flex-shrink: 0;
   transition: transform 0.15s ease-in-out;
   z-index: 1038;
   transform: translateX(-225px);
+  width: 225px;
 }
 #layoutSidenav #layoutSidenav_content {
   position: relative;
@@ -270,6 +303,7 @@ body {
 .sb-sidenav-dark {
   background-color: #212529;
   color: rgba(255, 255, 255, 0.5);
+  width: 225px;
 }
 .sb-sidenav-dark .sb-sidenav-menu .sb-sidenav-menu-heading {
   color: rgba(255, 255, 255, 0.25);
@@ -485,4 +519,97 @@ body {
   width: 20px !important;
   font-size: 0.75rem;
   border-radius: 0.25rem !important;
+}
+
+h1 {
+  position: relative;
+  margin-top: 20px;
+  font-family: "Cardo", serif;
+}
+
+h1.one {
+  background: -moz-linear-gradient(
+    #ffffff 0%,
+    #ffffff 49%,
+    #000000 50%,
+    #000000 51%,
+    #ffffff 52%,
+    #ffffff 100% ;
+  );
+  background: -ms-linear-gradient(
+    #ffffff 0%,
+    #ffffff 49%,
+    #000000 50%,
+    #000000 51%,
+    #ffffff 52%,
+    #ffffff 100%
+  );
+  background: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    color-stop(0%, #ffffff),
+    color-stop(49%, #ffffff),
+    color-stop(50%, #000000),
+    color-stop(51%, #000000),
+    color-stop(52%, #ffffff),
+    color-stop(100%, #ffffff)
+  );
+  background: -webkit-linear-gradient(
+    #ffffff 0%,
+    #ffffff 49%,
+    #000000 50%,
+    #000000 51%,
+    #ffffff 52%,
+    #ffffff 100%
+  );
+  background: -o-linear-gradient(
+    #ffffff 0%,
+    #ffffff 49%,
+    #000000 50%,
+    #000000 51%,
+    #ffffff 52%,
+    #ffffff 100%
+  );
+  background: linear-gradient(
+    #ffffff 0%,
+    #ffffff 49%,
+    #000000 50%,
+    #000000 51%,
+    #ffffff 52%,
+    #ffffff 100%
+  );
+  text-align: center;
+}
+h1.one span {
+  background: #fff;
+  padding: 0 20px;
+  position: relative;
+  z-index: 5;
+}
+
+/*contact form*/
+.contact-info img {
+  margin-bottom: 15%;
+}
+.contact-info h2 {
+  margin-bottom: 10%;
+}
+.col-md-9 {
+  background: #fff;
+  padding: 3%;
+  border-top-right-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+}
+.contact-form label {
+  font-weight: 600;
+}
+.contact-form button {
+  background: #25274d;
+  color: #fff;
+  font-weight: 600;
+  width: 25%;
+}
+.contact-form button:focus {
+  box-shadow: none;
 }

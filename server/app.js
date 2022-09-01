@@ -1,50 +1,64 @@
-const dotenv = require('dotenv');
-dotenv.config({ path:'./config.env' })
-const cors = require('cors')
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const dotenv = require("dotenv").config();
+const dbConfig = require("./config/database.config.js");
+// const dotenv = require('dotenv');
+// dotenv.config({ path:'./config.env' })
 
-var indexRouter = require('./routes/index');
-var studentsRouter = require('./routes/students');
+const mongoose = require("mongoose");
+
+const cors = require('cors')
+var createError = require("http-errors");
+var express = require("express");
+var path = require("path");
+var cookieParser = require("cookie-parser");
+var logger = require("morgan");
+
+var indexRouter = require("./routes/index");
+var studentsRouter = require("./routes/students");
+var courseRouter = require("./routes/courseRoutes");
 
 var app = express();
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+//initial db
+console.log(dbConfig);
+mongoose.connect(dbConfig.url, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 
-app.use(logger('dev'));
+// view engine setup
+app.set("views", path.join(__dirname, "views"));
+app.set("view engine", "jade");
+
+app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, "public")));
 app.use(cors())
 
 
-app.use('/', indexRouter);
-app.use('/students', studentsRouter);
+app.use("/", indexRouter);
+// app.use("/students", studentsRouter);
+app.use("/courses", courseRouter);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   res.status(err.status||500).json({
     message: err.message
   });
 
-  // // set locals, only providing error in development
-  // res.locals.message = err.message;
-  // res.locals.error = req.app.get('env') === 'development' ? err : {};
+  // set locals, only providing error in development
+  res.locals.message = err.message;
+  res.locals.error = req.app.get("env") === "development" ? err : {};
 
   // // render the error page
   // res.status(err.status || 500);
-  // res.render('error');
+  // res.render("error");
 });
 
 mongoose
@@ -53,3 +67,8 @@ mongoose
   .catch((err) => console.log(err))
 
 module.exports = app;
+
+// const PORT = process.env.PORT || 3000;
+// app.listen(PORT, () => {
+//   console.log(`App listening on ${PORT} port`);
+// });

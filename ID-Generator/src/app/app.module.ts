@@ -14,7 +14,7 @@ import { AuthHttpInterceptor } from './shared/services/auth-http.interceptor';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BatchmanagerModule } from './modules/batchmanager/batchmanager.module';
 import { StudentModule } from './modules/student/student.module';
-
+import { CoreModule } from './modules/core/core.module';
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,8 +31,11 @@ import { StudentModule } from './modules/student/student.module';
     AdminModule,
     BatchmanagerModule,
     StudentModule,
+    StudentModule,
+    BatchmanagerModule,
     CommonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CoreModule,
   ],
   exports: [SharedModule],
   providers: [
@@ -40,4 +43,6 @@ import { StudentModule } from './modules/student/student.module';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  public  title = 'test';
+ }

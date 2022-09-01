@@ -10,6 +10,8 @@ import { ContactusComponent } from './contactus/contactus.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
 import { LoginComponent } from './login/login.component';
+import { CoreModule } from '../core/core.module';
+import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
@@ -30,6 +32,8 @@ import { ResetpasswordComponent } from './resetpassword/resetpassword.component'
     CommonModule,
     PagesRoutingModule,
     SharedModule,
+    CoreModule,
+    FormsModule,
     ReactiveFormsModule,
     HttpClientModule
   ],

@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { AuthService } from 'src/app/shared/services/auth.service';
+import { RegistrationService } from '../../core/services/registration.service';
 
 @Component({
   selector: 'app-register',
@@ -10,41 +8,26 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 })
 export class RegisterComponent implements OnInit {
 
-  registrationError:any;
 
-  constructor(private auth: AuthService, private router:Router) { }
+  studentDetails={
+    name:'',
+    courseType:'',
+    photo:'',
+    emailId:'',
+    phoneno:'',
+    batch:'',
+    courseStartDate:'',
+    courseEndDate:''
+   }
 
-  ngOnInit(): void { }
+  constructor(private registration:RegistrationService) { }
 
-  form = new FormGroup({
-    name: new FormControl(null, Validators.required),
-    email: new FormControl(null, [Validators.required, Validators.email]),
-    password: new FormControl(null, Validators.required),
-    confirmPassword: new FormControl(null, Validators.required),
-  }, this.matchPassword )
-
-
-  //password match validator
-  matchPassword(form:AbstractControl){
-    const {password, confirmPassword } = form.value
-    if(password === confirmPassword){
-      return null;
-    }
-    return {passwordMismatch:true};
+  ngOnInit(): void {
   }
 
-  //submit form
-  onSubmit(){
-    this.auth.register(this.form.value).subscribe({
-      next: (data:any) => {
-        this.auth.setUser(data.token, data.user);
-        this.router.navigate(['student']);     
-      },
-      error: (err:any) => {
-        if(String(err.error.message).startsWith('E11000')) err.error.message = "Email id already exists"
-        this.registrationError = err.error.message||'something went wrong';
-      }
-    })
+  Registration(){
+     this.registration.newStudent(this.studentDetails);
+    console.log("Called");    
+    alert("Success");
   }
-
 }

@@ -4,11 +4,13 @@ import { SharedModule } from 'src/app/shared/shared.module';
 
 import { AdminRoutingModule } from './admin-routing.module';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { SideNavComponent } from './components/side-nav/side-nav.component';
 
 
 @NgModule({
   declarations: [
-    DashboardComponent
+    DashboardComponent,
+    SideNavComponent
   ],
   imports: [
     CommonModule,
@@ -16,4 +18,5 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     SharedModule
   ]
 })
+
 export class AdminModule { }
