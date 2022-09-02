@@ -1,24 +1,25 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { environment } from 'environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  root = 'http://localhost:3000/'
+  root = environment.api_url
   currentUser:any = this.getCurrentUser();
   token:any = this.getToken();
 
   constructor(private http: HttpClient) { }
 
   register(formData:any){
-    return this.http.post(`${this.root}users/register`, formData);
+    return this.http.post(`${this.root}/users/register`, formData);
   }
 
   login(formData:any){
-    return this.http.post(`${this.root}users/login`, formData);
+    return this.http.post(`${this.root}/users/login`, formData);
   }
 
   setUser (token:string, user:any) {
@@ -62,11 +63,11 @@ export class AuthService {
   }
 
   forgotPassword(email:any){
-    return this.http.post(`${this.root}users/forgotPassword`, email);
+    return this.http.post(`${this.root}/users/forgotPassword`, email);
   }
 
   resetPassword(password:any,token:string){
-    return this.http.patch(`${this.root}users/resetPassword/${token}`, password);
+    return this.http.patch(`${this.root}/users/resetPassword/${token}`, password);
   }
 
 }
