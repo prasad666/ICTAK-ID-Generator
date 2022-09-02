@@ -6,35 +6,30 @@ import { AuthService } from '../services/auth.service';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuard implements CanActivate {
+export class HomeRedirectGuard implements CanActivate {
 
-  constructor(private auth: AuthService, private router:Router){}
-
+  constructor(private auth:AuthService, private router:Router){}
 
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
       
       if(this.auth.isLoggedIn()) {   
-        const urlArray = state.url.split('/')
         const role = this.auth.currentUser.role
-        if(urlArray[1]==='student' && role==='student'){
-          return true
+        if(role==='student'){
+          this.router.navigate(['student'])
+          return false
         }
-        if(urlArray[1]==='backend'){
-          if(
-            urlArray[2]==='batchmanager' && role==='batchManager'){
-            return true
-          }
-          if(
-            urlArray[2]==='admin' && role==='admin'){
-            return true
-          }
+        if(role==='batchManager'){
+          this.router.navigate(['backend/batchmanager'])
+          return false
+        }
+        if(role==='admin'){
+          this.router.navigate(['backend/admin'])
+          return false
         }
       };
-      this.router.navigate(['pages/home'])
-      return false;  
-
+      return true;
   }
   
 }

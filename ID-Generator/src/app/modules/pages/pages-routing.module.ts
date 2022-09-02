@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { HomeRedirectGuard } from '../core/guards/home-redirect.guard';
 import { AboutusComponent } from './aboutus/aboutus.component';
 import { ContactusComponent } from './contactus/contactus.component';
 import { FaqsComponent } from './faqs/faqs.component';
@@ -11,7 +12,7 @@ import { ResetpasswordComponent } from './resetpassword/resetpassword.component'
 
 const routes: Routes = [
 
-  {path: "home", component: HomeComponent, title: 'Home'},
+  {path: "home", component: HomeComponent, title: 'Home', canActivate: [HomeRedirectGuard]},
   {path: "about-us", component: AboutusComponent, title: 'About Us'},
   {path: "faqs", component: FaqsComponent, title: 'FAQs'},
   {path: "contact-us", component: ContactusComponent, title: 'Contact Us'},

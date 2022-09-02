@@ -35,6 +35,7 @@ export class HomeComponent implements OnInit {
         if(this.form.value.remember){
           this.auth.storeUser(data.token, data.user);
         }
+
         if(data.user.role==='student'){
           this.router.navigate(['student']);     
         }else if(data.user.role==='batchManager'){
@@ -44,6 +45,7 @@ export class HomeComponent implements OnInit {
         }else {
           this.loginError = "Couldn't identify user"
         }
+
         this.loading = false;
       },
       error: (err:any) => {
