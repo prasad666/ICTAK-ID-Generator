@@ -30,18 +30,27 @@ export class HomeComponent implements OnInit {
     this.loading = true;
     this.auth.login(this.form.value).subscribe({
       next: (data:any) => {
-        
+
         this.auth.setUser(data.token, data.user);
         if(this.form.value.remember){
           this.auth.storeUser(data.token, data.user);
         }
-
+  
         if(data.user.role==='student'){
-          this.router.navigate(['student']);     
+          this.router.navigate(['student'])
+          .then(() => {
+            window.location.reload();
+          });     
         }else if(data.user.role==='batchManager'){
-          this.router.navigate(['backend/batchmanager']);     
+          this.router.navigate(['backend/batchmanager'])
+          .then(() => {
+            window.location.reload();
+          });     
         }else if(data.user.role==='admin'){
-          this.router.navigate(['backend/admin']);     
+          this.router.navigate(['backend/admin'])
+          .then(() => {
+            window.location.reload();
+          });    
         }else {
           this.loginError = "Couldn't identify user"
         }

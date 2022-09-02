@@ -24,6 +24,8 @@ export class AuthService {
   setUser (token:string, user:any) {
     this.currentUser = user;
     this.token = token;
+    sessionStorage.setItem('token', token);
+    sessionStorage.setItem('currentUser', JSON.stringify(user));  
   }
   
   storeUser (token:string, user:any) {
@@ -34,7 +36,7 @@ export class AuthService {
 
   getCurrentUser(){
     if(!this.currentUser){
-      let user= localStorage.getItem('currentUser');
+      let user= localStorage.getItem('currentUser')||sessionStorage.getItem('currentUser');
       if(user) return JSON.parse(user);
       return undefined;     
     }
@@ -42,12 +44,12 @@ export class AuthService {
   }
 
   getToken(){
-    if(!this.token) return localStorage.getItem('token');
+    if(!this.token) return localStorage.getItem('token')||sessionStorage.getItem('token');
     return this.token;
   }
 
   isLoggedIn(){
-    if(!this.token) this.token = localStorage.getItem('token');
+    if(!this.token) this.token = localStorage.getItem('token') || sessionStorage.getItem('currentUser');
     const helper = new JwtHelperService();
     return !helper.isTokenExpired(this.token);
   }
@@ -56,6 +58,7 @@ export class AuthService {
     this.currentUser = undefined;
     this.token = undefined;
     localStorage.clear();
+    sessionStorage.clear();
   }
 
   forgotPassword(email:any){
