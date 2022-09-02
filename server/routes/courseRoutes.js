@@ -1,30 +1,31 @@
 var express = require("express");
 var router = express.Router();
 var courseController = require("../controllers/courseController.js");
+var authController = require("../controllers/authController");
 
 /*
  * GET
  */
-router.get("/", courseController.list);
+router.get("/", authController.protect, authController.restrictTo('student','batchManager','admin'), courseController.list);
 
 /*
  * GET
  */
-router.get("/:id", courseController.show);
+router.get("/:id", authController.protect, authController.restrictTo('student','batchManager','admin'), courseController.show);
 
 /*
  * POST
  */
-router.post("/", courseController.create);
+router.post("/", authController.protect, authController.restrictTo('batchManager','admin'), courseController.create);
 
 /*
  * PUT
  */
-router.put("/:id", courseController.update);
+router.put("/:id", authController.protect, authController.restrictTo('batchManager','admin'), courseController.update);
 
 /*
  * DELETE
  */
-router.delete("/:id", courseController.remove);
+router.delete("/:id", authController.protect, authController.restrictTo('batchManager','admin'), courseController.remove);
 
 module.exports = router;

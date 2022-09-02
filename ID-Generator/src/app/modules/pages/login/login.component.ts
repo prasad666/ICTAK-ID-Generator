@@ -32,9 +32,30 @@ export class LoginComponent implements OnInit {
       next: (data:any) => {
         this.auth.setUser(data.token, data.user);
         if(this.form.value.remember){
-          this.auth.storeUser(data.token, data.user);
+          this.auth.saveUserInLocalStorage(data.token, data.user);
+        }else{
+          this.auth.saveUserInSessionStorage(data.token, data.user);
         }
-        this.router.navigate(['student']);     
+  
+        if(data.user.role==='student'){
+          this.router.navigate(['student'])
+          .then(() => {
+            window.location.reload();
+          });     
+        }else if(data.user.role==='batchManager'){
+          this.router.navigate(['backend/batchmanager'])
+          .then(() => {
+            window.location.reload();
+          });     
+        }else if(data.user.role==='admin'){
+          this.router.navigate(['backend/admin'])
+          .then(() => {
+            window.location.reload();
+          });    
+        }else {
+          this.loginError = "Couldn't identify user"
+        }
+
       },
       error: (err:any) => {
         console.log(err);

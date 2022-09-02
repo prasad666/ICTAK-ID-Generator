@@ -33,7 +33,9 @@ export class HomeComponent implements OnInit {
 
         this.auth.setUser(data.token, data.user);
         if(this.form.value.remember){
-          this.auth.storeUser(data.token, data.user);
+          this.auth.saveUserInLocalStorage(data.token, data.user);
+        }else{
+          this.auth.saveUserInSessionStorage(data.token, data.user);
         }
   
         if(data.user.role==='student'){

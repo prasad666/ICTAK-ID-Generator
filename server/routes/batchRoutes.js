@@ -1,30 +1,31 @@
 var express = require('express');
 var router = express.Router();
 var batchController = require('../controllers/batchController.js');
+var authController = require('../controllers/authController')
 
 /*
  * GET
  */
-router.get('/', batchController.list);
+router.get('/', authController.protect, authController.restrictTo('student','batchManager','admin'), batchController.list);
 
 /*
  * GET
  */
-router.get('/:id', batchController.show);
+router.get('/:id', authController.protect, authController.restrictTo('student','batchManager','admin'), batchController.show);
 
 /*
  * POST
  */
-router.post('/', batchController.create);
+router.post('/', authController.protect, authController.restrictTo('batchManager','admin'), batchController.create);
 
 /*
  * PUT
  */
-router.put('/:id', batchController.update);
+router.put('/:id', authController.protect, authController.restrictTo('batchManager','admin'), batchController.update);
 
 /*
  * DELETE
  */
-router.delete('/:id', batchController.remove);
+router.delete('/:id', authController.protect, authController.restrictTo('batchManager','admin'), batchController.remove);
 
 module.exports = router;

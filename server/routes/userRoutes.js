@@ -12,26 +12,26 @@ router.patch('/resetPassword/:token', authController.resetPassword);
 /*
  * GET
  */
-router.get("/", userController.list);
+router.get("/", authController.protect, authController.restrictTo('student','batchManager','admin'),  userController.list);
 
 /*
  * GET
  */
-router.get("/:id", userController.show);
+router.get("/:id", authController.protect, authController.restrictTo('student','batchManager','admin'), userController.show);
 
 /*
  * POST
  */
-router.post("/", userController.create);
+router.post("/", authController.protect, authController.restrictTo('student','batchManager','admin'),  userController.create);
 
 /*
  * PUT
  */
-router.put("/:id", userController.update);
+router.put("/:id", authController.protect, authController.restrictTo('student','batchManager','admin'),  userController.update);
 
 /*
  * DELETE
  */
-router.delete("/:id", userController.remove);
+router.delete("/:id", authController.protect, authController.restrictTo('student','batchManager','admin'),  userController.remove);
 
 module.exports = router;

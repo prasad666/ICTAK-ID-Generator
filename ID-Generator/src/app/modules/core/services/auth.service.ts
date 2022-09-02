@@ -25,11 +25,14 @@ export class AuthService {
   setUser (token:string, user:any) {
     this.currentUser = user;
     this.token = token;
+  }
+
+  saveUserInSessionStorage(token:string, user:any) {
     sessionStorage.setItem('token', token);
     sessionStorage.setItem('currentUser', JSON.stringify(user));  
   }
   
-  storeUser (token:string, user:any) {
+  saveUserInLocalStorage (token:string, user:any) {
     localStorage.setItem('token', token);
     localStorage.setItem('currentUser', JSON.stringify(user));
     

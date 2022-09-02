@@ -17,9 +17,9 @@ const routes: Routes = [
   {path: "faqs", component: FaqsComponent, title: 'FAQs'},
   {path: "contact-us", component: ContactusComponent, title: 'Contact Us'},
   {path: "login", component: LoginComponent, title: 'Login'},
-  {path: "register", component: RegisterComponent, title: 'Register'},
-  {path: "forgot-password", component: ForgotpasswordComponent, title: 'Forgot Password'},
-  {path: "reset-password/:token", component: ResetpasswordComponent},
+  {path: "register", component: RegisterComponent, title: 'Register',canActivate: [HomeRedirectGuard]},
+  {path: "forgot-password", component: ForgotpasswordComponent, title: 'Forgot Password',canActivate: [HomeRedirectGuard]},
+  {path: "reset-password/:token", component: ResetpasswordComponent,canActivate: [HomeRedirectGuard]},
 
 
 ];

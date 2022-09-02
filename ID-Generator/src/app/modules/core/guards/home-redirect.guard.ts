@@ -14,22 +14,22 @@ export class HomeRedirectGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
       
-      if(this.auth.isLoggedIn()) {   
-        const role = this.auth.currentUser.role
-        if(role==='student'){
-          this.router.navigate(['student'])
-          return false
-        }
-        if(role==='batchManager'){
-          this.router.navigate(['backend/batchmanager'])
-          return false
-        }
-        if(role==='admin'){
-          this.router.navigate(['backend/admin'])
-          return false
-        }
-      };
-      return true;
+    if(this.auth.isLoggedIn()) {   
+      const role = this.auth.currentUser.role
+      if(role==='student'){
+        this.router.navigate(['student'])
+        return false
+      }
+      if(role==='batchManager'){
+        this.router.navigate(['backend/batchmanager'])
+        return false
+      }
+      if(role==='admin'){
+        this.router.navigate(['backend/admin'])
+        return false
+      }
+    };
+    return true;
   }
   
 }
