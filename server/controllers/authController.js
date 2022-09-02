@@ -19,7 +19,7 @@ exports.register = async (req,res,next) =>{
             last_name:req.body.last_name,
             email:req.body.email,
             password:req.body.password,
-            role:req.body.role  //todo////change this///student cannot set any other role
+
         });
         
         //sign jwt
