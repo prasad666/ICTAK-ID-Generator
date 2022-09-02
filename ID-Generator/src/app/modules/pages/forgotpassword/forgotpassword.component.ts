@@ -32,10 +32,10 @@ export class ForgotpasswordComponent implements OnInit {
         this.loading = false;
         this.message = `Password reset link has been sent to ${this.form.value.email} (If not found in inbox, check spam folder.)`
       },
-      error: (error)=>{
+      error: (err)=>{
         this.loading = false;
-        this.message = error.error.message||'something went wrong';
-        console.log(error);
+        this.message = err.status===500 ? 'Something went wrong at server': err.error.message||'Something went wrong.Please check your connection'
+        console.log(err);
         
       }
     })

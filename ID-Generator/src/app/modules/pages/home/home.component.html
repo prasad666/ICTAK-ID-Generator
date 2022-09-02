@@ -43,12 +43,14 @@
             </label>
           </div>
           <button class="w-100 btn btn-lg btn-primary" type="submit" [disabled]="form.invalid">
-            <div *ngIf="!loading">
+            <span *ngIf="loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            Login
+            <!-- <div *ngIf="!loading">
               Login
             </div>
             <div *ngIf="loading" class="spinner-border" role="status">
               <span class="visually-hidden">Loading...</span>
-            </div>
+            </div> -->
           </button>
           <div class="loginError">{{loginError}}</div>
           <hr class="my-4" />

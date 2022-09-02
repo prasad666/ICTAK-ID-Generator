@@ -48,7 +48,7 @@ export class HomeComponent implements OnInit {
       },
       error: (err:any) => {
         console.log(err);
-        this.loginError = err.error.message||'something went wrong';
+        this.loginError = err.status===500 ? 'Something went wrong at server': err.error.message||'Something went wrong.Please check your connection';
         this.loading= false;
       }
     })
