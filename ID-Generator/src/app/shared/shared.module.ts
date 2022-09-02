@@ -9,6 +9,11 @@ import { AuthHeaderComponent } from './auth-header/auth-header.component';
 import { AuthFooterComponent } from './auth-footer/auth-footer.component';
 import { AuthNavComponent } from './auth-nav/auth-nav.component';
 import { GuestBannerComponent } from './guest-banner/guest-banner.component';
+import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
+import { AlertComponent } from './alert/alert.component';
+import { ToastComponent } from './toast/toast.component';
+import { ConfirmationDialogService } from './services/confirmation-dialog.service';
+import { ToastService } from './services/toast.service';
 
 @NgModule({
   declarations: [
@@ -19,19 +24,22 @@ import { GuestBannerComponent } from './guest-banner/guest-banner.component';
     AuthFooterComponent,
     AuthNavComponent,
     GuestBannerComponent,
+    ConfirmationDialogComponent,
+    AlertComponent,
+    ToastComponent,
   ],
-  imports: [
-    CommonModule,
-    RouterModule
-  ],
-  exports: [    
+  imports: [CommonModule, RouterModule],
+  exports: [
     GuestNavComponent,
     GuestHeaderComponent,
-    GuestFooterComponent, 
+    GuestFooterComponent,
     AuthHeaderComponent,
     AuthFooterComponent,
     AuthNavComponent,
     GuestBannerComponent,
-    ]
+    ConfirmationDialogComponent,
+    AlertComponent,
+  ],
+  providers: [ConfirmationDialogService, ToastService],
 })
-export class SharedModule { }
+export class SharedModule {}

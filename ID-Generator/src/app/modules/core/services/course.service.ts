@@ -7,12 +7,15 @@ import { map } from 'rxjs';
   providedIn: 'any',
 })
 export class CourseService {
-  API_LIST = environment.apiBase + '/courses/';
+  API = environment.apiBase + '/courses/';
 
   constructor(private http: HttpClient) {}
 
+  getById(id: any) {
+    return this.http.get(this.API + id);
+  }
   getCourses(page = 1, limit = 10, filter = '', sortColumn = '', sortDir = '') {
-    return this.http.get(this.API_LIST, {
+    return this.http.get(this.API, {
       params: new HttpParams()
         .set('page', page)
         .set('size', limit)
@@ -20,5 +23,11 @@ export class CourseService {
         .set('sort', sortColumn)
         .set('dir', sortDir),
     });
+  }
+
+  create(data: any): any {}
+  update(id: any, data: any): any {}
+  delete(id: any) {
+    return this.http.delete(this.API + id);
   }
 }

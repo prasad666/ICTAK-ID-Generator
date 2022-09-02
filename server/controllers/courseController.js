@@ -127,7 +127,7 @@ module.exports = {
    */
   remove: function (req, res) {
     var id = req.params.id;
-
+    console.log(id);
     CourseModel.findByIdAndRemove(id, function (err, course) {
       if (err) {
         return res.status(500).json({

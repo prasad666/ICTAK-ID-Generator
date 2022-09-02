@@ -19,7 +19,7 @@ import { AdminModule } from './modules/admin/admin.module';
 import { StudentModule } from './modules/student/student.module';
 import { BatchmanagerModule } from './modules/batchmanager/batchmanager.module';
 import { CoreModule } from './modules/core/core.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatFormFieldModule } from '@angular/material/form-field';
 
@@ -50,6 +50,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatProgressBarModule,
     MatInputModule,
     MatFormFieldModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   exports: [SharedModule],
   providers: [],

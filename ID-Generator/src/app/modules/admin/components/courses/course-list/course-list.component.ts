@@ -2,7 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import {
   debounceTime,
   distinctUntilChanged,
@@ -13,7 +13,7 @@ import {
 import { CourseDataSource } from 'src/app/modules/core/datasources/courses-datasource';
 import { Course } from 'src/app/modules/core/models/course';
 import { CourseService } from 'src/app/modules/core/services/course.service';
-
+import { ConfirmationDialogService } from 'src/app/shared/services/confirmation-dialog.service';
 @Component({
   selector: 'app-course-list',
   templateUrl: './course-list.component.html',
@@ -38,7 +38,9 @@ export class CourseListComponent implements OnInit {
 
   constructor(
     private courseService: CourseService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router,
+    private confirmationDialogService: ConfirmationDialogService
   ) {}
 
   ngOnInit(): void {
@@ -79,5 +81,41 @@ export class CourseListComponent implements OnInit {
       this.sort?.active ?? '_id',
       this.sort?.direction ?? 'asc'
     );
+  }
+
+  createObject(ev: Event) {
+    this.router
+      .navigate(['/backend/admin/course/create'])
+      .then((success) => console.log('navigation success?', success))
+      .catch(console.error);
+  }
+  editObject(el: any) {
+    this.router
+      .navigate([
+        '/backend/admin/course/edit/' +
+          el._elementRef.nativeElement.getAttribute('data-id'),
+      ])
+      .then((success) => console.log('navigation success?', success))
+      .catch(console.error);
+  }
+
+  deleteObject(el: any) {
+    let objId = el._elementRef.nativeElement.getAttribute('data-id');
+    this.confirmationDialogService
+      .confirm('Please confirm..', 'Do you really want to delete this course ?')
+      .then((confirmed) => {
+        console.log('User confirmed:', confirmed);
+        if (confirmed) {
+          this.courseService.delete(objId).subscribe((res) => {
+            console.log(res);
+            this.loadCoursesPage();
+          });
+        }
+      })
+      .catch(() =>
+        console.log(
+          'User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'
+        )
+      );
   }
 }

@@ -1,1 +1,80 @@
-<p>course-edit works!</p>
+<app-auth-header></app-auth-header>
+<div id="layoutSidenav">
+  <app-side-nav id="authnav"></app-side-nav>
+  <div id="layoutSidenav_content">
+    <main>
+      <div class="container-fluid px-4">
+        <h1 class="mt-4">Courses</h1>
+        <ol class="breadcrumb mb-4">
+          <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+          <li class="breadcrumb-item">Courses</li>
+          <li class="breadcrumb-item active">List</li>
+        </ol>
+        <div class="card mb-4">
+          <div class="card-body">
+            <div class="row"></div>
+            <h1 *ngIf="isAddMode">Add User</h1>
+            <h1 *ngIf="!isAddMode">Edit User</h1>
+            <form [formGroup]="form" (ngSubmit)="onSubmit()">
+              <div class="form-row">
+                <div class="form-group col-5">
+                  <label>Course Name</label>
+                  <input
+                    type="text"
+                    formControlName="course_name"
+                    class="form-control"
+                    [ngClass]="{
+                      'is-invalid': submitted && f['course_name'].errors
+                    }"
+                  />
+                  <div
+                    *ngIf="submitted && f['course_name'].errors"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="f['course_name'].errors['required']">
+                      Course Name is required
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group col-5">
+                  <label>Enabled</label>
+                  <input
+                    type="checkbox"
+                    name="enabled"
+                    id="enabled"
+                    class="form-check-input"
+                    [ngClass]="{
+                      'is-invalid': submitted && f['enabled'].errors
+                    }"
+                  />
+
+                  <div
+                    *ngIf="submitted && f['enabled'].errors"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="f['enabled'].errors['required']">
+                      Last Name is required
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <button [disabled]="loading" class="btn btn-primary">
+                  <span
+                    *ngIf="loading"
+                    class="spinner-border spinner-border-sm mr-1"
+                  ></span>
+                  Save
+                </button>
+                <a routerLink="/backend/admin/courses" class="btn btn-link"
+                  >Cancel</a
+                >
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </main>
+    <app-auth-footer></app-auth-footer>
+  </div>
+</div>
