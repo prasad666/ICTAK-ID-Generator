@@ -12,7 +12,7 @@ import { AuthService } from '../../core/services/auth.service';
 export class HomeComponent implements OnInit {
 
   loading = false;
-  loginError:any;
+  loginError = '';
 
   constructor(private auth: AuthService, private router:Router) { }
 
@@ -28,6 +28,7 @@ export class HomeComponent implements OnInit {
 
   onSubmit(){
     this.loading = true;
+    this.loginError = '';
     this.auth.login(this.form.value).subscribe({
       next: (data:any) => {
 

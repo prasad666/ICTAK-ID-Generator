@@ -128,7 +128,7 @@ exports.resetPassword = async (req,res,next) => {
 
         //match it with stored one
         const user= await User.findOne({encryptedResetToken: recievedTokenEncrypted});
-        if(!user){throw httpError(404, 'Not found')}
+        if(!user){throw httpError(401, 'Invalid Password reset request. Please generate a new password reset link')}
         //check whether expired
         if(user.passwordResetExpiry < Date.now()){
             throw httpError(406, 'Password reset link expired')

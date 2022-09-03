@@ -32,13 +32,15 @@ export class ResetpasswordComponent implements OnInit {
   }
 
   onSubmit(){
-    
+    this.message = '';
     this.auth.resetPassword(this.form.value,this.token).subscribe({
       next: (data)=>{
-        this.router.navigate(['pages/home']);     
+        this.message = 'Your password has been reset. Plese login to continue. Redirecting to login page in 10 seconds'
+        setTimeout(()=>{this.router.navigate(['pages/home']);}, 10000)
+             
       },
       error: (error)=>{
-        this.message = error.error.message||'something went wrong';
+        this.message = error.status===500 ? 'Something went wrong at server': error.error.message||'Something went wrong.Please check your connection';
       }
     })
   }
