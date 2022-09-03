@@ -18,7 +18,7 @@ export class AuthGuard implements CanActivate {
       if(this.auth.isLoggedIn()) {   
         const urlArray = state.url.split('/')
         const role = this.auth.currentUser.role
-        if(urlArray[1]==='student' && role==='student'){
+        if(urlArray[1]==='secure'&& urlArray[2]==='student' && role==='student'){
           return true
         }
         if(urlArray[1]==='backend'){

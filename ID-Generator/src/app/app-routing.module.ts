@@ -12,14 +12,6 @@ const routes: Routes = [
 },
 
 {
-  path: 'student',
-  loadChildren: () =>
-      import('./modules/student/student-routing.module').then(
-          m => m.StudentRoutingModule
-      ),
-},
-
-{
   path: 'backend/admin',
   loadChildren: () =>
       import('./modules/admin/admin-routing.module').then(

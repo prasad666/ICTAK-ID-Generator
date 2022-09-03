@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
         }
   
         if(data.user.role==='student'){
-          this.router.navigate(['student'])
+          this.router.navigate(['secure/student'])
           .then(() => {
             window.location.reload();
           });     

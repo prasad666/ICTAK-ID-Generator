@@ -17,7 +17,7 @@ export class HomeRedirectGuard implements CanActivate {
     if(this.auth.isLoggedIn()) {   
       const role = this.auth.currentUser.role
       if(role==='student'){
-        this.router.navigate(['student'])
+        this.router.navigate(['secure/student'])
         return false
       }
       if(role==='batchManager'){
