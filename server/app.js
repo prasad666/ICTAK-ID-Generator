@@ -47,7 +47,8 @@ app.post('/insert',function(req,res){
  
   var student = {       
       
-      name : req.body.student.name,
+      firstName : req.body.student. firstName,
+      lastName : req.body.student. lastName,
       courseType : req.body.student.courseType,
       photo : req.body.student.photo,
       emailId : req.body.student.emailId,

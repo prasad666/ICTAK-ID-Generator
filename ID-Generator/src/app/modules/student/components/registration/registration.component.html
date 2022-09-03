@@ -3,46 +3,87 @@
 <body>
 <div class="container">
     
-<form (ngSubmit)="Registration()">
+<form [formGroup]="registerForm" (ngSubmit)="Registration()">
 
-<div class="form-group" id="text">
-    <label for="name">Student Name</label>
-    <input type="text" class="form-control" name="name" [(ngModel)]="studentDetails.name" >
-  </div>
-  
+<div class="form-group"  id="text">
+    <label for="name">First Name</label>
+    <input type="text" formControlName="firstName" class="form-control" name="firstName" >
+    <div *ngIf="f.firstName.touched && f.firstName.invalid" class="alert alert-danger">  
+      <div *ngIf="f.firstName.errors.required">FirstName is required</div>
+      <div *ngIf="f.firstName.errors && f.firstName.errors.minLength">Name should be 3 character.</div>
+      </div>
+      </div>
+      
+      <div class="form-group"  id="text">
+        <label> Last name</label>        
+        <input type="text" class="form-control"
+          formControlName="lastName"> 
+          <div *ngIf="f.lastName.touched && f.lastName.invalid" class="alert alert-danger">
+            <div *ngIf="f.lastName.errors.required">Lastname is required</div> 
+          </div> 
+        </div>
+      
   <div class="form-group" id="text">
     <label for="alterEgo">Course Type</label>
-    <input type="text"  class="form-control"  [(ngModel)]="studentDetails.courseType" name="courseType"> 
+    <input type="text"  class="form-control"  formControlName="courseType" name="courseType"> 
+    <div *ngIf="f.courseType.touched && f.courseType.invalid" class="alert alert-danger">
+      <div *ngIf="f.courseType.errors.required">Lastname is required</div> 
+    </div>
   </div>
+
   <div class="form-group" id="text">
     <label for="alterEgo">Photo</label>
     <input type="file"  class="form-control" 
-            [(ngModel)]="studentDetails.photo" name="photo"> 
+    formControlName="photo" name="photo"> 
+    <div *ngIf="f.photo.touched && f.photo.invalid" class="alert alert-danger">
+      <div *ngIf="f.photo.errors.required">Photo is required</div> 
+    </div>
   </div>
   <div class="form-group" id="text">
     <label for="alterEgo">Email Id</label>
     <input type="email"  class="form-control" 
-            [(ngModel)]="studentDetails.emailId" name="emailId"> 
+    formControlName="emailId" name="emailId"> 
+    <div *ngIf="f.emailId.touched && f.emailId.invalid" class="alert alert-danger">
+      <div *ngIf="f.emailId.errors.required">emailId is required</div> 
+      <div *ngIf="f.emailId.errors.pattern">Please enter valid emailId</div>
+    </div>
   </div>
+
   <div class="form-group" id="text">
-    <label for="alterEgo">Phone Number</label>
-    <input type="text"  class="form-control"  [(ngModel)]="studentDetails.phoneno" name="phoneno"> 
+      <label for="alterEgo">Phone Number</label>
+      <input formControlName="phoneno" type="text"  class="form-control"   name="phoneno"> 
+      <div *ngIf="f.phoneno.touched && f.phoneno.invalid" class="alert alert-danger">  
+        <div *ngIf="f.phoneno.errors.required">Mobile Number is required.</div>  
+        <div *ngIf="f.phoneno.errors.pattern">Please, Enter 10 digit Mobile Number.</div>   
+      </div> 
   </div>
   <div class="form-group" id="text">
     <label for="power">Batch</label>
-    <select class="form-control"  id="power" name="batch"
-            required>>
-            <!-- [(ngModel)]="studentDetails.power" name="power"> -->
-      <!-- <option *ngFor="let pow of powers" [value]="pow">{{pow}}</option> -->
+    <select class="form-control"  id="batch" formControlName="batch" name="batch">
+       <option *ngFor="let b of batch" [value]="b">{{batch}}</option>
+         <!-- <option >{{batch[1]}}</option> 
+        <option>{{batch[2]}}</option>     -->
+
+       <div *ngIf="f.batch.touched && f.batch.invalid" class="alert alert-danger">
+        <div *ngIf="f.batch.errors.required">Batch is required.</div> 
+     </div> -->
     </select>
   </div>
   <div class="form-group" id="text">
     <label for="alterEgo">course starting date</label>
-    <input type="date"  class="form-control" [(ngModel)]="studentDetails.courseStartDate" name="courseStartDate"> 
+    <input type="date"  class="form-control" formControlName="courseStartDate" name="courseStartDate"> 
+    <div *ngIf="f.courseStartDate.touched && f.courseStartDate.invalid" class="alert alert-danger">
+      <div *ngIf="f.courseStartDate.errors.required">Required</div> 
+    </div>
   </div>
+
+
   <div class="form-group" id="text">
     <label for="alterEgo">course ending date</label>
-    <input type="date"  class="form-control"  [(ngModel)]="studentDetails. courseEndDate" name="courseEndDate"> 
+    <input type="date"  class="form-control"  formControlName="courseEndDate" name="courseEndDate"> 
+    <div *ngIf="f.courseEndDate.touched && f.courseEndDate.invalid" class="alert alert-danger">
+      <div *ngIf="f.courseEndDate.errors.required">Lastname is required</div> 
+    </div>
   </div>
   
   <div class="btn">
