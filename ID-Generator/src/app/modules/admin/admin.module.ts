@@ -20,6 +20,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
 import { BatchListComponent } from './components/batches/batch-list/batch-list.component';
 import { BatchEditComponent } from './components/batches/batch-edit/batch-edit.component';
+import { BatchmanagerListComponent } from './components/batchmanagers/batchmanager-list/batchmanager-list.component';
+import { BatchmanagerEditComponent } from './components/batchmanagers/batchmanager-edit/batchmanager-edit.component';
+import { StudentEditComponent } from './components/students/student-edit/student-edit.component';
+import { StudentListComponent } from './components/students/student-list/student-list.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +33,10 @@ import { BatchEditComponent } from './components/batches/batch-edit/batch-edit.c
     CourseEditComponent,
     BatchListComponent,
     BatchEditComponent,
+    BatchmanagerListComponent,
+    BatchmanagerEditComponent,
+    StudentEditComponent,
+    StudentListComponent,
   ],
   imports: [
     CommonModule,

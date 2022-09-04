@@ -23,7 +23,7 @@ module.exports = {
   },
 
   listAll: function (req, res) {
-    var role = req.params.role || "";
+    var role = req.query.role || "";
     var queryObj = {};
     if (role) {
       queryObj = { role: role };

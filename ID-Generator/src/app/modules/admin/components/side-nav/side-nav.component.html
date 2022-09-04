@@ -5,7 +5,11 @@
         <!-- Admin -->
         <div class="sb-sidenav-menu-heading"></div>
 
-        <a class="nav-link" href="index.html">
+        <a
+          class="nav-link"
+          [routerLink]="['/backend/admin/dashboard']"
+          [routerLinkActive]="['active']"
+        >
           <div class="sb-nav-link-icon">
             <i class="fas fa-tachometer-alt"></i>
           </div>
@@ -32,8 +36,18 @@
           data-bs-parent="#sidenavAccordion"
         >
           <nav class="sb-sidenav-menu-nested nav">
-            <a class="nav-link" href="layout-static.html">Batch Managers</a>
-            <a class="nav-link" href="layout-sidenav-light.html">Students</a>
+            <a
+              class="nav-link"
+              [routerLink]="['/backend/admin/batchmanagers']"
+              [routerLinkActive]="['active']"
+              >Batch Managers</a
+            >
+            <a
+              class="nav-link"
+              [routerLink]="['/backend/admin/students']"
+              [routerLinkActive]="['active']"
+              >Students</a
+            >
           </nav>
         </div>
 
@@ -86,8 +100,8 @@
           <div class="sb-sidenav-collapse-arrow">
             <i class="fas fa-angle-down"></i>
           </div>
-        </a> -->
-        <!-- <div
+        </a>
+        <div
           class="collapse"
           id="menuSupport"
           aria-labelledby="headingOne"
