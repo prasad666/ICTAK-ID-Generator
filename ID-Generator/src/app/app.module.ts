@@ -18,11 +18,10 @@ import { PagesModule } from './modules/pages/pages.module';
 import { AdminModule } from './modules/admin/admin.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthHttpInterceptor } from './modules/core/services/auth-http.interceptor';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BatchmanagerModule } from './modules/batchmanager/batchmanager.module';
 import { StudentModule } from './modules/student/student.module';
 import { CoreModule } from './modules/core/core.module';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatFormFieldModule } from '@angular/material/form-field';
 
@@ -56,12 +55,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatProgressBarModule,
     MatInputModule,
     MatFormFieldModule,
-    FormsModule,
-    ReactiveFormsModule,
   ],
   exports: [SharedModule],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor , multi:true }
+    { provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
 })

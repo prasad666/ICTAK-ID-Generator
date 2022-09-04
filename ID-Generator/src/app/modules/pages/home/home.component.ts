@@ -6,65 +6,61 @@ import { AuthService } from '../../core/services/auth.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
 })
-
 export class HomeComponent implements OnInit {
-
   loading = false;
   loginError = '';
 
-  constructor(private auth: AuthService, private router:Router) { }
+  constructor(private auth: AuthService, private router: Router) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   form = new FormGroup({
-    email: new FormControl(null, [Validators.required, Validators.email]),
+    email: new FormControl(null, [Validators.required]),
     password: new FormControl(null, Validators.required),
-    remember: new FormControl(false)
-
+    remember: new FormControl(false),
   });
 
-  onSubmit(){
+  onSubmit() {
     this.loading = true;
     this.loginError = '';
     this.auth.login(this.form.value).subscribe({
-      next: (data:any) => {
-
+      next: (data: any) => {
         this.auth.setUser(data.token, data.user);
-        if(this.form.value.remember){
+        if (this.form.value.remember) {
           this.auth.saveUserInLocalStorage(data.token, data.user);
-        }else{
+        } else {
           this.auth.saveUserInSessionStorage(data.token, data.user);
         }
-  
-        if(data.user.role==='student'){
-          this.router.navigate(['secure/student'])
-          .then(() => {
+
+        if (data.user.role === 'student') {
+          this.router.navigate(['secure/student']).then(() => {
             window.location.reload();
-          });     
-        }else if(data.user.role==='batchManager'){
-          this.router.navigate(['backend/batchmanager'])
-          .then(() => {
+          });
+        } else if (data.user.role === 'batchManager') {
+          this.router.navigate(['backend/batchmanager']).then(() => {
             window.location.reload();
-          });     
-        }else if(data.user.role==='admin'){
-          this.router.navigate(['backend/admin'])
-          .then(() => {
+          });
+        } else if (data.user.role === 'admin') {
+          this.router.navigate(['backend/admin']).then(() => {
             window.location.reload();
-          });    
-        }else {
-          this.loginError = "Couldn't identify user"
+          });
+        } else {
+          this.loginError = "Couldn't identify user";
         }
 
         this.loading = false;
       },
-      error: (err:any) => {
+      error: (err: any) => {
         console.log(err);
-        this.loginError = err.status===500 ? 'Something went wrong at server': err.error.message||'Something went wrong.Please check your connection';
-        this.loading= false;
-      }
-    })
+        this.loginError =
+          err.status === 500
+            ? 'Something went wrong at server'
+            : err.error.message ||
+              'Something went wrong.Please check your connection';
+        this.loading = false;
+      },
+    });
   }
 }

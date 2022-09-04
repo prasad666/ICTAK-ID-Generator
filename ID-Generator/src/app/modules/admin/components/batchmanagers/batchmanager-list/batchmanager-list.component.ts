@@ -50,7 +50,7 @@ export class BatchmanagerListComponent implements OnInit {
   ngOnInit(): void {
     this.course = this.route.snapshot.data['batchmanager'];
     this.dataSource = new UserDatasource(this.userService);
-    this.dataSource.loadUsers('batchmanager', 0);
+    this.dataSource.loadUsers('batchManager', 0);
     this.successMessage = history.state['success'];
   }
 
@@ -80,7 +80,7 @@ export class BatchmanagerListComponent implements OnInit {
 
   loadUsersPage() {
     this.dataSource.loadUsers(
-      'batchmanager',
+      'batchManager',
       this.paginator?.pageIndex ?? 0,
       this.paginator?.pageSize ?? 10,
       this.input.nativeElement.value,

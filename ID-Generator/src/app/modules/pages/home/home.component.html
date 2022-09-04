@@ -5,22 +5,32 @@
   <div class="container-fluid col-xl-10 col-xxl-8 px-4 py-5 marketing">
     <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
       <div class="col-md-10 mx-auto col-lg-5">
-        <form class="p-4 p-md-5 border rounded-3 bg-light" [formGroup]="form" (ngSubmit)="onSubmit()">
+        <form
+          class="p-4 p-md-5 border rounded-3 bg-light"
+          [formGroup]="form"
+          (ngSubmit)="onSubmit()"
+        >
           <div class="form-floating mb-3">
             <input
-              type="email"
+              type="text"
               class="form-control"
               id="inputEmail"
               placeholder="name@example.com"
               formControlName="email"
             />
-            <label for="inputEmail">Email address</label>
+            <label for="inputEmail">Email / Username</label>
           </div>
-          <div class="error" *ngIf="form.controls['email'].dirty && form.controls['email'].errors?.['required']">
+          <div
+            class="error"
+            *ngIf="form.controls['email'].dirty && form.controls['email'].errors?.['required']"
+          >
             Email is required
           </div>
-          <div class="error" *ngIf="form.controls['email'].dirty && form.controls['email'].errors?.['email']">
-              Email is invalid
+          <div
+            class="error"
+            *ngIf="form.controls['email'].dirty && form.controls['email'].errors?.['email']"
+          >
+            Email is invalid
           </div>
 
           <div class="form-floating mb-3">
@@ -33,17 +43,30 @@
             />
             <label for="inputPassword">Password</label>
           </div>
-          <div class="error" *ngIf="form.controls['password'].dirty && form.controls['password'].errors?.['required']">
+          <div
+            class="error"
+            *ngIf="form.controls['password'].dirty && form.controls['password'].errors?.['required']"
+          >
             Password is required
           </div>
 
           <div class="checkbox mb-3">
             <label>
-              <input type="checkbox" value="" formControlName="remember"/> Remember me
+              <input type="checkbox" value="" formControlName="remember" />
+              Remember me
             </label>
           </div>
-          <button class="w-100 btn btn-lg btn-primary" type="submit" [disabled]="form.invalid">
-            <span *ngIf="loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+          <button
+            class="w-100 btn btn-lg btn-primary"
+            type="submit"
+            [disabled]="form.invalid"
+          >
+            <span
+              *ngIf="loading"
+              class="spinner-border spinner-border-sm"
+              role="status"
+              aria-hidden="true"
+            ></span>
             Login
             <!-- <div *ngIf="!loading">
               Login
@@ -52,10 +75,12 @@
               <span class="visually-hidden">Loading...</span>
             </div> -->
           </button>
-          <div class="loginError">{{loginError}}</div>
+          <div class="loginError">{{ loginError }}</div>
           <hr class="my-4" />
           <small class="text-muted"
-            ><a routerLink="/pages/forgot-password">Forgot password? Click here.</a></small
+            ><a routerLink="/pages/forgot-password"
+              >Forgot password? Click here.</a
+            ></small
           >
         </form>
       </div>
