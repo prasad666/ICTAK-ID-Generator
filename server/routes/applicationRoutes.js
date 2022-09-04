@@ -1,30 +1,31 @@
 var express = require("express");
 var router = express.Router();
 var applicationController = require("../controllers/applicationController.js");
+var authController = require('../controllers/authController')
 
 /*
  * GET
  */
-router.get("/", applicationController.list);
+router.get("/", authController.protect, authController.restrictTo('student','batchManager','admin'), applicationController.list);
 
 /*
  * GET
  */
-router.get("/:id", applicationController.show);
+router.get("/:id", authController.protect, authController.restrictTo('student','batchManager','admin'), applicationController.show);
 
 /*
  * POST
  */
-router.post("/", applicationController.create);
+router.post("/", authController.protect, authController.restrictTo('student','batchManager','admin'), applicationController.create);
 
 /*
  * PUT
  */
-router.put("/:id", applicationController.update);
+router.put("/:id", authController.protect, authController.restrictTo('student','batchManager','admin'), applicationController.update);
 
 /*
  * DELETE
  */
-router.delete("/:id", applicationController.remove);
+router.delete("/:id", authController.protect, authController.restrictTo('student','batchManager','admin'), applicationController.remove);
 
 module.exports = router;

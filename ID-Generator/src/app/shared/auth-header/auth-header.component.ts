@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/modules/core/services/auth.service';
 
 @Component({
   selector: 'app-auth-header',
@@ -7,9 +9,13 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class AuthHeaderComponent implements OnInit {
   @Input() componentTitle: string = 'ICTAK Administration';
-  constructor() { }
+  constructor(private auth: AuthService, private router:Router) { }
 
   ngOnInit(): void {
   }
 
+  onLogOut(){
+    this.auth.logout();
+    this.router.navigate(['/'])
+  }
 }

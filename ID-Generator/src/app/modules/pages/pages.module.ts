@@ -12,6 +12,9 @@ import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.compone
 import { LoginComponent } from './login/login.component';
 import { CoreModule } from '../core/core.module';
 import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
 
 
 @NgModule({
@@ -23,13 +26,16 @@ import { FormsModule } from '@angular/forms';
     ContactusComponent,
     ForgotpasswordComponent,
     LoginComponent,
+    ResetpasswordComponent,
   ],
   imports: [
     CommonModule,
     PagesRoutingModule,
     SharedModule,
     CoreModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   exports:[
 

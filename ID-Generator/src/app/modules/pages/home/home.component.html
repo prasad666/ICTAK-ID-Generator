@@ -5,36 +5,57 @@
   <div class="container-fluid col-xl-10 col-xxl-8 px-4 py-5 marketing">
     <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
       <div class="col-md-10 mx-auto col-lg-5">
-        <form class="p-4 p-md-5 border rounded-3 bg-light">
+        <form class="p-4 p-md-5 border rounded-3 bg-light" [formGroup]="form" (ngSubmit)="onSubmit()">
           <div class="form-floating mb-3">
             <input
               type="email"
               class="form-control"
-              id="floatingInput"
+              id="inputEmail"
               placeholder="name@example.com"
+              formControlName="email"
             />
-            <label for="floatingInput">Email address</label>
+            <label for="inputEmail">Email address</label>
           </div>
+          <div class="error" *ngIf="form.controls['email'].dirty && form.controls['email'].errors?.['required']">
+            Email is required
+          </div>
+          <div class="error" *ngIf="form.controls['email'].dirty && form.controls['email'].errors?.['email']">
+              Email is invalid
+          </div>
+
           <div class="form-floating mb-3">
             <input
               type="password"
               class="form-control"
-              id="floatingPassword"
+              id="inputPassword"
               placeholder="Password"
+              formControlName="password"
             />
-            <label for="floatingPassword">Password</label>
+            <label for="inputPassword">Password</label>
           </div>
+          <div class="error" *ngIf="form.controls['password'].dirty && form.controls['password'].errors?.['required']">
+            Password is required
+          </div>
+
           <div class="checkbox mb-3">
             <label>
-              <input type="checkbox" value="remember-me" /> Remember me
+              <input type="checkbox" value="" formControlName="remember"/> Remember me
             </label>
           </div>
-          <button class="w-100 btn btn-lg btn-primary" type="submit">
+          <button class="w-100 btn btn-lg btn-primary" type="submit" [disabled]="form.invalid">
+            <span *ngIf="loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
             Login
+            <!-- <div *ngIf="!loading">
+              Login
+            </div>
+            <div *ngIf="loading" class="spinner-border" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div> -->
           </button>
+          <div class="loginError">{{loginError}}</div>
           <hr class="my-4" />
           <small class="text-muted"
-            ><a href="">Forgot password? Click here.</a>></small
+            ><a routerLink="/pages/forgot-password">Forgot password? Click here.</a></small
           >
         </form>
       </div>
@@ -50,12 +71,14 @@
           culpa qui officia deserunt mollit anim id est laborum..
         </p>
         <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-          <button type="button" class="btn btn-primary btn-lg px-4 me-md-2">
-            Sign Up!
-          </button>
-          <!-- <button type="button" class="btn btn-outline-secondary btn-lg px-4">
-            Default
-          </button> -->
+          <a routerLink="/pages/register">
+            <button type="button" class="btn btn-primary btn-lg px-4 me-md-2">
+              Sign Up!
+            </button>
+            <!-- <button type="button" class="btn btn-outline-secondary btn-lg px-4">
+              Default
+            </button> -->
+          </a>
         </div>
       </div>
     </div>

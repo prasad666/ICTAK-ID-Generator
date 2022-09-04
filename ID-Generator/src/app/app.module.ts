@@ -16,8 +16,11 @@ import { SharedModule } from './shared/shared.module';
 import { CommonModule } from '@angular/common';
 import { PagesModule } from './modules/pages/pages.module';
 import { AdminModule } from './modules/admin/admin.module';
-import { StudentModule } from './modules/student/student.module';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthHttpInterceptor } from './modules/core/services/auth-http.interceptor';
+import { ReactiveFormsModule } from '@angular/forms';
 import { BatchmanagerModule } from './modules/batchmanager/batchmanager.module';
+import { StudentModule } from './modules/student/student.module';
 import { CoreModule } from './modules/core/core.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
@@ -33,9 +36,12 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     SharedModule,
     PagesModule,
     AdminModule,
+    BatchmanagerModule,
+    StudentModule,
     StudentModule,
     BatchmanagerModule,
     CommonModule,
+    ReactiveFormsModule,
     CoreModule,
     MatInputModule,
     MatPaginatorModule,
@@ -54,7 +60,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     ReactiveFormsModule,
   ],
   exports: [SharedModule],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor , multi:true }
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {
