@@ -38,7 +38,6 @@ export class BatchesDatasource implements DataSource<Batch> {
     sortColumn = '_id',
     sortDirection = 'asc'
   ) {
-    console.log(sortColumn);
     this.loadingSubject.next(true);
 
     this.batchesService
@@ -48,7 +47,6 @@ export class BatchesDatasource implements DataSource<Batch> {
         finalize(() => this.loadingSubject.next(false))
       )
       .subscribe((batches: any) => {
-        console.log(batches);
         this.hasPrevPage = batches.hasPrevPage;
         this.limit = batches.limit;
         this.nextPage = batches.nextPage;
