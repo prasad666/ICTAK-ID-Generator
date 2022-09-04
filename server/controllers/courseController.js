@@ -32,6 +32,22 @@ module.exports = {
   },
 
   /**
+   * userController.list()
+   */
+  listAll: function (req, res) {
+    CourseModel.find(function (err, courses) {
+      if (err) {
+        return res.status(500).json({
+          message: "Error when getting user.",
+          error: err,
+        });
+      }
+
+      return res.json(courses);
+    });
+  },
+
+  /**
    * courseController.show()
    */
   show: function (req, res) {

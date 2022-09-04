@@ -17,6 +17,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
+import { BatchListComponent } from './components/batches/batch-list/batch-list.component';
+import { BatchEditComponent } from './components/batches/batch-edit/batch-edit.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +27,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     SideNavComponent,
     CourseListComponent,
     CourseEditComponent,
+    BatchListComponent,
+    BatchEditComponent,
   ],
   imports: [
     CommonModule,
@@ -39,6 +44,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatButtonModule,
     FormsModule,
     ReactiveFormsModule,
+    NgbAlertModule,
   ],
 })
 export class AdminModule {}

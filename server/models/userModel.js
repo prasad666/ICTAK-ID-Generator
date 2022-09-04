@@ -7,7 +7,7 @@ var userSchema = new Schema(
     last_name: String,
     password: String,
     email: String,
-    role: String,
+    role: String, //student, batchmanager, admin
     enabled: Boolean,
     deleted: Boolean,
     deletedAt: Date,

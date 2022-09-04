@@ -6,15 +6,15 @@ import { map } from 'rxjs';
 @Injectable({
   providedIn: 'any',
 })
-export class CourseService {
-  API = environment.apiBase + '/courses/';
+export class BatchService {
+  API = environment.apiBase + '/batches/';
 
   constructor(private http: HttpClient) {}
 
   getById(id: any) {
     return this.http.get(this.API + id);
   }
-  getCourses(page = 1, limit = 10, filter = '', sortColumn = '', sortDir = '') {
+  getBatches(page = 1, limit = 10, filter = '', sortColumn = '', sortDir = '') {
     return this.http.get(this.API, {
       params: new HttpParams()
         .set('page', page)
@@ -23,10 +23,6 @@ export class CourseService {
         .set('sort', sortColumn)
         .set('dir', sortDir),
     });
-  }
-
-  getAllCourses() {
-    return this.http.get(this.API + 'all', {});
   }
 
   create(data: any): any {

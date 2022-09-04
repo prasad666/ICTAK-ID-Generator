@@ -22,6 +22,24 @@ module.exports = {
     });
   },
 
+  listAll: function (req, res) {
+    var role = req.params.role || "";
+    var queryObj = {};
+    if (role) {
+      queryObj = { role: role };
+    }
+
+    UserModel.find(queryObj, function (err, users) {
+      if (err) {
+        return res.status(500).json({
+          message: "Error when getting user.",
+          error: err,
+        });
+      }
+
+      return res.json(users);
+    });
+  },
   /**
    * userController.show()
    */

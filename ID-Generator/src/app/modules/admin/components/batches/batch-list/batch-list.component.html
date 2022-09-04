@@ -4,10 +4,10 @@
   <div id="layoutSidenav_content">
     <main>
       <div class="container-fluid px-4">
-        <h1 class="mt-4">Courses</h1>
+        <h1 class="mt-4">Batches</h1>
         <ol class="breadcrumb mb-4">
           <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-          <li class="breadcrumb-item">Courses</li>
+          <li class="breadcrumb-item">Batches</li>
           <li class="breadcrumb-item active">List</li>
         </ol>
         <ngb-alert
@@ -30,7 +30,7 @@
                   #createButton
                   (click)="createObject($event)"
                 >
-                  <i class="fa fa-plus"></i> Create Course
+                  <i class="fa fa-plus"></i> Create Batch
                 </button>
               </div>
               <div class="col-sm-2">
@@ -46,8 +46,7 @@
             <mat-spinner></mat-spinner>
           </div>
           <mat-table
-            class="courses-table mat-table mat-elevation-z8"
-            matSort
+            class="batches-table mat-table mat-elevation-z8"
             matSort
             [dataSource]="dataSource"
           >
@@ -63,23 +62,69 @@
                 No.
               </div>
               <div
-                *matCellDef="let course; let i = index"
+                *matCellDef="let batch; let i = index"
                 data-label="No."
                 class="mat-cell"
               >
                 {{ dataSource.pagingCounter + i }}
               </div>
             </ng-container>
-            <ng-container matColumnDef="course_name">
+            <ng-container matColumnDef="batch_name">
               <div *matHeaderCellDef class="mat-header-cell" mat-sort-header>
-                Course Name
+                Batch Name
               </div>
               <div
-                *matCellDef="let course"
-                data-label="Course Name"
+                *matCellDef="let batch"
+                data-label="Batch Name"
                 class="mat-cell"
               >
-                {{ course.course_name }}
+                {{ batch.batch_name }}
+              </div>
+            </ng-container>
+
+            <ng-container matColumnDef="course">
+              <div *matHeaderCellDef class="mat-header-cell">Course</div>
+              <div
+                *matCellDef="let batch"
+                data-label="Batch Name"
+                class="mat-cell"
+              >
+                {{ batch.course?.course_name }}
+              </div>
+            </ng-container>
+            <ng-container matColumnDef="user">
+              <div *matHeaderCellDef class="mat-header-cell">Batch Manager</div>
+              <div
+                *matCellDef="let batch"
+                data-label="Batch Manager"
+                class="mat-cell"
+              >
+                {{ batch.user?.first_name }} {{ batch.user?.last_name }}
+              </div>
+            </ng-container>
+            <ng-container matColumnDef="start_date">
+              <div *matHeaderCellDef class="mat-header-cell" mat-sort-header>
+                Start Date
+              </div>
+              <div
+                *matCellDef="let batch"
+                data-label="Start Date"
+                class="mat-cell"
+              >
+                {{ batch.start_date | date: "dd.MM.y" }}
+              </div>
+            </ng-container>
+
+            <ng-container matColumnDef="end_date">
+              <div *matHeaderCellDef class="mat-header-cell" mat-sort-header>
+                End Date
+              </div>
+              <div
+                *matCellDef="let batch"
+                data-label="End Date"
+                class="mat-cell"
+              >
+                {{ batch.end_date | date: "dd.MM.y" }}
               </div>
             </ng-container>
 
@@ -89,11 +134,11 @@
               </div>
               <div
                 class="enabled-cell"
-                *matCellDef="let course"
+                *matCellDef="let batch"
                 data-label="Enabled"
                 class="mat-cell"
               >
-                {{ course.enabled }}
+                {{ batch.enabled }}
               </div>
             </ng-container>
 
@@ -103,21 +148,21 @@
               </div>
               <div
                 class="createdAt-cell"
-                *matCellDef="let course"
+                *matCellDef="let batch"
                 data-label="Created At"
                 class="mat-cell"
               >
-                {{ course.createdAt | date: "dd.MM.y HH:mm:ss" }}
+                {{ batch.createdAt | date: "dd.MM.y HH:mm:ss" }}
               </div>
             </ng-container>
             <ng-container matColumnDef="actions">
               <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
-              <mat-cell *matCellDef="let course">
+              <mat-cell *matCellDef="let batch">
                 <button
                   #editButton
                   mat-icon-button
                   class="mat-icon-button"
-                  [attr.data-id]="course._id"
+                  [attr.data-id]="batch._id"
                   (click)="editObject(editButton)"
                 >
                   <mat-icon color="primary">edit</mat-icon>
@@ -126,7 +171,7 @@
                   #deleteButton
                   mat-icon-button
                   class="mat-icon-button"
-                  [attr.data-id]="course._id"
+                  [attr.data-id]="batch._id"
                   (click)="deleteObject(deleteButton)"
                 >
                   <mat-icon color="warn">delete</mat-icon>

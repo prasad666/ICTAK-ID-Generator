@@ -1,5 +1,6 @@
 var BatchModel = require("../models/batchModel.js");
-
+const CourseModel = require("../models/courseModel.js");
+var UserModel = require("../models/userModel");
 /**
  * batchController.js
  *
@@ -9,17 +10,70 @@ module.exports = {
   /**
    * batchController.list()
    */
-  list: function (req, res) {
-    BatchModel.find(function (err, batchs) {
-      if (err) {
-        return res.status(500).json({
-          message: "Error when getting batch.",
-          error: err,
-        });
-      }
 
-      return res.json(batchs);
+  list: async function (req, res) {
+    const {
+      page = 1,
+      size = 10,
+      sort = "_id",
+      dir = "asc",
+      filter = "",
+    } = req.query;
+    let queryObj = {};
+    if (filter) {
+      queryObj = { batch_name: new RegExp("^" + filter) };
+    }
+    console.log(queryObj);
+    const batches = await BatchModel.paginate(queryObj, {
+      page,
+      limit: size,
+      sort: { [sort]: dir },
+      populate: [
+        {
+          path: "course",
+          select: "course_name",
+        },
+        {
+          path: "user",
+          select: "first_name",
+        },
+      ],
     });
+    console.log(batches);
+    return res.json(batches);
+  },
+
+  list1: function (req, res) {
+    // BatchModel.find(function (err, batches) {
+    //   if (err) {
+    //     return res.status(500).json({
+    //       message: "Error when getting batch.",
+    //       error: err,
+    //     });
+    //   }
+
+    //   return res.json(batches);
+    // });
+    BatchModel.find()
+      .populate("course")
+      .populate("user")
+      .exec(function (err, batches) {
+        if (err) {
+          console.log(err);
+          return res.status(500).json({
+            message: "Error when getting batch.",
+            error: err,
+          });
+        }
+
+        if (!batches) {
+          return res.status(404).json({
+            message: "No such batch",
+          });
+        }
+
+        return res.json(batches);
+      });
   },
 
   /**
@@ -28,22 +82,26 @@ module.exports = {
   show: function (req, res) {
     var id = req.params.id;
 
-    BatchModel.findOne({ _id: id }, function (err, batch) {
-      if (err) {
-        return res.status(500).json({
-          message: "Error when getting batch.",
-          error: err,
-        });
-      }
+    BatchModel.findOne({ _id: id })
+      .populate("course")
+      .populate("user")
+      .exec(function (err, batch) {
+        if (err) {
+          console.log(err);
+          return res.status(500).json({
+            message: "Error when getting batch.",
+            error: err,
+          });
+        }
 
-      if (!batch) {
-        return res.status(404).json({
-          message: "No such batch",
-        });
-      }
+        if (!batch) {
+          return res.status(404).json({
+            message: "No such batch",
+          });
+        }
 
-      return res.json(batch);
-    });
+        return res.json(batch);
+      });
   },
 
   /**
@@ -52,8 +110,8 @@ module.exports = {
   create: function (req, res) {
     var batch = new BatchModel({
       batch_name: req.body.batch_name,
-      course_id: req.body.course_id,
-      batchmanager_id: req.body.batchmanager_id,
+      course: req.body.course,
+      user: req.body.user,
       enabled: req.body.enabled,
       start_date: req.body.start_date,
       end_date: req.body.end_date,

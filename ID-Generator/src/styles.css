@@ -690,3 +690,7 @@ h1.one span {
 .spinner-container mat-spinner {
   margin: 130px auto 0 auto;
 }
+
+.app-form .form-group div {
+  padding: 0.75em 0.5em;
+}

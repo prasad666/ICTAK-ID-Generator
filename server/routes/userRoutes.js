@@ -6,7 +6,7 @@ var userController = require("../controllers/userController.js");
  * GET
  */
 router.get("/", userController.list);
-
+router.get("/all", userController.listAll);
 /*
  * GET
  */

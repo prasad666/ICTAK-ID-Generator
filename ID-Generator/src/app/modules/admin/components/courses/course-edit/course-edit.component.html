@@ -13,12 +13,14 @@
         <div class="card mb-4">
           <div class="card-body">
             <div class="row"></div>
-            <h1 *ngIf="isAddMode">Add User</h1>
-            <h1 *ngIf="!isAddMode">Edit User</h1>
-            <form [formGroup]="form" (ngSubmit)="onSubmit()">
-              <div class="form-row">
-                <div class="form-group col-5">
+            <h1 *ngIf="isAddMode">Add Course</h1>
+            <h1 *ngIf="!isAddMode">Edit Course</h1>
+            <form class="app-form" [formGroup]="form" (ngSubmit)="onSubmit()">
+              <div class="form-group row">
+                <div class="col-sm-3 text-end">
                   <label>Course Name</label>
+                </div>
+                <div class="col-sm-6">
                   <input
                     type="text"
                     formControlName="course_name"
@@ -36,39 +38,37 @@
                     </div>
                   </div>
                 </div>
-                <div class="form-group col-5">
+              </div>
+              <div class="form-group row">
+                <div class="col-sm-3 text-end">
                   <label>Enabled</label>
+                </div>
+                <div class="col-sm-6">
                   <input
                     type="checkbox"
                     name="enabled"
                     id="enabled"
                     class="form-check-input"
-                    [ngClass]="{
-                      'is-invalid': submitted && f['enabled'].errors
-                    }"
+                    value="1"
+                    formControlName="enabled"
+                    [checked]="f['enabled']"
                   />
-
-                  <div
-                    *ngIf="submitted && f['enabled'].errors"
-                    class="invalid-feedback"
-                  >
-                    <div *ngIf="f['enabled'].errors['required']">
-                      Last Name is required
-                    </div>
-                  </div>
                 </div>
               </div>
-              <div class="form-group">
-                <button [disabled]="loading" class="btn btn-primary">
-                  <span
-                    *ngIf="loading"
-                    class="spinner-border spinner-border-sm mr-1"
-                  ></span>
-                  Save
-                </button>
-                <a routerLink="/backend/admin/courses" class="btn btn-link"
-                  >Cancel</a
-                >
+              <div class="form-group row">
+                <div class="col-sm-3 text-end"></div>
+                <div class="col-sm-6">
+                  <button [disabled]="loading" class="btn btn-primary">
+                    <span
+                      *ngIf="loading"
+                      class="spinner-border spinner-border-sm mr-1"
+                    ></span>
+                    Save
+                  </button>
+                  <a routerLink="/backend/admin/courses" class="btn btn-link"
+                    >Cancel</a
+                  >
+                </div>
               </div>
             </form>
           </div>

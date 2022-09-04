@@ -11,26 +11,31 @@ import {
   merge,
   tap,
 } from 'rxjs';
-import { CourseDataSource } from 'src/app/modules/core/datasources/courses-datasource';
-import { Course } from 'src/app/modules/core/models/course';
-import { CourseService } from 'src/app/modules/core/services/course.service';
+import { BatchesDatasource } from 'src/app/modules/core/datasources/batches-datasource';
+import { Batch } from 'src/app/modules/core/models/batch';
+import { BatchService } from 'src/app/modules/core/services/batch.service';
 import { ConfirmationDialogService } from 'src/app/shared/services/confirmation-dialog.service';
+
 @Component({
-  selector: 'app-course-list',
-  templateUrl: './course-list.component.html',
-  styleUrls: ['./course-list.component.css'],
+  selector: 'app-batch-list',
+  templateUrl: './batch-list.component.html',
+  styleUrls: ['./batch-list.component.css'],
 })
-export class CourseListComponent implements OnInit {
+export class BatchListComponent implements OnInit {
   tableColumns: string[] = [
     '_id',
-    'course_name',
+    'batch_name',
+    'course',
+    'user',
+    'start_date',
+    'end_date',
     'enabled',
     'createdAt',
     'actions',
   ];
 
-  dataSource!: CourseDataSource;
-  course!: Course;
+  dataSource!: BatchesDatasource;
+  batch!: Batch;
   successMessage: any = false;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -39,16 +44,16 @@ export class CourseListComponent implements OnInit {
   @ViewChild('input') input!: ElementRef;
 
   constructor(
-    private courseService: CourseService,
+    private batchService: BatchService,
     private route: ActivatedRoute,
     private router: Router,
     private confirmationDialogService: ConfirmationDialogService
   ) {}
 
   ngOnInit(): void {
-    this.course = this.route.snapshot.data['course'];
-    this.dataSource = new CourseDataSource(this.courseService);
-    this.dataSource.loadCourses(0);
+    this.batch = this.route.snapshot.data['batch'];
+    this.dataSource = new BatchesDatasource(this.batchService);
+    this.dataSource.loadBatches(0);
     this.successMessage = history.state['success'];
   }
 
@@ -63,7 +68,7 @@ export class CourseListComponent implements OnInit {
         tap(() => {
           if (this.input.nativeElement.value.length > 3) {
             this.paginator.pageIndex = 0;
-            this.loadCoursesPage();
+            this.loadBatchesPage();
           }
         })
       )
@@ -72,12 +77,12 @@ export class CourseListComponent implements OnInit {
     this.sort.sortChange.subscribe(() => (this.paginator.pageIndex = 0));
 
     merge(this.sort.sortChange, this.paginator.page)
-      .pipe(tap(() => this.loadCoursesPage()))
+      .pipe(tap(() => this.loadBatchesPage()))
       .subscribe();
   }
 
-  loadCoursesPage() {
-    this.dataSource.loadCourses(
+  loadBatchesPage() {
+    this.dataSource.loadBatches(
       this.paginator?.pageIndex ?? 0,
       this.paginator?.pageSize ?? 10,
       this.input.nativeElement.value,
@@ -88,14 +93,14 @@ export class CourseListComponent implements OnInit {
 
   createObject(ev: Event) {
     this.router
-      .navigate(['/backend/admin/course/create'])
+      .navigate(['/backend/admin/batch/create'])
       .then((success) => console.log('navigation success?', success))
       .catch(console.error);
   }
   editObject(el: any) {
     this.router
       .navigate([
-        '/backend/admin/course/edit/' +
+        '/backend/admin/batch/edit/' +
           el._elementRef.nativeElement.getAttribute('data-id'),
       ])
       .then((success) => console.log('navigation success?', success))
@@ -109,9 +114,9 @@ export class CourseListComponent implements OnInit {
       .then((confirmed) => {
         console.log('User confirmed:', confirmed);
         if (confirmed) {
-          this.courseService.delete(objId).subscribe((res) => {
+          this.batchService.delete(objId).subscribe((res) => {
             console.log(res);
-            this.loadCoursesPage();
+            this.loadBatchesPage();
           });
         }
       })

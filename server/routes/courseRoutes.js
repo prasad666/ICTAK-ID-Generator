@@ -7,6 +7,8 @@ var courseController = require("../controllers/courseController.js");
  */
 router.get("/", courseController.list);
 
+router.get("/all", courseController.listAll);
+
 /*
  * GET
  */
