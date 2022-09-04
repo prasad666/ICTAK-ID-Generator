@@ -1,7 +1,8 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'environments/environment';
-import { map } from 'rxjs';
+import { map, Observable } from 'rxjs';
+import { Course } from '../models/course';
 
 @Injectable({
   providedIn: 'any',
@@ -25,8 +26,8 @@ export class CourseService {
     });
   }
 
-  getAllCourses() {
-    return this.http.get(this.API + 'all', {});
+  getAllCourses(): Observable<Course[]> {
+    return this.http.get<Course[]>(this.API + 'all', {});
   }
 
   create(data: any): any {

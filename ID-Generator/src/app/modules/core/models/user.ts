@@ -4,4 +4,9 @@ export interface User {
   email: string;
   role: string;
   password: string;
+  enabled: boolean;
+  deleted: boolean;
+  deletedAt: Date;
+  createdAt: Date;
+  updatedAt: Date;
 }

@@ -9,17 +9,30 @@ module.exports = {
   /**
    * userController.list()
    */
-  list: function (req, res) {
-    UserModel.find(function (err, users) {
-      if (err) {
-        return res.status(500).json({
-          message: "Error when getting user.",
-          error: err,
-        });
-      }
-
-      return res.json(users);
+  list: async function (req, res) {
+    const {
+      role = "",
+      page = 1,
+      size = 10,
+      sort = "_id",
+      dir = "asc",
+      filter = "",
+    } = req.query;
+    let queryObj = {};
+    if (filter) {
+      queryObj = { first_name: new RegExp("^" + filter) };
+    }
+    if (role) {
+      queryObj.role = role;
+    }
+    console.log(queryObj);
+    const users = await UserModel.paginate(queryObj, {
+      page,
+      limit: size,
+      sort: { [sort]: dir },
     });
+    console.log(users);
+    return res.json(users);
   },
 
   listAll: function (req, res) {

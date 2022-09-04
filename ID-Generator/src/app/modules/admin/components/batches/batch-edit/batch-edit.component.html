@@ -15,7 +15,12 @@
             <div class="row"></div>
             <h1 *ngIf="isAddMode">Add Batch</h1>
             <h1 *ngIf="!isAddMode">Edit Batch</h1>
-            <form class="app-form" [formGroup]="form" (ngSubmit)="onSubmit()">
+            <form
+              class="app-form"
+              [formGroup]="form"
+              (ngSubmit)="onSubmit()"
+              *ngIf="isLoaded"
+            >
               <div class="form-group row">
                 <div class="col-sm-3 text-end">
                   <label>Batch Name</label>
@@ -49,16 +54,20 @@
                     formControlName="course"
                     class="form-select"
                   >
-                    <option *ngFor="let course of courses">
+                    <option
+                      *ngFor="let course of courses"
+                      value="{{ course._id }}"
+                      [selected]="course.id == batchObj.course_id"
+                    >
                       {{ course.course_name }}
                     </option>
                   </select>
 
                   <div
-                    *ngIf="submitted && f['course'].errors"
+                    *ngIf="submitted && f['course_id'].errors"
                     class="invalid-feedback"
                   >
-                    <div *ngIf="f['course'].errors['required']">
+                    <div *ngIf="f['course_id'].errors['required']">
                       Course is required
                     </div>
                   </div>
@@ -67,21 +76,25 @@
 
               <div class="form-group row">
                 <div class="col-sm-3 text-end">
-                  <label>Course</label>
+                  <label>Batch Manager</label>
                 </div>
                 <div class="col-sm-6">
                   <select id="user" formControlName="user" class="form-select">
-                    <option *ngFor="let user of users">
+                    <option
+                      *ngFor="let user of users"
+                      value="{{ user._id }}"
+                      [selected]="user.id == batchObj.user_id"
+                    >
                       {{ user.first_name + " " + user.last_name }}
                     </option>
                   </select>
 
                   <div
-                    *ngIf="submitted && f['course'].errors"
+                    *ngIf="submitted && f['user_id'].errors"
                     class="invalid-feedback"
                   >
-                    <div *ngIf="f['course'].errors['required']">
-                      Course is required
+                    <div *ngIf="f['user_id'].errors['required']">
+                      User is required
                     </div>
                   </div>
                 </div>

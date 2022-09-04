@@ -1,7 +1,9 @@
+import { DatePipe, formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { first } from 'rxjs';
+import { Batch } from 'src/app/modules/core/models/batch';
 import { BatchService } from 'src/app/modules/core/services/batch.service';
 import { CourseService } from 'src/app/modules/core/services/course.service';
 import { UserService } from 'src/app/modules/core/services/user.service';
@@ -11,6 +13,7 @@ import { ToastService } from 'src/app/shared/services/toast.service';
   selector: 'app-batch-edit',
   templateUrl: './batch-edit.component.html',
   styleUrls: ['./batch-edit.component.css'],
+  providers: [DatePipe],
 })
 export class BatchEditComponent implements OnInit {
   form!: FormGroup;
@@ -20,6 +23,8 @@ export class BatchEditComponent implements OnInit {
   submitted = false;
   courses: any;
   users: any;
+  batchObj: any;
+  isLoaded = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -28,7 +33,8 @@ export class BatchEditComponent implements OnInit {
     private batchService: BatchService,
     private toastService: ToastService,
     private courseService: CourseService,
-    private userService: UserService
+    private userService: UserService,
+    private datePipe: DatePipe
   ) {
     this.courses = this.courseService
       .getAllCourses()
@@ -46,6 +52,8 @@ export class BatchEditComponent implements OnInit {
     this.form = this.formBuilder.group({
       batch_name: ['', Validators.required],
       course: ['', Validators.required],
+      user_id: [],
+      course_id: [],
       user: ['', Validators.required],
       start_date: ['', Validators.required],
       end_date: ['', Validators.required],
@@ -56,7 +64,18 @@ export class BatchEditComponent implements OnInit {
       this.batchService
         .getById(this.id)
         .pipe(first())
-        .subscribe((x) => this.form.patchValue(x));
+        .subscribe((x) => {
+          let batch = <Batch>x;
+          //batch.start_date = new Date(batch.start_date);
+          //batch.end_date = new Date(batch.end_date);
+          this.form.patchValue(batch);
+          this.batchObj = batch;
+          console.log(this.batchObj);
+          this.isLoaded = true;
+        });
+    } else {
+      this.batchObj = <Batch>{};
+      this.isLoaded = true;
     }
   }
 
@@ -81,20 +100,20 @@ export class BatchEditComponent implements OnInit {
 
     this.loading = true;
     if (this.isAddMode) {
-      this.createCourse();
+      this.createBatch();
     } else {
-      this.updateCourse();
+      this.updateBatch();
     }
   }
 
-  private createCourse() {
+  private createBatch() {
     this.batchService
       .create(this.form.value)
       .pipe(first())
       .subscribe({
         next: () => {
-          this.router.navigate(['backend/admin/courses'], {
-            state: { success: 'Course has been created successfully.' },
+          this.router.navigate(['backend/admin/batches'], {
+            state: { success: 'Batch has been created successfully.' },
           });
         },
         error: (error: any) => {
@@ -103,14 +122,14 @@ export class BatchEditComponent implements OnInit {
       });
   }
 
-  private updateCourse() {
+  private updateBatch() {
     this.batchService
       .update(this.id, this.form.value)
       .pipe(first())
       .subscribe({
         next: () => {
-          this.router.navigate(['backend/admin/courses'], {
-            state: { success: 'Course has been updated successfully.' },
+          this.router.navigate(['backend/admin/batches'], {
+            state: { success: 'Batch has been updated successfully.' },
           });
         },
         error: (error: any) => {

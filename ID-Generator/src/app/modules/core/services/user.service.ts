@@ -1,7 +1,8 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'environments/environment';
-import { map } from 'rxjs';
+import { map, Observable } from 'rxjs';
+import { User } from '../models/user';
 
 @Injectable({
   providedIn: 'any',
@@ -14,9 +15,17 @@ export class UserService {
   getById(id: any) {
     return this.http.get(this.API + id);
   }
-  getUsers(page = 1, limit = 10, filter = '', sortColumn = '', sortDir = '') {
+  getUsers(
+    role = '',
+    page = 1,
+    limit = 10,
+    filter = '',
+    sortColumn = '',
+    sortDir = ''
+  ) {
     return this.http.get(this.API, {
       params: new HttpParams()
+        .set('role', role)
         .set('page', page)
         .set('size', limit)
         .set('filter', filter)
@@ -25,8 +34,8 @@ export class UserService {
     });
   }
 
-  getAllUsers() {
-    return this.http.get(this.API + 'all', {});
+  getAllUsers(): Observable<User[]> {
+    return this.http.get<User[]>(this.API + 'all', {});
   }
 
   getUsersByRole(role: any) {
