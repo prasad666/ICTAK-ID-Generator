@@ -13,6 +13,11 @@ import { BatchmanagerListComponent } from './components/batchmanagers/batchmanag
 
 const routes: Routes = [
   { path: '', component: DashboardComponent, canActivate: [AuthGuard] },
+  {
+    path: 'dashboard',
+    component: DashboardComponent,
+    canActivate: [AuthGuard],
+  },
   { path: 'courses', component: CourseListComponent, canActivate: [AuthGuard] },
   {
     path: 'course/create',
