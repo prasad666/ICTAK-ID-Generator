@@ -57,17 +57,16 @@
                     <option
                       *ngFor="let course of courses"
                       value="{{ course._id }}"
-                      [selected]="course.id == batchObj.course_id"
                     >
                       {{ course.course_name }}
                     </option>
                   </select>
 
                   <div
-                    *ngIf="submitted && f['course_id'].errors"
+                    *ngIf="submitted && f['course'].errors"
                     class="invalid-feedback"
                   >
-                    <div *ngIf="f['course_id'].errors['required']">
+                    <div *ngIf="f['course'].errors['required']">
                       Course is required
                     </div>
                   </div>
@@ -81,19 +80,18 @@
                 <div class="col-sm-6">
                   <select id="user" formControlName="user" class="form-select">
                     <option
-                      *ngFor="let user of users"
-                      value="{{ user._id }}"
-                      [selected]="user.id == batchObj.user_id"
+                      *ngFor="let userObj of users"
+                      value="{{ userObj._id }}"
                     >
-                      {{ user.first_name + " " + user.last_name }}
+                      {{ userObj.first_name + " " + userObj.last_name }}
                     </option>
                   </select>
 
                   <div
-                    *ngIf="submitted && f['user_id'].errors"
+                    *ngIf="submitted && f['user'].errors"
                     class="invalid-feedback"
                   >
-                    <div *ngIf="f['user_id'].errors['required']">
+                    <div *ngIf="f['user'].errors['required']">
                       User is required
                     </div>
                   </div>

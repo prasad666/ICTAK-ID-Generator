@@ -52,8 +52,7 @@ export class BatchEditComponent implements OnInit {
     this.form = this.formBuilder.group({
       batch_name: ['', Validators.required],
       course: ['', Validators.required],
-      user_id: [],
-      course_id: [],
+
       user: ['', Validators.required],
       start_date: ['', Validators.required],
       end_date: ['', Validators.required],
@@ -66,11 +65,12 @@ export class BatchEditComponent implements OnInit {
         .pipe(first())
         .subscribe((x) => {
           let batch = <Batch>x;
-          //batch.start_date = new Date(batch.start_date);
-          //batch.end_date = new Date(batch.end_date);
+          batch.start_date = batch.start_date.substring(0, 10);
+          batch.end_date = batch.end_date.substring(0, 10);
           this.form.patchValue(batch);
+          //this.form.get('start_date')?.patchValue('2022-05-09');
           this.batchObj = batch;
-          console.log(this.batchObj);
+          console.log(this.batchObj, this.form);
           this.isLoaded = true;
         });
     } else {
