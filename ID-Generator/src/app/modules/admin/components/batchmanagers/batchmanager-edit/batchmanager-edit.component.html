@@ -1,1 +1,186 @@
-<p>batchmanager-edit works!</p>
+<app-auth-header></app-auth-header>
+<div id="layoutSidenav">
+  <app-side-nav id="authnav"></app-side-nav>
+  <div id="layoutSidenav_content">
+    <main>
+      <div class="container-fluid px-4">
+        <h1 class="mt-4">Courses</h1>
+        <ol class="breadcrumb mb-4">
+          <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+          <li class="breadcrumb-item">Batches</li>
+          <li class="breadcrumb-item active">Add</li>
+        </ol>
+        <div class="card mb-4">
+          <div class="card-body">
+            <div class="row"></div>
+            <h1 *ngIf="isAddMode">Add Batch</h1>
+            <h1 *ngIf="!isAddMode">Edit Batch</h1>
+            <form
+              class="app-form"
+              [formGroup]="form"
+              (ngSubmit)="onSubmit()"
+              *ngIf="isLoaded"
+            >
+              <div class="form-group row">
+                <div class="col-sm-3 text-end">
+                  <label>Batch Name</label>
+                </div>
+                <div class="col-sm-6">
+                  <input
+                    type="text"
+                    formControlName="batch_name"
+                    class="form-control"
+                    [ngClass]="{
+                      'is-invalid': submitted && f['batch_name'].errors
+                    }"
+                  />
+                  <div
+                    *ngIf="submitted && f['batch_name'].errors"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="f['batch_name'].errors['required']">
+                      Batch Name is required
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col-sm-3 text-end">
+                  <label>Course</label>
+                </div>
+                <div class="col-sm-6">
+                  <select
+                    id="course"
+                    formControlName="course"
+                    class="form-select"
+                  >
+                    <option
+                      *ngFor="let course of courses"
+                      value="{{ course._id }}"
+                    >
+                      {{ course.course_name }}
+                    </option>
+                  </select>
+
+                  <div
+                    *ngIf="submitted && f['course'].errors"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="f['course'].errors['required']">
+                      Course is required
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <div class="col-sm-3 text-end">
+                  <label>Batch Manager</label>
+                </div>
+                <div class="col-sm-6">
+                  <select id="user" formControlName="user" class="form-select">
+                    <option
+                      *ngFor="let userObj of users"
+                      value="{{ userObj._id }}"
+                    >
+                      {{ userObj.first_name + " " + userObj.last_name }}
+                    </option>
+                  </select>
+
+                  <div
+                    *ngIf="submitted && f['user'].errors"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="f['user'].errors['required']">
+                      User is required
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col-sm-3 text-end">
+                  <label>Start Date</label>
+                </div>
+                <div class="col-sm-6">
+                  <input
+                    type="date"
+                    formControlName="start_date"
+                    class="form-control"
+                    [ngClass]="{
+                      'is-invalid': submitted && f['start_date'].errors
+                    }"
+                  />
+                  <div
+                    *ngIf="submitted && f['start_date'].errors"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="f['start_date'].errors['required']">
+                      Start Date is required
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <div class="col-sm-3 text-end">
+                  <label>End Date</label>
+                </div>
+                <div class="col-sm-6">
+                  <input
+                    type="date"
+                    formControlName="end_date"
+                    class="form-control"
+                    [ngClass]="{
+                      'is-invalid': submitted && f['end_date'].errors
+                    }"
+                  />
+                  <div
+                    *ngIf="submitted && f['end_date'].errors"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="f['end_date'].errors['required']">
+                      End Date is required
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <div class="col-sm-3 text-end">
+                  <label>Enabled</label>
+                </div>
+                <div class="col-sm-6">
+                  <input
+                    type="checkbox"
+                    name="enabled"
+                    id="enabled"
+                    class="form-check-input"
+                    value="1"
+                    formControlName="enabled"
+                    [checked]="f['enabled']"
+                  />
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col-sm-3 text-end"></div>
+                <div class="col-sm-6">
+                  <button [disabled]="loading" class="btn btn-primary">
+                    <span
+                      *ngIf="loading"
+                      class="spinner-border spinner-border-sm mr-1"
+                    ></span>
+                    Save
+                  </button>
+                  <a routerLink="/backend/admin/courses" class="btn btn-link"
+                    >Cancel</a
+                  >
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </main>
+    <app-auth-footer></app-auth-footer>
+  </div>
+</div>
