@@ -83,8 +83,8 @@ module.exports = {
     var id = req.params.id;
 
     BatchModel.findOne({ _id: id })
-      .populate("course")
-      .populate("user")
+      // .populate("course")
+      // .populate("user")
       .exec(function (err, batch) {
         if (err) {
           console.log(err);
@@ -153,12 +153,8 @@ module.exports = {
       batch.batch_name = req.body.batch_name
         ? req.body.batch_name
         : batch.batch_name;
-      batch.course_id = req.body.course_id
-        ? req.body.course_id
-        : batch.course_id;
-      batch.batchmanager_id = req.body.batchmanager_id
-        ? req.body.batchmanager_id
-        : batch.batchmanager_id;
+      batch.course = req.body.course ? req.body.course : batch.course;
+      batch.user = req.body.user ? req.body.user : batch.user;
       batch.enabled = req.body.enabled ? req.body.enabled : batch.enabled;
       batch.start_date = req.body.start_date
         ? req.body.start_date

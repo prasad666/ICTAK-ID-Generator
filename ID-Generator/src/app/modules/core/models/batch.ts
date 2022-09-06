@@ -1,12 +1,10 @@
 export interface Batch {
   _id: string;
   batch_name: string;
-  course_id: string;
-  user_id: string;
-  course: object;
-  user: object;
-  start_date: Date;
-  end_date: Date;
+  course: string;
+  user: string;
+  start_date: string;
+  end_date: string;
   enabled: boolean;
   createdAt: Date;
 }
