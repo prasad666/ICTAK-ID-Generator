@@ -22,7 +22,7 @@ export class BatchmanagerEditComponent implements OnInit {
   submitted = false;
   courses: any;
   users: any;
-  batchObj: any;
+  userObj: any;
   isLoaded = false;
 
   constructor(
@@ -47,11 +47,11 @@ export class BatchmanagerEditComponent implements OnInit {
     this.isAddMode = !this.id;
 
     this.form = this.formBuilder.group({
-      batch_name: ['', Validators.required],
-      course: ['', Validators.required],
+      first_name: ['', Validators.required],
+      last_name: ['', Validators.required],
 
-      user: ['', Validators.required],
-      start_date: ['', Validators.required],
+      email: ['', Validators.required, Validators.email],
+      password: ['', Validators.required],
       end_date: ['', Validators.required],
       enabled: [true],
     });
@@ -63,11 +63,11 @@ export class BatchmanagerEditComponent implements OnInit {
         .subscribe((x) => {
           let user = <User>x;
           this.form.patchValue(user);
-          this.batchObj = user;
+          this.userObj = user;
           this.isLoaded = true;
         });
     } else {
-      this.batchObj = <User>{};
+      this.userObj = <User>{};
       this.isLoaded = true;
     }
   }
