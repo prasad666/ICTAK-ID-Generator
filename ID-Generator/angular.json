@@ -26,8 +26,8 @@
             ],
             "scripts": [
               "./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
-              "./src//assets/js/fontawesome.min.js",
-              "./src//assets/js/scripts.js"
+              "./src/assets/js/fontawesome.min.js",
+              "./src/assets/js/scripts.js"
             ]
           },
           "configurations": {

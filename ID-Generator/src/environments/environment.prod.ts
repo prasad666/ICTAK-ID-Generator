@@ -1,4 +1,5 @@
 export const environment = {
   production: true,
-  api_url: 'http://localhost',
+  apiBase: 'https://ictak-id-generaor.herokuapp.com',
+  api_url: 'https://ictak-id-generaor.herokuapp.com',
 };
