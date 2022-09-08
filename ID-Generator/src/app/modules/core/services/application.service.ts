@@ -19,8 +19,8 @@ export class ApplicationService {
     return this.http.get(`${this.API}/${id}`)
   }
 
-  approveApplication(id:string){
-    return this.http.put(`${this.API}/${id}`, {status:'approved'})
+  approveApplication(id:string, remarks:string){
+    return this.http.put(`${this.API}/${id}`, {status:'approved',remarks:remarks})
   }
 
   rejectApplication(id:string,remarks:string){

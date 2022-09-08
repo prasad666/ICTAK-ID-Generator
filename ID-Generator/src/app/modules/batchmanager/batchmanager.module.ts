@@ -16,6 +16,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { ApplicationDetailsComponent } from './components/application-details/application-details.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatButtonModule } from '@angular/material/button';
+import { FormsModule } from '@angular/forms';
+import { HistoryComponent } from './components/history/history.component';
 
 
 
@@ -25,7 +27,8 @@ import { MatButtonModule } from '@angular/material/button';
     SideNavComponent,
     BatchManagerHomeComponent,
     ApplicationsComponent,
-    ApplicationDetailsComponent
+    ApplicationDetailsComponent,
+    HistoryComponent
   ],
   imports: [
     CommonModule,
@@ -38,7 +41,8 @@ import { MatButtonModule } from '@angular/material/button';
     MatFormFieldModule,
     MatCardModule,
     MatProgressBarModule,
-    MatButtonModule   
+    MatButtonModule,
+    FormsModule   
     
   ]
 })

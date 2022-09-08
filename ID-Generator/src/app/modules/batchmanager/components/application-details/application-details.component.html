@@ -7,11 +7,13 @@
       </p>
     </mat-card-content>
     <hr>
-    <mat-card-actions>
+    <mat-card-actions >
+      <input  class="remarks" placeholder="Remarks" [(ngModel)]="remarks">
       <button mat-flat-button color="primary" (click)="onApprove()">Approve</button>
       <button mat-flat-button color="warn" (click)="onReject()">Reject</button>
     </mat-card-actions>
     <mat-card-footer>
-      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+      <div *ngIf="error" class="err">{{error}}</div>
+      <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
     </mat-card-footer>
 </mat-card>
