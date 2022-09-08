@@ -39,7 +39,7 @@ export class ApplicationDetailsComponent implements OnInit {
     })
   }
   onReject(){
-    this.applicationService.rejectApplication(this.id,'idk')
+    this.applicationService.rejectApplication(this.id,''/*remarks'*/)/////TODO add remarks here
     .subscribe({ 
       next: (data:any)=> {
         this.router.navigate(['/backend/batchmanager/applications'])
