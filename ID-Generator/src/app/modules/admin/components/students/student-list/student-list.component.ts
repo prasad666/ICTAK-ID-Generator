@@ -48,7 +48,7 @@ export class StudentListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.course = this.route.snapshot.data['students'];
+    this.course = this.route.snapshot.data['student'];
     this.dataSource = new UserDatasource(this.userService);
     this.dataSource.loadUsers('student', 0);
     this.successMessage = history.state['success'];
@@ -91,14 +91,14 @@ export class StudentListComponent implements OnInit {
 
   createObject(ev: Event) {
     this.router
-      .navigate(['/backend/admin/batchmanager/create'])
+      .navigate(['/backend/admin/student/create'])
       .then((success) => console.log('navigation success?', success))
       .catch(console.error);
   }
   editObject(el: any) {
     this.router
       .navigate([
-        '/backend/admin/batchmanager/edit/' +
+        '/backend/admin/student/edit/' +
           el._elementRef.nativeElement.getAttribute('data-id'),
       ])
       .then((success) => console.log('navigation success?', success))

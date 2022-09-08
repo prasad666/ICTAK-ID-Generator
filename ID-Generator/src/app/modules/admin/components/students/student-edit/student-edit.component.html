@@ -1,1 +1,160 @@
-<p>student-edit works!</p>
+<app-auth-header></app-auth-header>
+<div id="layoutSidenav">
+  <app-side-nav id="authnav"></app-side-nav>
+  <div id="layoutSidenav_content">
+    <main>
+      <div class="container-fluid px-4">
+        <h1 class="mt-4">Courses</h1>
+        <ol class="breadcrumb mb-4">
+          <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+          <li class="breadcrumb-item">Batchmanager</li>
+          <li class="breadcrumb-item active">Edit</li>
+        </ol>
+        <div class="card mb-4">
+          <div class="card-body">
+            <div class="row"></div>
+            <h1 *ngIf="isAddMode">Add Batchmanager</h1>
+            <h1 *ngIf="!isAddMode">Edit Batchmanager</h1>
+            <form
+              class="app-form"
+              [formGroup]="form"
+              (ngSubmit)="onSubmit()"
+              *ngIf="isLoaded"
+            >
+              <div class="form-group row">
+                <div class="col-sm-3 text-end">
+                  <label>First Name</label>
+                </div>
+                <div class="col-sm-6">
+                  <input
+                    type="text"
+                    formControlName="first_name"
+                    class="form-control"
+                    [ngClass]="{
+                      'is-invalid': submitted && f['first_name'].errors
+                    }"
+                  />
+                  <div
+                    *ngIf="submitted && f['first_name'].errors"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="f['first_name'].errors['required']">
+                      First Name is required
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <div class="col-sm-3 text-end">
+                  <label>Last Name</label>
+                </div>
+                <div class="col-sm-6">
+                  <input
+                    type="text"
+                    formControlName="last_name"
+                    class="form-control"
+                    [ngClass]="{
+                      'is-invalid': submitted && f['last_name'].errors
+                    }"
+                  />
+                  <div
+                    *ngIf="submitted && f['last_name'].errors"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="f['last_name'].errors['required']">
+                      Last Name is required
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <div class="col-sm-3 text-end">
+                  <label>Email ID</label>
+                </div>
+                <div class="col-sm-6">
+                  <input
+                    type="text"
+                    formControlName="email"
+                    class="form-control"
+                    [ngClass]="{
+                      'is-invalid': submitted && f['email'].errors
+                    }"
+                  />
+                  <div
+                    *ngIf="submitted && f['email'].errors"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="f['email'].errors['required']">
+                      Email ID is required
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <div class="col-sm-3 text-end">
+                  <label>Password</label>
+                </div>
+                <div class="col-sm-6">
+                  <input
+                    type="password"
+                    formControlName="password"
+                    class="form-control"
+                    placeholder="Password"
+                    [ngClass]="{
+                      'is-invalid': submitted && f['password'].errors
+                    }"
+                  />
+                  <div
+                    *ngIf="submitted && f['password'].errors"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="f['password'].errors['required']">
+                      Password is required
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <div class="col-sm-3 text-end">
+                  <label>Enabled</label>
+                </div>
+                <div class="col-sm-6">
+                  <input
+                    type="checkbox"
+                    name="enabled"
+                    id="enabled"
+                    class="form-check-input"
+                    value="1"
+                    formControlName="enabled"
+                    [checked]="f['enabled']"
+                  />
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col-sm-3 text-end"></div>
+                <div class="col-sm-6">
+                  <input type="hidden" formControlName="role" />
+                  <button [disabled]="loading" class="btn btn-primary">
+                    <span
+                      *ngIf="loading"
+                      class="spinner-border spinner-border-sm mr-1"
+                    ></span>
+                    Save
+                  </button>
+                  <a routerLink="/backend/admin/students" class="btn btn-link"
+                    >Cancel</a
+                  >
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </main>
+    <app-auth-footer></app-auth-footer>
+  </div>
+</div>
