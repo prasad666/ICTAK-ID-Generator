@@ -38,7 +38,7 @@ export class BatchmanagerEditComponent implements OnInit {
       .subscribe((res) => (this.courses = res));
 
     this.users = this.userService
-      .getUsersByRole('batchmanager')
+      .getUsersByRole('batchManager')
       .subscribe((res) => (this.users = res));
   }
 
@@ -49,10 +49,9 @@ export class BatchmanagerEditComponent implements OnInit {
     this.form = this.formBuilder.group({
       first_name: ['', Validators.required],
       last_name: ['', Validators.required],
-
-      email: ['', Validators.required, Validators.email],
-      password: ['', Validators.required],
-      end_date: ['', Validators.required],
+      email: ['', Validators.required],
+      password: ['', this.isAddMode ? Validators.required : null],
+      role: ['batchManager'],
       enabled: [true],
     });
 
@@ -93,19 +92,19 @@ export class BatchmanagerEditComponent implements OnInit {
 
     this.loading = true;
     if (this.isAddMode) {
-      this.createBatch();
+      this.createUser();
     } else {
-      this.updateBatch();
+      this.updateUser();
     }
   }
 
-  private createBatch() {
+  private createUser() {
     this.userService
       .create(this.form.value)
       .pipe(first())
       .subscribe({
         next: () => {
-          this.router.navigate(['backend/admin/batcchmanagers'], {
+          this.router.navigate(['backend/admin/batchmanagers'], {
             state: { success: 'Batchmanager has been created successfully.' },
           });
         },
@@ -115,7 +114,7 @@ export class BatchmanagerEditComponent implements OnInit {
       });
   }
 
-  private updateBatch() {
+  private updateUser() {
     this.userService
       .update(this.id, this.form.value)
       .pipe(first())

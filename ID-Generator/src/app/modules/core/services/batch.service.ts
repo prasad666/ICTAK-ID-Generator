@@ -7,7 +7,7 @@ import { map } from 'rxjs';
   providedIn: 'any',
 })
 export class BatchService {
-  API = environment.apiBase + '/batches/';
+  API = environment.api_url + '/batches/';
 
   constructor(private http: HttpClient) {}
 

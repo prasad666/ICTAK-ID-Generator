@@ -8,7 +8,7 @@ import { Course } from '../models/course';
   providedIn: 'any',
 })
 export class CourseService {
-  API = environment.apiBase + '/courses/';
+  API = environment.api_url + '/courses/';
 
   constructor(private http: HttpClient) {}
 
