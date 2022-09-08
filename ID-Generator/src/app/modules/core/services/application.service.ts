@@ -7,11 +7,25 @@ import { environment } from 'environments/environment';
 })
 export class ApplicationService {
 
-  API = environment.api_url;
+  API = environment.api_url +'/applications';
 
   constructor(private http:HttpClient) { }
 
   getPendingApplications(batchId:string){
-    return this.http.get(`${this.API}/applications/pending/${batchId}`)
+    return this.http.get(`${this.API}/pending/${batchId}`)
   }
+
+  getApplication(id:string){
+    return this.http.get(`${this.API}/${id}`)
+  }
+
+  approveApplication(id:string){
+    return this.http.put(`${this.API}/${id}`, {status:'approved'})
+  }
+
+  rejectApplication(id:string,remarks:string){
+    return this.http.put(`${this.API}/${id}`, {status:'rejected',remarks:remarks})
+  }
+
+
 }

@@ -1,0 +1,17 @@
+<mat-card class="example-card">
+    <mat-card-subtitle>application details</mat-card-subtitle>
+    <mat-card-title>tttt</mat-card-title>
+    <mat-card-content>
+      <p>This card has divider and indeterminate progress as footer</p>
+      <p> {{application|json}}
+      </p>
+    </mat-card-content>
+    <hr>
+    <mat-card-actions>
+      <button mat-flat-button color="primary" (click)="onApprove()">Approve</button>
+      <button mat-flat-button color="warn" (click)="onReject()">Reject</button>
+    </mat-card-actions>
+    <mat-card-footer>
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </mat-card-footer>
+</mat-card>

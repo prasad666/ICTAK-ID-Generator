@@ -8,6 +8,7 @@
   border: 1px solid;
   text-align: center;
   width: 40%;
+  font-size: 1rem;
 }
 
 .applicationtable{
@@ -19,6 +20,14 @@
 }
 
 .nodata{
-  margin: 1rem;
+  margin: 4rem;
   text-align: center;
+}
+mat-row:last-child{
+  border: 0px solid;
+}
+mat-row:hover{
+  background-color: rgb(238, 245, 252);
+  border-radius: 3px;
+  cursor: pointer;
 }

@@ -11,7 +11,11 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSortModule } from '@angular/material/sort';
+import { MatCardModule } from "@angular/material/card";
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { ApplicationDetailsComponent } from './components/application-details/application-details.component';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatButtonModule } from '@angular/material/button';
 
 
 
@@ -20,7 +24,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     DashboardComponent,
     SideNavComponent,
     BatchManagerHomeComponent,
-    ApplicationsComponent
+    ApplicationsComponent,
+    ApplicationDetailsComponent
   ],
   imports: [
     CommonModule,
@@ -30,7 +35,11 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatPaginatorModule,
     MatIconModule,
     MatSortModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatCardModule,
+    MatProgressBarModule,
+    MatButtonModule   
+    
   ]
 })
 export class BatchmanagerModule { }

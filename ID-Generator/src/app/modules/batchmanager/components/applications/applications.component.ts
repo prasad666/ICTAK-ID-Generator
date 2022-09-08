@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 import { Application } from 'src/app/modules/core/models/application';
 import { ApplicationService } from 'src/app/modules/core/services/application.service';
 import { AuthService } from 'src/app/modules/core/services/auth.service';
@@ -13,7 +14,7 @@ import { AuthService } from 'src/app/modules/core/services/auth.service';
 })
 export class ApplicationsComponent implements OnInit {
 
-  constructor(private applications: ApplicationService, private auth: AuthService) { }
+  constructor(private applications: ApplicationService, private auth: AuthService, private router:Router) { }
 
   dataSource:any;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -48,4 +49,7 @@ export class ApplicationsComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
   
+  onClick(applicationId:any){
+    this.router.navigate(['/backend/batchmanager/applications/'+ applicationId])    
+  }
 }
