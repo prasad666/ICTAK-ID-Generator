@@ -12,6 +12,8 @@ var logger = require("morgan");
 var usersRouter = require("./routes/userRoutes");
 var courseRouter = require("./routes/courseRoutes");
 var batchRouter = require("./routes/batchRoutes");
+var applicationRouter = require("./routes/applicationRoutes");
+
 
 var app = express();
 app.use(cors());
@@ -45,6 +47,8 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/users", usersRouter);
 app.use("/courses", courseRouter);
 app.use("/batches", batchRouter);
+app.use("/applications", applicationRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

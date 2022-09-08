@@ -23,6 +23,22 @@ module.exports = {
   },
 
   /**
+   * applicationController.pendingApplications()
+   */
+     pendingApplications: function (req, res) {     /////TODO uncomment batch_id once bathchmanager model is complete
+      ApplicationModel.find({ status: 'pending' /*, batch_id: req.params.batch */}, function (err, applications) {
+        if (err) {
+          return res.status(500).json({
+            message: "Error when getting application.",
+            error: err,
+          });
+        }
+  
+        return res.json(applications);
+      });
+    },
+
+  /**
    * applicationController.show()
    */
   show: function (req, res) {
