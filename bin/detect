@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# bin/detect <build-dir>
+
+# used for inline heroku buildpack
+
+echo "heroku  buildpack"
+exit 0
+
