@@ -30,3 +30,7 @@ mat-row:hover{
   background-color: rgb(238, 245, 252);
   border-radius: 3px;
 }
+table {
+  width: 100%;
+}
+

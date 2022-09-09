@@ -30,6 +30,8 @@
     "@ng-bootstrap/ng-bootstrap": "^13.0.0",
     "@popperjs/core": "^2.11.6",
     "bootstrap": "^5.2.0",
+    "jspdf": "^2.5.1",
+    "jspdf-autotable": "^3.5.25",
     "ngx-popperjs": "^14.1.0",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
