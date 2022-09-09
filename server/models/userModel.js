@@ -33,6 +33,8 @@ var userSchema = new Schema(
     deletedAt: Date,
     encryptedResetToken: String,
     passwordResetExpiry: Date,
+    batch: [{ type : Schema.Types.ObjectId, ref: 'batch' }],
+
   },
   { timestamps: true }
 );

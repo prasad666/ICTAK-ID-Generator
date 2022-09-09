@@ -5,6 +5,7 @@ import { AuthGuard } from '../core/guards/auth.guard';
 import { BatchManagerHomeComponent } from './components/batch-manager-home/batch-manager-home.component';
 import { ApplicationsComponent } from './components/applications/applications.component';
 import { ApplicationDetailsComponent } from './components/application-details/application-details.component';
+import { HistoryComponent } from './components/history/history.component';
 
 const routes: Routes = [{
   path: "", 
@@ -13,7 +14,8 @@ const routes: Routes = [{
     { path:'', component:DashboardComponent },
     { path:'applications', component:ApplicationsComponent },
     { path:'applications/:id', component:ApplicationDetailsComponent },
-    
+    { path:'history', component:HistoryComponent },
+   
   ],
   canActivate: [AuthGuard]
 }];

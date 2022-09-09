@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 
@@ -25,6 +25,15 @@ export class ApplicationService {
 
   rejectApplication(id:string,remarks:string){
     return this.http.put(`${this.API}/${id}`, {status:'rejected',remarks:remarks})
+  }
+
+  getHistory(batches:string,fromDate:string, toDate:string){
+    return this.http.get(`${this.API}/history`,{
+      params: new HttpParams()
+        .set('batches', batches)
+        .set('from', fromDate)
+        .set('to', toDate)
+    })
   }
 
 

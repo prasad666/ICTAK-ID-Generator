@@ -9,6 +9,10 @@ var authController = require('../controllers/authController')
 router.get("/", authController.protect, authController.restrictTo('student','batchManager','admin'), applicationController.list);
 
 /*
+ * history of approved/rejected applications
+ */
+router.get("/history", authController.protect, authController.restrictTo('batchManager','admin'), applicationController.history);
+/*
  * GET pending applications for a specific batch
  */
 router.get("/pending/:batch", authController.protect, authController.restrictTo('batchManager','admin'), applicationController.pendingApplications);

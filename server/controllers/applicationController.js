@@ -158,7 +158,33 @@ module.exports = {
     });
   }, 
 
+   /**
+   * applicationController.history()
+   */
+    history: function (req, res) {  
+      const batches =req.query.batches.split(',');
+      const batchFilter = batches.map((b)=>{return {batch_id:b}});
+
+      const findObj= {
+        $or : batchFilter,
+        status: {$ne: 'pending'},
+        updatedAt: {
+          $gte:req.query.from,
+          $lte: req.query.to    ///new ISODate(req.query.to)
+        }
+      }
+
+      ApplicationModel.find(findObj, function (err, applications) {
+        if (err) {
+          return res.status(500).json({
+            message: "Error when getting application.",
+            error: err,
+          });
+        }
   
+        return res.json(applications);
+      });
+    }, 
 
 };
 
