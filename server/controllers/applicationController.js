@@ -145,8 +145,17 @@ module.exports = {
   /**
    * applicationController.pendingApplications()
    */
-    pendingApplications: function (req, res) {     /////TODO uncomment batch_id once bathchmanager model is complete
-    ApplicationModel.find({ status: 'pending' /*, batch_id: req.params.batch */}, function (err, applications) {
+    pendingApplications: function (req, res) {  
+      const batches =req.query.batches.split(',');
+      const batchFilter = batches.map((b)=>{return {batch_id: b}});
+
+      const findObj= {
+        $or : batchFilter,
+        status: 'pending',
+        }
+
+
+      ApplicationModel.find(findObj, function (err, applications) {
       if (err) {
         return res.status(500).json({
           message: "Error when getting application.",

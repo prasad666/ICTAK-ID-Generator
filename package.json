@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "heroku": "^7.63.0"
+    "heroku": "^7.63.0",
+    "jspdf": "^2.5.1"
   }
 }

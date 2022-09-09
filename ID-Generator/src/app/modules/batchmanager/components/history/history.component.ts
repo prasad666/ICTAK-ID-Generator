@@ -8,6 +8,7 @@ import autoTable from 'jspdf-autotable';
 
 import { ApplicationService } from 'src/app/modules/core/services/application.service';
 import { AuthService } from 'src/app/modules/core/services/auth.service';
+import { BatchService } from 'src/app/modules/core/services/batch.service';
 import * as XLSX from 'xlsx';
 
 
@@ -19,12 +20,12 @@ import * as XLSX from 'xlsx';
 })
 export class HistoryComponent implements OnInit {
   
-  constructor(private applications: ApplicationService, private auth: AuthService, private router:Router) { }
+  constructor(private applications: ApplicationService,private batchService:BatchService, private auth: AuthService, private router:Router) { }
 
-  batchesString = this.auth.currentUser.batch?.join()||'63187d78142dce9cd46024b3';////change
+  batchesString = ""
   fromDate:any 
   toDate:any 
-  showTable=false;
+  showTable='hidden';
   historyData:any;
 
   dataSource:any;
@@ -40,6 +41,16 @@ export class HistoryComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.batchService.getBatchesByBatchManager(this.auth.currentUser._id)
+    .subscribe({
+      next:(data:any)=>{
+        this.batchesString = data.map((e:any)=>e._id).join();
+        
+      },
+      error:(err)=>{
+        console.log(err);
+      }
+    })
   }
 
   applyFilter(event: Event) {
@@ -53,11 +64,12 @@ export class HistoryComponent implements OnInit {
     this.applications.getHistory(this.batchesString,from,to)
     .subscribe({ 
       next: (data:any)=> {
-        this.historyData=data;
         this.dataSource = new MatTableDataSource<any>(data);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
-        this.showTable=true;
+        this.showTable='visible';
+        this.historyData=data;
+        
       },
       error: (err)=> {
         console.log(err);
@@ -66,14 +78,13 @@ export class HistoryComponent implements OnInit {
   }
 
   //excel
-  //@ViewChild('TABLE') table!: ElementRef;
   createExcel()
   {
-    const ws: XLSX.WorkSheet=XLSX.utils.json_to_sheet(this.historyData) //table_to_sheet(this.table.nativeElement);//converts a DOM TABLE element to a worksheet
+    const ws: XLSX.WorkSheet=XLSX.utils.json_to_sheet(this.historyData) 
     const wb: XLSX.WorkBook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
     /* save to file */
-    XLSX.writeFile(wb, 'SheetJS.xlsx');
+    XLSX.writeFile(wb, `history (${this.fromDate} to ${this.toDate}).xlsx`);
   }
 
  
@@ -95,7 +106,7 @@ export class HistoryComponent implements OnInit {
       body: rows,
     })
     
-    doc.save('table.pdf')
+    doc.save(`history (${this.fromDate} to ${this.toDate}).pdf`)
   }
 
 }

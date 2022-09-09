@@ -15,7 +15,7 @@ router.get("/history", authController.protect, authController.restrictTo('batchM
 /*
  * GET pending applications for a specific batch
  */
-router.get("/pending/:batch", authController.protect, authController.restrictTo('batchManager','admin'), applicationController.pendingApplications);
+router.get("/pending", authController.protect, authController.restrictTo('batchManager','admin'), applicationController.pendingApplications);
 
 /*
  * GET

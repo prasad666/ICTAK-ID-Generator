@@ -1,18 +1,21 @@
+.main{
+  padding-top: 1rem;
+}
 .search{
-  margin: 1rem 0 1rem 1rem;
-  text-align: right;
+  float: right;
+  padding-top:1rem;
 } 
 
 .input1{
   border-radius: 1rem;
   border: 1px solid;
   text-align: center;
-  width: 40%;
   font-size: 1rem;
 }
 
 .applicationtable{
   border-radius: .4rem;
+  margin-top: 1.5rem;
 }
 
 .paginator{
@@ -30,7 +33,14 @@ mat-row:hover{
   background-color: rgb(238, 245, 252);
   border-radius: 3px;
 }
-table {
-  width: 100%;
+
+
+.history{
+  height: 2.3rem;
+  margin: 1%;
+}
+
+.export{
+  margin:0 1rem .5rem 0;
 }
 

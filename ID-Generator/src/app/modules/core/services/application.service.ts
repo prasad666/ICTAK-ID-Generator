@@ -11,8 +11,10 @@ export class ApplicationService {
 
   constructor(private http:HttpClient) { }
 
-  getPendingApplications(batchId:string){
-    return this.http.get(`${this.API}/pending/${batchId}`)
+  getPendingApplications(batchesString:string){
+    return this.http.get(`${this.API}/pending`,{
+      params: new HttpParams().set('batches', batchesString)
+    })
   }
 
   getApplication(id:string){
@@ -28,12 +30,12 @@ export class ApplicationService {
   }
 
   getHistory(batches:string,fromDate:any, toDate:any){
-    return this.http.get(`${this.API}/history`,{
+    return this.http.get(`${this.API}/history`, {
       params: new HttpParams()
         .set('batches', batches)
         .set('from', fromDate)
-        .set('to', toDate)
-    })
+        .set('to', toDate),
+    });
   }
 
 
