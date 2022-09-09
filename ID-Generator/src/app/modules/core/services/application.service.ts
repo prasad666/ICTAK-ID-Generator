@@ -27,7 +27,7 @@ export class ApplicationService {
     return this.http.put(`${this.API}/${id}`, {status:'rejected',remarks:remarks})
   }
 
-  getHistory(batches:string,fromDate:string, toDate:string){
+  getHistory(batches:string,fromDate:any, toDate:any){
     return this.http.get(`${this.API}/history`,{
       params: new HttpParams()
         .set('batches', batches)

@@ -17,6 +17,7 @@ import { ApplicationDetailsComponent } from './components/application-details/ap
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatButtonModule } from '@angular/material/button';
 import { FormsModule } from '@angular/forms';
+import {MatDatepickerModule} from '@angular/material/datepicker';
 import { HistoryComponent } from './components/history/history.component';
 
 
@@ -42,7 +43,9 @@ import { HistoryComponent } from './components/history/history.component';
     MatCardModule,
     MatProgressBarModule,
     MatButtonModule,
-    FormsModule   
+    FormsModule,
+    MatDatepickerModule,
+    MatFormFieldModule
     
   ]
 })

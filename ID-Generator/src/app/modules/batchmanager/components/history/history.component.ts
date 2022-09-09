@@ -12,8 +12,13 @@ import { AuthService } from 'src/app/modules/core/services/auth.service';
   styleUrls: ['./history.component.css']
 })
 export class HistoryComponent implements OnInit {
-
+  
   constructor(private applications: ApplicationService, private auth: AuthService, private router:Router) { }
+
+  batchesString = this.auth.currentUser.batch?.join()||'63187d78142dce9cd46024b3';////change
+  fromDate:any 
+  toDate:any 
+  showTable=false;
 
   dataSource:any;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -29,18 +34,6 @@ export class HistoryComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.applications.getHistory(this.auth.currentUser.batch)
-    .subscribe({ 
-      next: (data:any)=> {
-        console.log(data);
-        this.dataSource = new MatTableDataSource<any>(data);
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
-      },
-      error: (err)=> {
-        console.log(err);
-      }
-    })
   }
 
   applyFilter(event: Event) {
@@ -48,7 +41,21 @@ export class HistoryComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
   
-  onClick(applicationId:any){
-    this.router.navigate(['/backend/batchmanager/applications/'+ applicationId])    
+  updateHistory(){
+    let from = Date.parse(this.fromDate)
+    let to = Date.parse(this.toDate)
+    this.applications.getHistory(this.batchesString,from,to)
+    .subscribe({ 
+      next: (data:any)=> {
+        console.log(data);
+        this.dataSource = new MatTableDataSource<any>(data);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+        this.showTable=true;
+      },
+      error: (err)=> {
+        console.log(err);
+      }
+    })
   }
 }
