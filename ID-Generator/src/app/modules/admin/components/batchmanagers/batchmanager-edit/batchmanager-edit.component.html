@@ -7,14 +7,14 @@
         <h1 class="mt-4">Courses</h1>
         <ol class="breadcrumb mb-4">
           <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-          <li class="breadcrumb-item">Batches</li>
-          <li class="breadcrumb-item active">Add</li>
+          <li class="breadcrumb-item">Batchmanager</li>
+          <li class="breadcrumb-item active">Edit</li>
         </ol>
         <div class="card mb-4">
           <div class="card-body">
             <div class="row"></div>
-            <h1 *ngIf="isAddMode">Add Batch</h1>
-            <h1 *ngIf="!isAddMode">Edit Batch</h1>
+            <h1 *ngIf="isAddMode">Add Batchmanager</h1>
+            <h1 *ngIf="!isAddMode">Edit Batchmanager</h1>
             <form
               class="app-form"
               [formGroup]="form"
@@ -23,51 +23,23 @@
             >
               <div class="form-group row">
                 <div class="col-sm-3 text-end">
-                  <label>Batch Name</label>
+                  <label>First Name</label>
                 </div>
                 <div class="col-sm-6">
                   <input
                     type="text"
-                    formControlName="batch_name"
+                    formControlName="first_name"
                     class="form-control"
                     [ngClass]="{
-                      'is-invalid': submitted && f['batch_name'].errors
+                      'is-invalid': submitted && f['first_name'].errors
                     }"
                   />
                   <div
-                    *ngIf="submitted && f['batch_name'].errors"
+                    *ngIf="submitted && f['first_name'].errors"
                     class="invalid-feedback"
                   >
-                    <div *ngIf="f['batch_name'].errors['required']">
-                      Batch Name is required
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="form-group row">
-                <div class="col-sm-3 text-end">
-                  <label>Course</label>
-                </div>
-                <div class="col-sm-6">
-                  <select
-                    id="course"
-                    formControlName="course"
-                    class="form-select"
-                  >
-                    <option
-                      *ngFor="let course of courses"
-                      value="{{ course._id }}"
-                    >
-                      {{ course.course_name }}
-                    </option>
-                  </select>
-
-                  <div
-                    *ngIf="submitted && f['course'].errors"
-                    class="invalid-feedback"
-                  >
-                    <div *ngIf="f['course'].errors['required']">
-                      Course is required
+                    <div *ngIf="f['first_name'].errors['required']">
+                      First Name is required
                     </div>
                   </div>
                 </div>
@@ -75,47 +47,23 @@
 
               <div class="form-group row">
                 <div class="col-sm-3 text-end">
-                  <label>Batch Manager</label>
-                </div>
-                <div class="col-sm-6">
-                  <select id="user" formControlName="user" class="form-select">
-                    <option
-                      *ngFor="let userObj of users"
-                      value="{{ userObj._id }}"
-                    >
-                      {{ userObj.first_name + " " + userObj.last_name }}
-                    </option>
-                  </select>
-
-                  <div
-                    *ngIf="submitted && f['user'].errors"
-                    class="invalid-feedback"
-                  >
-                    <div *ngIf="f['user'].errors['required']">
-                      User is required
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="form-group row">
-                <div class="col-sm-3 text-end">
-                  <label>Start Date</label>
+                  <label>Last Name</label>
                 </div>
                 <div class="col-sm-6">
                   <input
-                    type="date"
-                    formControlName="start_date"
+                    type="text"
+                    formControlName="last_name"
                     class="form-control"
                     [ngClass]="{
-                      'is-invalid': submitted && f['start_date'].errors
+                      'is-invalid': submitted && f['last_name'].errors
                     }"
                   />
                   <div
-                    *ngIf="submitted && f['start_date'].errors"
+                    *ngIf="submitted && f['last_name'].errors"
                     class="invalid-feedback"
                   >
-                    <div *ngIf="f['start_date'].errors['required']">
-                      Start Date is required
+                    <div *ngIf="f['last_name'].errors['required']">
+                      Last Name is required
                     </div>
                   </div>
                 </div>
@@ -123,23 +71,48 @@
 
               <div class="form-group row">
                 <div class="col-sm-3 text-end">
-                  <label>End Date</label>
+                  <label>Email ID</label>
                 </div>
                 <div class="col-sm-6">
                   <input
-                    type="date"
-                    formControlName="end_date"
+                    type="text"
+                    formControlName="email"
                     class="form-control"
                     [ngClass]="{
-                      'is-invalid': submitted && f['end_date'].errors
+                      'is-invalid': submitted && f['email'].errors
                     }"
                   />
                   <div
-                    *ngIf="submitted && f['end_date'].errors"
+                    *ngIf="submitted && f['email'].errors"
                     class="invalid-feedback"
                   >
-                    <div *ngIf="f['end_date'].errors['required']">
-                      End Date is required
+                    <div *ngIf="f['email'].errors['required']">
+                      Email ID is required
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <div class="col-sm-3 text-end">
+                  <label>Password</label>
+                </div>
+                <div class="col-sm-6">
+                  <input
+                    type="password"
+                    formControlName="password"
+                    class="form-control"
+                    placeholder="Password"
+                    [ngClass]="{
+                      'is-invalid': submitted && f['password'].errors
+                    }"
+                  />
+                  <div
+                    *ngIf="submitted && f['password'].errors"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="f['password'].errors['required']">
+                      Password is required
                     </div>
                   </div>
                 </div>
@@ -164,6 +137,7 @@
               <div class="form-group row">
                 <div class="col-sm-3 text-end"></div>
                 <div class="col-sm-6">
+                  <input type="hidden" formControlName="role" />
                   <button [disabled]="loading" class="btn btn-primary">
                     <span
                       *ngIf="loading"
@@ -171,7 +145,9 @@
                     ></span>
                     Save
                   </button>
-                  <a routerLink="/backend/admin/courses" class="btn btn-link"
+                  <a
+                    routerLink="/backend/admin/batchmanagers"
+                    class="btn btn-link"
                     >Cancel</a
                   >
                 </div>

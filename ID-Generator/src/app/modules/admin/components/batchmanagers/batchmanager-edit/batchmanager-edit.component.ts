@@ -22,7 +22,7 @@ export class BatchmanagerEditComponent implements OnInit {
   submitted = false;
   courses: any;
   users: any;
-  batchObj: any;
+  userObj: any;
   isLoaded = false;
 
   constructor(
@@ -38,7 +38,7 @@ export class BatchmanagerEditComponent implements OnInit {
       .subscribe((res) => (this.courses = res));
 
     this.users = this.userService
-      .getUsersByRole('batchmanager')
+      .getUsersByRole('batchManager')
       .subscribe((res) => (this.users = res));
   }
 
@@ -47,12 +47,11 @@ export class BatchmanagerEditComponent implements OnInit {
     this.isAddMode = !this.id;
 
     this.form = this.formBuilder.group({
-      batch_name: ['', Validators.required],
-      course: ['', Validators.required],
-
-      user: ['', Validators.required],
-      start_date: ['', Validators.required],
-      end_date: ['', Validators.required],
+      first_name: ['', Validators.required],
+      last_name: ['', Validators.required],
+      email: ['', Validators.required],
+      password: ['', this.isAddMode ? Validators.required : null],
+      role: ['batchManager'],
       enabled: [true],
     });
 
@@ -63,11 +62,11 @@ export class BatchmanagerEditComponent implements OnInit {
         .subscribe((x) => {
           let user = <User>x;
           this.form.patchValue(user);
-          this.batchObj = user;
+          this.userObj = user;
           this.isLoaded = true;
         });
     } else {
-      this.batchObj = <User>{};
+      this.userObj = <User>{};
       this.isLoaded = true;
     }
   }
@@ -93,19 +92,19 @@ export class BatchmanagerEditComponent implements OnInit {
 
     this.loading = true;
     if (this.isAddMode) {
-      this.createBatch();
+      this.createUser();
     } else {
-      this.updateBatch();
+      this.updateUser();
     }
   }
 
-  private createBatch() {
+  private createUser() {
     this.userService
       .create(this.form.value)
       .pipe(first())
       .subscribe({
         next: () => {
-          this.router.navigate(['backend/admin/batcchmanagers'], {
+          this.router.navigate(['backend/admin/batchmanagers'], {
             state: { success: 'Batchmanager has been created successfully.' },
           });
         },
@@ -115,7 +114,7 @@ export class BatchmanagerEditComponent implements OnInit {
       });
   }
 
-  private updateBatch() {
+  private updateUser() {
     this.userService
       .update(this.id, this.form.value)
       .pipe(first())

@@ -1,3 +1,6 @@
+const bcrypt = require("bcrypt");
+const crypto = require("crypto");
+
 var UserModel = require("../models/userModel.js");
 
 /**
@@ -72,7 +75,7 @@ module.exports = {
           message: "No such user",
         });
       }
-
+      user.password = "";
       return res.json(user);
     });
   },
@@ -80,11 +83,12 @@ module.exports = {
   /**
    * userController.create()
    */
-  create: function (req, res) {
+  create: async function (req, res) {
+    var password = await bcrypt.hash(req.body.password, 12);
     var user = new UserModel({
       first_name: req.body.first_name,
       last_name: req.body.last_name,
-      password: req.body.password,
+      password: password,
       email: req.body.email,
       role: req.body.role,
       enabled: req.body.enabled,
@@ -108,9 +112,9 @@ module.exports = {
   /**
    * userController.update()
    */
-  update: function (req, res) {
+  update: async function (req, res) {
     var id = req.params.id;
-
+    req.body.password = await bcrypt.hash(req.body.password, 12);
     UserModel.findOne({ _id: id }, function (err, user) {
       if (err) {
         return res.status(500).json({
