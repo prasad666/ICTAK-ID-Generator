@@ -7,14 +7,14 @@
         <h1 class="mt-4">Courses</h1>
         <ol class="breadcrumb mb-4">
           <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-          <li class="breadcrumb-item">Batchmanager</li>
+          <li class="breadcrumb-item">Student</li>
           <li class="breadcrumb-item active">Edit</li>
         </ol>
         <div class="card mb-4">
           <div class="card-body">
             <div class="row"></div>
-            <h1 *ngIf="isAddMode">Add Batchmanager</h1>
-            <h1 *ngIf="!isAddMode">Edit Batchmanager</h1>
+            <h1 *ngIf="isAddMode">Add Student</h1>
+            <h1 *ngIf="!isAddMode">Edit Student</h1>
             <form
               class="app-form"
               [formGroup]="form"
