@@ -7,6 +7,10 @@ var authController = require('../controllers/authController')
  * GET
  */
 router.get("/", authController.protect, authController.restrictTo('student','batchManager','admin'), applicationController.list);
+/*
+ * GET ID pdf if approved
+ */
+router.get("/getPdf", authController.protect, authController.restrictTo('student','batchManager','admin'), applicationController.getPdf);
 
 /*
  * GET

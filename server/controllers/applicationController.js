@@ -1,4 +1,7 @@
 var ApplicationModel = require("../models/applicationModel.js");
+var fs = require('fs');
+var path = require('path')
+var html_to_pdf = require('html-pdf-node');
 
 /**
  * applicationController.js
@@ -140,4 +143,52 @@ module.exports = {
       return res.status(204).json();
     });
   },
+
+   /**
+   * applicationController.getPdf()
+   */
+    getPdf: function (req, res) {
+      
+  
+      ApplicationModel.findOne({ student_id: req.user.id }, function (err, application) {
+        if (err) {
+          return res.status(500).json({
+            message: "Error when getting application.",
+            error: err,
+          });
+        }
+  
+        if (!application) {
+          return res.status(404).json({
+            message: "No such application",
+          });
+        }
+
+        if (application.status!=="approved") {
+          return res.status(403).json({
+            message: application.status,
+            applicationStatus: application.status,
+            applicationRemarks: application.remarks,
+
+          });
+        }
+       
+        let options = { format: 'A4', path:'./pdf/test.pdf' };
+        
+        let file = { content: "<h1>Welcome to html-pdf-nodw</h1>" };
+        html_to_pdf.generatePdf(file, options).then(() => {
+          if (application.status==="approved") {
+             res.sendFile(path.resolve(__dirname +'/../pdf/test.pdf'));
+          }
+        });
+        
+
+     
+        
+
+  
+      });
+    },
+  
+
 };
