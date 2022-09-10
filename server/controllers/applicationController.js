@@ -29,7 +29,13 @@ module.exports = {
   show: function (req, res) {
     var id = req.params.id;
 
-    ApplicationModel.findOne({ _id: id }, function (err, application) {
+    ApplicationModel.findOne({ _id: id })
+      .populate('student_id')
+      .populate({
+        path:'batch_id',
+        populate:'course'
+      })
+      .exec(function (err, application) {
       if (err) {
         return res.status(500).json({
           message: "Error when getting application.",

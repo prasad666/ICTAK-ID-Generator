@@ -23,6 +23,8 @@ export class ApplicationDetailsComponent implements OnInit {
     .subscribe({ 
       next: (data:any)=> {
         this.application = data;
+        console.log(data);
+        
       },
       error: (err)=> {
         console.log(err);
