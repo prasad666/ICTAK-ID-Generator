@@ -14,6 +14,10 @@ router.get('/', authController.protect, authController.restrictTo('student','bat
 router.get('/:id', authController.protect, authController.restrictTo('student','batchManager','admin'), batchController.show);
 
 /*
+ * GET batches of batchmanager
+ */
+router.get('/batchmanager/:batchmanagerId', authController.protect, authController.restrictTo('batchManager','admin'), batchController.listBatchesByBatchManager);
+/*
  * POST
  */
 router.post('/', authController.protect, authController.restrictTo('batchManager','admin'), batchController.create);

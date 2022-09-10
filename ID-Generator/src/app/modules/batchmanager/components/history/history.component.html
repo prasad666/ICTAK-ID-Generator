@@ -1,0 +1,150 @@
+<div class="main">
+  <h2 >History</h2>
+  <div class="historywrap">
+    <input class="history1" [(ngModel)]="fromDate" type="date" />
+    to
+    <input class="history" [(ngModel)]="toDate" type="date" />
+    <button class="history" mat-flat-button color="primary" (click)="updateHistory()">view</button>
+    <div class="search" [ngStyle]="{'visibility': showTable }">
+      <input
+        class="filter"
+        matInput
+        (keyup)="applyFilter($event)"
+        placeholder="Filter"
+        #input
+      />
+    </div>
+  </div>
+</div>
+
+<div [ngStyle]="{'visibility': showTable }">
+  
+  <mat-table
+    class="courses-table mat-table mat-elevation-z8 applicationtable"
+    matSort
+    [dataSource]="dataSource"
+  >
+    <ng-container matColumnDef="studentName">
+      <div *matHeaderCellDef class="mat-header-cell" mat-sort-header>
+        Name of student 
+      </div>
+      <div
+        *matCellDef="let application"
+        data-label="student Name"
+        class="mat-cell"
+      >
+        {{ application.studentName }}
+      </div>
+    </ng-container>
+
+    <ng-container matColumnDef="email">
+      <div *matHeaderCellDef class="mat-header-cell" mat-sort-header>
+        Email
+      </div>
+      <div
+        class="enabled-cell"
+        *matCellDef="let application"
+        data-label="email"
+        class="mat-cell"
+      >
+        {{ application.email}}
+      </div>
+    </ng-container>
+
+    <ng-container matColumnDef="course">
+      <div *matHeaderCellDef class="mat-header-cell" mat-sort-header>
+        Course
+      </div>
+      <div
+        class="enabled-cell"
+        *matCellDef="let application"
+        data-label="course"
+        class="mat-cell"
+      >
+        {{ application.course}}
+      </div>
+    </ng-container>
+
+    <ng-container matColumnDef="batch">
+      <div *matHeaderCellDef class="mat-header-cell" mat-sort-header>
+        Batch
+      </div>
+      <div
+        class="enabled-cell"
+        *matCellDef="let application"
+        data-label="batch"
+        class="mat-cell"
+      >
+        {{ application.batch}}
+      </div>
+    </ng-container>
+
+    <ng-container matColumnDef="registeredOn">
+      <div *matHeaderCellDef class="mat-header-cell" mat-sort-header>
+        Registered On
+      </div>
+      <div
+        class="createdAt-cell"
+        *matCellDef="let application"
+        data-label="registeredOn"
+        class="mat-cell"
+      >
+        {{ application.registeredOn | date: "dd.MM.y HH:mm:ss"}}
+      </div>
+    </ng-container>
+
+    <ng-container matColumnDef="AppliedOn">
+      <div *matHeaderCellDef class="mat-header-cell" mat-sort-header>
+        Applied On
+      </div>
+      <div
+        class="createdAt-cell"
+        *matCellDef="let application"
+        data-label="AppliedOn"
+        class="mat-cell"
+      >
+        {{ application.AppliedOn | date: "dd.MM.y HH:mm:ss" }}
+      </div>
+    </ng-container>
+
+    <ng-container matColumnDef="status">
+      <div *matHeaderCellDef class="mat-header-cell" mat-sort-header>
+        Status
+      </div>
+      <div
+        class="enabled-cell"
+        *matCellDef="let application"
+        data-label="status"
+        class="mat-cell"
+      >
+        {{ application.status}}
+      </div>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="tableColumns"></mat-header-row>
+
+    <mat-row
+      *matRowDef="let application; columns: tableColumns"
+      class="mat-row"
+    ></mat-row>
+
+    <div class="mat-row nodata" *matNoDataRow>
+      <div class="mat-cell" colspan="4">No matching data</div>
+    </div>
+  </mat-table>
+
+  <mat-paginator
+    class="paginator"
+    [pageSizeOptions]="[5, 10, 20]"
+    showFirstLastButtons
+    aria-label="Select page of periodic elements"
+  >
+  </mat-paginator>
+
+  <button class="export"  mat-flat-button color="primary" (click)="createExcel()">
+    Export as Excel
+  </button>
+  <button class="export" mat-flat-button color="primary" (click)="createPdf()">
+    Export as pdf
+  </button>
+</div>

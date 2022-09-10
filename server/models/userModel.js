@@ -33,6 +33,7 @@ var userSchema = new Schema(
     deletedAt: Date,
     encryptedResetToken: String,
     passwordResetExpiry: Date,
+
   },
   { timestamps: true }
 );

@@ -1,0 +1,59 @@
+button{
+    min-width: 10%;
+    margin: 1%;
+    height: 2.5rem;
+
+}
+
+.remarks{
+    margin: 1%;
+    height: 2.5rem;
+    flex-grow: 1;
+
+}
+.card-actions{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap ;
+    padding-top: 4%;
+}
+
+.err{
+    text-align: right;
+    color: rgb(178, 68, 68);
+    padding:0 1.5rem 1rem 0;
+}
+mat-card{
+    margin-top: 1.5rem;
+    padding: 5%;
+    
+}
+
+#table{
+    border-radius: 1rem !important;
+
+}
+
+.table1{
+    width: 100%;
+    border-radius: 5px;
+}
+
+.card-head{
+    margin-bottom: 3%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+table {
+    border-collapse: collapse;
+    border-radius: 30px;
+    border-style: hidden; 
+    box-shadow: 0 0 0 1px #666; 
+}
+
+td,th {
+    border: 1px solid #ccc;
+    padding: 1% 3%;
+}

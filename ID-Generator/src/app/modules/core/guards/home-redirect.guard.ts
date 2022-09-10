@@ -15,7 +15,7 @@ export class HomeRedirectGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
       
     if(this.auth.isLoggedIn()) {   
-      const role = this.auth.currentUser.role
+      const role = this.auth.currentUser?.role 
       if(role==='student'){
         this.router.navigate(['secure/student'])
         return false

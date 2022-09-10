@@ -1,2 +1,3 @@
-export class Application {
+export interface Application {
+    
 }

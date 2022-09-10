@@ -13,6 +13,15 @@ router.get("/", authController.protect, authController.restrictTo('student','bat
 router.get("/getPdf", authController.protect, authController.restrictTo('student','batchManager','admin'), applicationController.getPdf);
 
 /*
+ * history of approved/rejected applications
+ */
+router.get("/history", authController.protect, authController.restrictTo('batchManager','admin'), applicationController.history);
+/*
+ * GET pending applications for a specific batch
+ */
+router.get("/pending", authController.protect, authController.restrictTo('batchManager','admin'), applicationController.pendingApplications);
+
+/*
  * GET
  */
 router.get("/:id", authController.protect, authController.restrictTo('student','batchManager','admin'), applicationController.show);

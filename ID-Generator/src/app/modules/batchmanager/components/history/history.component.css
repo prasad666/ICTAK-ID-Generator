@@ -1,0 +1,50 @@
+.main{
+  padding-top: 1rem;
+}
+.search{
+  float: right;
+  padding-top:1rem;
+} 
+
+.filter{
+  border-radius: 1rem;
+  border: 1px solid;
+  text-align: center;
+  font-size: 1rem;
+}
+
+.applicationtable{
+  border-radius: .4rem;
+  margin-top: 1.5rem;
+}
+
+.paginator{
+  margin-top: 1rem;
+}
+
+.nodata{
+  margin: 4rem;
+  text-align: center;
+}
+mat-row:last-child{
+  border: 0px solid;
+}
+mat-row:hover{
+  background-color: rgb(238, 245, 252);
+  border-radius: 3px;
+}
+
+
+.history{
+  height: 2.3rem;
+  margin: 1%;
+}
+.history1{
+  height: 2.3rem;
+  margin: 1% 1% 1% 0;
+}
+
+.export{
+  margin:0 1rem 1rem 0;
+}
+

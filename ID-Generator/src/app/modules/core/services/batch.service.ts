@@ -34,4 +34,7 @@ export class BatchService {
   delete(id: any) {
     return this.http.delete(this.API + id);
   }
+  getBatchesByBatchManager(batchManagerId:string){
+    return this.http.get(this.API + 'batchmanager/' + batchManagerId);
+  }
 }

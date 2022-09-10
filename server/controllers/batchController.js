@@ -194,4 +194,32 @@ module.exports = {
       return res.status(204).json();
     });
   },
+
+  
+  /**
+   * batchController.listBatchesByBatchManager()
+   */
+   listBatchesByBatchManager: function (req, res) {
+    const id = req.params.batchmanagerId;
+
+    BatchModel.find({ user: id })
+      .select('_id')
+      .exec(function (err, batch) {
+        if (err) {
+          console.log(err);
+          return res.status(500).json({
+            message: "Error when getting batch.",
+            error: err,
+          });
+        }
+
+        if (!batch) {
+          return res.status(404).json({
+            message: "No such batch",
+          });
+        }
+
+        return res.json(batch);
+      });
+  },
 };

@@ -98,7 +98,7 @@ exports.forgotPassword = async (req, res, next) => {
     await user.save();
 
     //create url with un-encrypted token & send url to user's mail
-    const rootUrl = "localhost:4200"; ////////////change this in procduction    env  |||| use   req.get('host')
+    const rootUrl = req.get('host');  
     const passResetLink = `${req.protocol}://${rootUrl}/pages/reset-password/${resetToken}`;
     const message = `<h2>ICTAK</h2>Password reset link for ICTAK ID Generator (expires in 60 minutes) : <a href = "${passResetLink}"><button style="padding:10px; margin:5px 0 0 0" >reset password</button></a>`;
     await sendMail({

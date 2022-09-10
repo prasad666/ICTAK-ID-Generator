@@ -11,7 +11,12 @@ var applicationSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "batch",
     },
-    status: String,
+    status: {
+        type:String,
+        required:true,
+        default:'pending',
+        enum:['pending', 'approved', 'rejected']
+    },
     reviewed_by: {
       type: Schema.Types.ObjectId,
       ref: "user",

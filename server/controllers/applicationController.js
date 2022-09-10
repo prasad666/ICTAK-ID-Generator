@@ -25,13 +25,20 @@ module.exports = {
     });
   },
 
+ 
   /**
    * applicationController.show()
    */
   show: function (req, res) {
     var id = req.params.id;
 
-    ApplicationModel.findOne({ _id: id }, function (err, application) {
+    ApplicationModel.findOne({ _id: id })
+      .populate('student_id')
+      .populate({
+        path:'batch_id',
+        populate:'course'
+      })
+      .exec(function (err, application) {
       if (err) {
         return res.status(500).json({
           message: "Error when getting application.",
@@ -144,6 +151,80 @@ module.exports = {
     });
   },
 
+  /**
+   * applicationController.pendingApplications()
+   */
+    pendingApplications: function (req, res) {  
+      const batches =req.query.batches.split(',');
+      const batchFilter = batches.map((b)=>{return {batch_id: b}});
+
+      const findObj= {
+        $or : batchFilter,
+        status: 'pending',
+        }
+
+
+      ApplicationModel.find(findObj)
+      .populate('student_id')
+      .populate({
+        path:'batch_id',
+        select:'batch_name',
+        populate:{
+          path:'course',
+          select:'course_name'
+        }
+       })
+      .exec(function (err, applications) {
+        if (err) {
+          return res.status(500).json({
+            message: "Error when getting application.",
+            error: err,
+          });
+        }
+
+        return res.json(applications);
+      });
+  }, 
+
+   /**
+   * applicationController.history()
+   */
+    history: function (req, res) {  
+      const batches =req.query.batches.split(',');
+      const batchFilter = batches.map((b)=>{return {batch_id:b}});
+
+      const findObj= {
+        $or : batchFilter,
+        status: {$ne: 'pending'},
+        updatedAt: {
+          $gte:req.query.from,
+          $lte: req.query.to    ///new ISODate(req.query.to)
+        }
+      }
+
+      ApplicationModel.find(findObj)
+      .populate('student_id')
+      .populate({
+        path:'batch_id',
+        select:'batch_name',
+        populate:{
+          path:'course',
+          select:'course_name'
+        }
+       })
+      .exec(function (err, applications) {
+        if (err) {
+          return res.status(500).json({
+            message: "Error when getting application.",
+            error: err,
+          });
+        }
+  
+        return res.json(applications);
+      });
+    }, 
+
+
    /**
    * applicationController.getPdf()
    */
@@ -192,3 +273,5 @@ module.exports = {
   
 
 };
+
+
