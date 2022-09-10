@@ -10,6 +10,10 @@ router.get("/", authController.protect, authController.restrictTo('student','bat
 /*
  * GET ID pdf if approved
  */
+router.get("/status", authController.protect, authController.restrictTo('student','batchManager','admin'), applicationController.applicationStatus);
+/*
+ * GET ID pdf if approved
+ */
 router.get("/getPdf", authController.protect, authController.restrictTo('student','batchManager','admin'), applicationController.getPdf);
 
 /*

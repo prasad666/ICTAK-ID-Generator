@@ -1,1 +1,5 @@
-<p>id-generation works!</p>
+<div class="main">
+    <h3>Your application status is: {{data.status}}</h3>
+    <p *ngIf="data.remarks">Remarks: {{data.remarks}}</p>
+    <button mat-raised-button *ngIf="data.status==='approved'" (click)="this.onDownload()"> Download ID</button>
+</div>

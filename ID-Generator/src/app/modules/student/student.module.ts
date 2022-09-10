@@ -8,6 +8,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { IdGenerationComponent } from './components/id-generation/id-generation.component';
+import { StudentHomeComponent } from './components/student-home/student-home.component';
+import { MatButtonModule } from '@angular/material/button';
 
 
 @NgModule({
@@ -15,6 +17,7 @@ import { IdGenerationComponent } from './components/id-generation/id-generation.
     DashboardComponent,
     SideNavComponent,
     IdGenerationComponent,
+    StudentHomeComponent,
     
             
   ],
@@ -25,7 +28,8 @@ import { IdGenerationComponent } from './components/id-generation/id-generation.
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
-    SharedModule
+    SharedModule,
+    MatButtonModule
   ]
 })
 export class StudentModule { }

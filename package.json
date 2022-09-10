@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "file-saver": "^2.0.5",
     "heroku": "^7.63.0",
     "jspdf": "^2.5.1"
   }

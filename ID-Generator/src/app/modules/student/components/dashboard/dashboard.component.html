@@ -1,22 +1,9 @@
-<app-auth-header componentTitle="ICTAK Students"></app-auth-header>
-<div id="layoutSidenav">
-  <app-side-nav id="authnav"></app-side-nav>
-  <div id="layoutSidenav_content">
-    <main>
-      <div class="container-fluid px-4">
-        <app-id-generation></app-id-generation>
-
-        <h1 class="mt-4">Dashboard</h1>
-        <ol class="breadcrumb mb-4">
-          <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-        </ol>
-        <div class="card mb-4">
-          <div class="card-body">
-            <p class="mb-0">Welcome Back!</p>
-          </div>
-        </div>
-      </div>
-    </main>
-    <app-auth-footer></app-auth-footer>
+<h1 class="mt-4">Dashboard</h1>
+<ol class="breadcrumb mb-4">
+  <li class="breadcrumb-item"><a routerLink="/secure/student/">Dashboard</a></li>
+</ol>
+<div class="card mb-4">
+  <div class="card-body">
+    <p class="mb-0">Welcome Back!</p>
   </div>
 </div>

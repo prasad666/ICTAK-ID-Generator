@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-
+import { saveAs } from 'file-saver'
+import { ApplicationService } from 'src/app/modules/core/services/application.service';
 @Component({
   selector: 'app-id-generation',
   templateUrl: './id-generation.component.html',
@@ -8,14 +9,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class IdGenerationComponent implements OnInit {
 
-  constructor(private http:HttpClient) { }
+  data:any={status:null, remarks:null};
+  constructor(private applicationService:ApplicationService) { }
 
   ngOnInit(): void {
-    this.http.get('http://localhost:3000/applications/getPdf')
+    this.applicationService.applicationStatus()
     .subscribe({
       next:(data)=>{
-        console.log(data);
-        
+        this.data= data
+      },
+      error:(err)=>{
+        console.log(err);
+      }
+    })
+    
+  }
+
+  onDownload(){
+    this.applicationService.getPdf()
+    .subscribe({
+      next:(data)=>{
+        let downloadURL = window.URL.createObjectURL(data);
+        saveAs(downloadURL);
       },
       error:(err)=>{
         console.log(err);

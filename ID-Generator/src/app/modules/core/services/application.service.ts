@@ -37,6 +37,12 @@ export class ApplicationService {
         .set('to', toDate),
     });
   }
+  applicationStatus(){
+    return this.http.get(`${this.API}/status`)
+  }
 
+  getPdf(){
+    return this.http.get(`${this.API}/getPdf`,{responseType:'blob'})
+  }
 
 }
