@@ -107,13 +107,27 @@ export class HistoryComponent implements OnInit {
   //pdf
   createPdf(){
     const doc = new jsPDF();
-    const col = ['_id', 'createdAt', 'status'];
+    const col = [
+      'Name',
+      'Email',
+      'Course',
+      'Batch',
+      'Applied On',
+      'Status'
+    ];
     const rows:any = [];
     
     const itemNew = this.historyData;
     
-    itemNew.forEach((element: { _id: any; createdAt: any; status: any; }) => {
-      const temp = [element._id, element.createdAt, element.status];
+    itemNew.forEach((element:any) => {
+      const temp = [
+        element.studentName,
+        element.email,
+        element.course,
+        element.batch,
+        element.AppliedOn,
+        element.status
+      ];
       rows.push(temp);
     });
     
