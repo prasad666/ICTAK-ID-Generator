@@ -44,16 +44,6 @@ module.exports = {
   },
 
   list1: function (req, res) {
-    // BatchModel.find(function (err, batches) {
-    //   if (err) {
-    //     return res.status(500).json({
-    //       message: "Error when getting batch.",
-    //       error: err,
-    //     });
-    //   }
-
-    //   return res.json(batches);
-    // });
     BatchModel.find()
       .populate("course")
       .populate("user")
@@ -76,6 +66,18 @@ module.exports = {
       });
   },
 
+  listAllEnabled: function (req, res) {
+    BatchModel.find({ enabled: true }, function (err, batches) {
+      if (err) {
+        return res.status(500).json({
+          message: "Error when getting batch.",
+          error: err,
+        });
+      }
+
+      return res.json(batches);
+    });
+  },
   /**
    * batchController.show()
    */

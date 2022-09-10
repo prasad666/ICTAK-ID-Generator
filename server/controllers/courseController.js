@@ -38,7 +38,20 @@ module.exports = {
     CourseModel.find(function (err, courses) {
       if (err) {
         return res.status(500).json({
-          message: "Error when getting user.",
+          message: "Error when getting course.",
+          error: err,
+        });
+      }
+
+      return res.json(courses);
+    });
+  },
+
+  listAllEnabled: function (req, res) {
+    CourseModel.find({ enabled: true }, function (err, courses) {
+      if (err) {
+        return res.status(500).json({
+          message: "Error when getting course.",
           error: err,
         });
       }

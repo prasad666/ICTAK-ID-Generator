@@ -17,27 +17,76 @@
         </div>
       </div>
       <div class="col-md-9">
-        <form (ngSubmit)="Registration()">
-          <div class="form-group" id="text">
-            <label for="name">Student Name</label>
-            <input
-              type="text"
-              class="form-control"
-              name="name"
-              [(ngModel)]="studentDetails.name"
-            />
+        <form
+          (ngSubmit)="registerForm.form.valid && Registration()"
+          novalidate
+          *ngIf="isLoaded"
+          #registerForm="ngForm"
+        >
+          <div class="row py-3">
+            <div class="form-group col-md-6" id="text">
+              <label for="first_name">First Name</label>
+              <input
+                type="text"
+                class="form-control"
+                required
+                name="first_name"
+                #first_name="ngModel"
+                [(ngModel)]="studentDetails.first_name"
+              />
+              <span
+                class="text-danger"
+                *ngIf="
+                  (first_name.touched || registerForm.submitted) &&
+                  first_name.errors?.required
+                "
+              >
+                First Name is required
+              </span>
+            </div>
+            <div class="form-group col-md-6" id="text">
+              <label for="name">Last Name</label>
+              <input
+                type="text"
+                class="form-control"
+                required
+                name="last_name"
+                #last_name="ngModel"
+                [(ngModel)]="studentDetails.last_name"
+              />
+              <span
+                class="text-danger"
+                *ngIf="
+                  (last_name.touched || registerForm.submitted) &&
+                  last_name.errors?.required
+                "
+              >
+                Last Name is required
+              </span>
+            </div>
           </div>
 
-          <div class="form-group" id="text">
-            <label for="alterEgo">Course Type</label>
+          <div class="form-group py-3" id="text">
+            <label for="alterEgo">Email Id</label>
             <input
-              type="text"
+              type="email"
+              required
               class="form-control"
-              [(ngModel)]="studentDetails.courseType"
-              name="courseType"
+              [(ngModel)]="studentDetails.emailId"
+              name="emailId"
             />
           </div>
-          <div class="form-group" id="text">
+          <div class="form-group py-3" id="text">
+            <label for="alterEgo">Phone Number</label>
+            <input
+              type="text"
+              required
+              class="form-control"
+              [(ngModel)]="studentDetails.phoneno"
+              name="phoneno"
+            />
+          </div>
+          <div class="form-group py-3" id="text">
             <label for="alterEgo">Photo</label>
             <input
               type="file"
@@ -46,53 +95,63 @@
               name="photo"
             />
           </div>
-          <div class="form-group" id="text">
-            <label for="alterEgo">Email Id</label>
-            <input
-              type="email"
-              class="form-control"
-              [(ngModel)]="studentDetails.emailId"
-              name="emailId"
-            />
-          </div>
-          <div class="form-group" id="text">
-            <label for="alterEgo">Phone Number</label>
-            <input
-              type="text"
-              class="form-control"
-              [(ngModel)]="studentDetails.phoneno"
-              name="phoneno"
-            />
-          </div>
-          <div class="form-group" id="text">
-            <label for="power">Batch</label>
-            <select class="form-control" id="power" name="batch" required>
-              >
-              <!-- [(ngModel)]="studentDetails.power" name="power"> -->
-              <!-- <option *ngFor="let pow of powers" [value]="pow">{{pow}}</option> -->
+          <div class="form-group py-3" id="text">
+            <label for="alterEgo">Course</label>
+            <select
+              class="form-select"
+              required
+              name="courseType"
+              [(ngModel)]="studentDetails.courseType"
+              (change)="onCourseChange($event.target.value)"
+            >
+              <option value="">Please select course</option>
+              <option *ngFor="let course of courses" [value]="course._id">
+                {{ course.course_name }}
+              </option>
             </select>
           </div>
-          <div class="form-group" id="text">
-            <label for="alterEgo">course starting date</label>
+          <div class="form-group py-3" id="text">
+            <label for="power">Batch</label>
+            <select
+              class="form-select"
+              id="power"
+              name="batch"
+              required
+              (change)="onBatchChange($event.target.value)"
+            >
+              >
+              <option value="">Please select Batch</option>
+              <option *ngFor="let batch of selectedBatches" [value]="batch._id">
+                {{ batch.batch_name }}
+              </option>
+            </select>
+          </div>
+          <div class="form-group py-3" id="text">
+            <label for="alterEgo">Course starting date</label>
             <input
               type="date"
+              readonly
               class="form-control"
               [(ngModel)]="studentDetails.courseStartDate"
               name="courseStartDate"
             />
           </div>
-          <div class="form-group" id="text">
+          <div class="form-group py-3" id="text">
             <label for="alterEgo">course ending date</label>
             <input
               type="date"
+              readonly
               class="form-control"
               [(ngModel)]="studentDetails.courseEndDate"
               name="courseEndDate"
             />
           </div>
 
-          <div class="btn">
-            <button class="btn btn-primary" type="submit">REGISTER</button>
+          <div class="py-3">
+            <button class="btn btn-lg btn-primary me-4" type="submit">
+              Register
+            </button>
+            <button class="btn btn-lg btn-primary" type="reset">Reset</button>
           </div>
         </form>
       </div>

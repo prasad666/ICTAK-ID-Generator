@@ -1,31 +1,57 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
-var batchController = require('../controllers/batchController.js');
-var authController = require('../controllers/authController')
+var batchController = require("../controllers/batchController.js");
+var authController = require("../controllers/authController");
 
 /*
  * GET
  */
-router.get('/', authController.protect, authController.restrictTo('student','batchManager','admin'), batchController.list);
+router.get(
+  "/",
+  authController.protect,
+  authController.restrictTo("student", "batchManager", "admin"),
+  batchController.list
+);
+router.get("/all-enabled", batchController.listAllEnabled);
 
 /*
  * GET
  */
-router.get('/:id', authController.protect, authController.restrictTo('student','batchManager','admin'), batchController.show);
+router.get(
+  "/:id",
+  authController.protect,
+  authController.restrictTo("student", "batchManager", "admin"),
+  batchController.show
+);
 
 /*
  * POST
  */
-router.post('/', authController.protect, authController.restrictTo('batchManager','admin'), batchController.create);
+router.post(
+  "/",
+  authController.protect,
+  authController.restrictTo("batchManager", "admin"),
+  batchController.create
+);
 
 /*
  * PUT
  */
-router.put('/:id', authController.protect, authController.restrictTo('batchManager','admin'), batchController.update);
+router.put(
+  "/:id",
+  authController.protect,
+  authController.restrictTo("batchManager", "admin"),
+  batchController.update
+);
 
 /*
  * DELETE
  */
-router.delete('/:id', authController.protect, authController.restrictTo('batchManager','admin'), batchController.remove);
+router.delete(
+  "/:id",
+  authController.protect,
+  authController.restrictTo("batchManager", "admin"),
+  batchController.remove
+);
 
 module.exports = router;
