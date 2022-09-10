@@ -155,16 +155,26 @@ module.exports = {
         }
 
 
-      ApplicationModel.find(findObj, function (err, applications) {
-      if (err) {
-        return res.status(500).json({
-          message: "Error when getting application.",
-          error: err,
-        });
-      }
+      ApplicationModel.find(findObj)
+      .populate('student_id')
+      .populate({
+        path:'batch_id',
+        select:'batch_name',
+        populate:{
+          path:'course',
+          select:'course_name'
+        }
+       })
+      .exec(function (err, applications) {
+        if (err) {
+          return res.status(500).json({
+            message: "Error when getting application.",
+            error: err,
+          });
+        }
 
-      return res.json(applications);
-    });
+        return res.json(applications);
+      });
   }, 
 
    /**
@@ -183,7 +193,17 @@ module.exports = {
         }
       }
 
-      ApplicationModel.find(findObj, function (err, applications) {
+      ApplicationModel.find(findObj)
+      .populate('student_id')
+      .populate({
+        path:'batch_id',
+        select:'batch_name',
+        populate:{
+          path:'course',
+          select:'course_name'
+        }
+       })
+      .exec(function (err, applications) {
         if (err) {
           return res.status(500).json({
             message: "Error when getting application.",

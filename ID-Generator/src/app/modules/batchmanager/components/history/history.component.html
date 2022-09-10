@@ -1,13 +1,13 @@
 <div class="main">
   <h2 >History</h2>
   <div class="historywrap">
-    <input class="history" [(ngModel)]="fromDate" type="date" />
+    <input class="history1" [(ngModel)]="fromDate" type="date" />
     to
     <input class="history" [(ngModel)]="toDate" type="date" />
     <button class="history" mat-flat-button color="primary" (click)="updateHistory()">view</button>
     <div class="search" [ngStyle]="{'visibility': showTable }">
       <input
-        class="input1"
+        class="filter"
         matInput
         (keyup)="applyFilter($event)"
         placeholder="Filter"
@@ -24,44 +24,100 @@
     matSort
     [dataSource]="dataSource"
   >
-    <ng-container matColumnDef="_id">
+    <ng-container matColumnDef="studentName">
       <div *matHeaderCellDef class="mat-header-cell" mat-sort-header>
-        Course Name
+        Name of student 
       </div>
       <div
         *matCellDef="let application"
-        data-label="Course Name"
+        data-label="student Name"
         class="mat-cell"
       >
-        {{ application._id }}
+        {{ application.studentName }}
+      </div>
+    </ng-container>
+
+    <ng-container matColumnDef="email">
+      <div *matHeaderCellDef class="mat-header-cell" mat-sort-header>
+        Email
+      </div>
+      <div
+        class="enabled-cell"
+        *matCellDef="let application"
+        data-label="email"
+        class="mat-cell"
+      >
+        {{ application.email}}
+      </div>
+    </ng-container>
+
+    <ng-container matColumnDef="course">
+      <div *matHeaderCellDef class="mat-header-cell" mat-sort-header>
+        Course
+      </div>
+      <div
+        class="enabled-cell"
+        *matCellDef="let application"
+        data-label="course"
+        class="mat-cell"
+      >
+        {{ application.course}}
+      </div>
+    </ng-container>
+
+    <ng-container matColumnDef="batch">
+      <div *matHeaderCellDef class="mat-header-cell" mat-sort-header>
+        Batch
+      </div>
+      <div
+        class="enabled-cell"
+        *matCellDef="let application"
+        data-label="batch"
+        class="mat-cell"
+      >
+        {{ application.batch}}
+      </div>
+    </ng-container>
+
+    <ng-container matColumnDef="registeredOn">
+      <div *matHeaderCellDef class="mat-header-cell" mat-sort-header>
+        Registered On
+      </div>
+      <div
+        class="createdAt-cell"
+        *matCellDef="let application"
+        data-label="registeredOn"
+        class="mat-cell"
+      >
+        {{ application.registeredOn | date: "dd.MM.y HH:mm:ss"}}
+      </div>
+    </ng-container>
+
+    <ng-container matColumnDef="AppliedOn">
+      <div *matHeaderCellDef class="mat-header-cell" mat-sort-header>
+        Applied On
+      </div>
+      <div
+        class="createdAt-cell"
+        *matCellDef="let application"
+        data-label="AppliedOn"
+        class="mat-cell"
+      >
+        {{ application.AppliedOn | date: "dd.MM.y HH:mm:ss" }}
       </div>
     </ng-container>
 
     <ng-container matColumnDef="status">
       <div *matHeaderCellDef class="mat-header-cell" mat-sort-header>
-        Enabled
+        Status
       </div>
       <div
         class="enabled-cell"
         *matCellDef="let application"
-        data-label="Enabled"
+        data-label="status"
         class="mat-cell"
       >
-        {{ application.status }}
-      </div>
-    </ng-container>
-
-    <ng-container matColumnDef="createdAt">
-      <div *matHeaderCellDef class="mat-header-cell" mat-sort-header>
-        Created At
-      </div>
-      <div
-        class="createdAt-cell"
-        *matCellDef="let application"
-        data-label="Created At"
-        class="mat-cell"
-      >
-        {{ application.createdAt | date: "dd.MM.y HH:mm:ss" }}
+        {{ application.status}}
       </div>
     </ng-container>
 

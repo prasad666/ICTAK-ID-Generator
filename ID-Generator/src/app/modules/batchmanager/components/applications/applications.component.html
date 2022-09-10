@@ -11,68 +11,89 @@
   [dataSource]="dataSource"
   >
 
-    <ng-container matColumnDef="_id">
+    <ng-container matColumnDef="studentName">
       <div *matHeaderCellDef class="mat-header-cell" mat-sort-header>
-        Course Name
+        Name of student 
       </div>
       <div
         *matCellDef="let application"
-        data-label="Course Name"
+        data-label="student Name"
         class="mat-cell"
       >
-        {{ application._id }}
+        {{ application.studentName }}
       </div>
     </ng-container>
 
-    <ng-container matColumnDef="status">
+    <ng-container matColumnDef="email">
       <div *matHeaderCellDef class="mat-header-cell" mat-sort-header>
-        Enabled
+        Email
       </div>
       <div
         class="enabled-cell"
         *matCellDef="let application"
-        data-label="Enabled"
+        data-label="email"
         class="mat-cell"
       >
-        {{ application.status}}
+        {{ application.email}}
       </div>
     </ng-container>
 
-    <ng-container matColumnDef="createdAt">
+    <ng-container matColumnDef="course">
       <div *matHeaderCellDef class="mat-header-cell" mat-sort-header>
-        Created At
+        Course
+      </div>
+      <div
+        class="enabled-cell"
+        *matCellDef="let application"
+        data-label="course"
+        class="mat-cell"
+      >
+        {{ application.course}}
+      </div>
+    </ng-container>
+
+    <ng-container matColumnDef="batch">
+      <div *matHeaderCellDef class="mat-header-cell" mat-sort-header>
+        Batch
+      </div>
+      <div
+        class="enabled-cell"
+        *matCellDef="let application"
+        data-label="batch"
+        class="mat-cell"
+      >
+        {{ application.batch}}
+      </div>
+    </ng-container>
+
+    <ng-container matColumnDef="registeredOn">
+      <div *matHeaderCellDef class="mat-header-cell" mat-sort-header>
+        Registered On
       </div>
       <div
         class="createdAt-cell"
         *matCellDef="let application"
-        data-label="Created At"
+        data-label="registeredOn"
         class="mat-cell"
       >
-        {{ application.createdAt | date: "dd.MM.y HH:mm:ss" }}
+        {{ application.registeredOn | date: "dd.MM.y HH:mm:ss"}}
       </div>
     </ng-container>
-    <ng-container matColumnDef="student_id">
-      <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
-      <mat-cell *matCellDef="let application">
-        <button
-          #editButton
-          mat-icon-button
-          class="mat-icon-button"
-          [attr.data-id]="application._id"
-        >
-          <mat-icon color="primary">edit</mat-icon>
-        </button>
-        <button
-          #deleteButton
-          mat-icon-button
-          class="mat-icon-button"
-          [attr.data-id]="application._id"
-        >
-          <mat-icon color="warn">delete</mat-icon>
-        </button>
-      </mat-cell>
-    </ng-container>
 
+    <ng-container matColumnDef="AppliedOn">
+      <div *matHeaderCellDef class="mat-header-cell" mat-sort-header>
+        Applied On
+      </div>
+      <div
+        class="createdAt-cell"
+        *matCellDef="let application"
+        data-label="AppliedOn"
+        class="mat-cell"
+      >
+        {{ application.AppliedOn | date: "dd.MM.y HH:mm:ss" }}
+      </div>
+    </ng-container>
+    
     <mat-header-row *matHeaderRowDef="tableColumns"></mat-header-row>
 
     <mat-row

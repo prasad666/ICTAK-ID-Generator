@@ -33,9 +33,13 @@ export class HistoryComponent implements OnInit {
   @ViewChild(MatSort) sort!: MatSort;
 
   tableColumns: string[] = [
-    '_id',
-    'createdAt',
-    'status',
+    'studentName',
+    'email',
+    'course',
+    'batch',
+    'registeredOn',
+    'AppliedOn',
+    'status'
   ];
 
 
@@ -64,11 +68,23 @@ export class HistoryComponent implements OnInit {
     this.applications.getHistory(this.batchesString,from,to)
     .subscribe({ 
       next: (data:any)=> {
-        this.dataSource = new MatTableDataSource<any>(data);
+        let modifiedData = data.map((e:any)=>{
+          return {
+            '_id':e._id,
+            'studentName':e.student_id.first_name+' '+e.student_id.first_name,
+            'email':e.student_id.email,
+            'course':e.batch_id.course.course_name,
+            'batch':e.batch_id.batch_name,
+            'registeredOn':e.student_id.createdAt,
+            'AppliedOn':e.updatedAt,
+            'status':e.status,
+          }
+        })
+        this.dataSource = new MatTableDataSource<any>(modifiedData);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
         this.showTable='visible';
-        this.historyData=data;
+        this.historyData=modifiedData;
         
       },
       error: (err)=> {

@@ -6,7 +6,7 @@
   padding-top:1rem;
 } 
 
-.input1{
+.filter{
   border-radius: 1rem;
   border: 1px solid;
   text-align: center;
@@ -39,8 +39,12 @@ mat-row:hover{
   height: 2.3rem;
   margin: 1%;
 }
+.history1{
+  height: 2.3rem;
+  margin: 1% 1% 1% 0;
+}
 
 .export{
-  margin:0 1rem .5rem 0;
+  margin:0 1rem 1rem 0;
 }
 

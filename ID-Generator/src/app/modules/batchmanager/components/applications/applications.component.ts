@@ -21,10 +21,12 @@ export class ApplicationsComponent implements OnInit {
   @ViewChild(MatSort) sort!: MatSort;
   batchesString = "";
   tableColumns: string[] = [
-    '_id',
-    'createdAt',
-    'status',
-    'student_id',
+    'studentName',
+    'email',
+    'course',
+    'batch',
+    'registeredOn',
+    'AppliedOn',
   ];
 
 
@@ -37,8 +39,18 @@ export class ApplicationsComponent implements OnInit {
         this.applications.getPendingApplications(this.batchesString)
         .subscribe({ 
           next: (data:any)=> {
-            console.log(data);
-            this.dataSource = new MatTableDataSource<any>(data);
+            let modifiedData = data.map((e:any)=>{
+              return {
+                '_id':e._id,
+                'studentName':e.student_id.first_name+' '+e.student_id.first_name,
+                'email':e.student_id.email,
+                'course':e.batch_id.course.course_name,
+                'batch':e.batch_id.batch_name,
+                'registeredOn':e.student_id.createdAt,
+                'AppliedOn':e.updatedAt,
+              }
+            })
+            this.dataSource = new MatTableDataSource<any>(modifiedData);
             this.dataSource.paginator = this.paginator;
             this.dataSource.sort = this.sort;
           },
