@@ -23,7 +23,13 @@ module.exports = {
     } = req.query;
     let queryObj = {};
     if (filter) {
-      queryObj = { first_name: new RegExp("^" + filter) };
+      queryObj = {
+        $or: [
+          { first_name: new RegExp("^" + filter) },
+          { last_name: new RegExp("^" + filter) },
+          { email: new RegExp("^" + filter) },
+        ],
+      };
     }
     if (role) {
       queryObj.role = role;
