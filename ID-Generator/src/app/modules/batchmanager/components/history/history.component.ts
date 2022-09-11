@@ -27,6 +27,7 @@ export class HistoryComponent implements OnInit {
   toDate:any 
   showTable='hidden';
   historyData:any;
+  error:any;
 
   dataSource:any;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -53,6 +54,11 @@ export class HistoryComponent implements OnInit {
       },
       error:(err)=>{
         console.log(err);
+        this.error=
+          err.status === 500
+          ? 'Something went wrong at server'
+          : err.error.message ||
+            'Something went wrong.Please check your connection';
       }
     })
   }
@@ -89,6 +95,11 @@ export class HistoryComponent implements OnInit {
       },
       error: (err)=> {
         console.log(err);
+        this.error=
+          err.status === 500
+          ? 'Something went wrong at server'
+          : err.error.message ||
+            'Something went wrong.Please check your connection';
       }
     })
   }
