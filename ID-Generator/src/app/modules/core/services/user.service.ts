@@ -52,4 +52,8 @@ export class UserService {
   delete(id: any) {
     return this.http.delete(this.API + id);
   }
+
+  activate(id: any) {
+    return this.http.patch(this.API + id, {});
+  }
 }
