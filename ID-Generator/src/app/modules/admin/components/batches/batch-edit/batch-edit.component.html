@@ -8,7 +8,8 @@
         <ol class="breadcrumb mb-4">
           <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
           <li class="breadcrumb-item">Batches</li>
-          <li class="breadcrumb-item active">Add</li>
+          <li *ngIf="isAddMode" class="breadcrumb-item active">Add</li>
+          <li *ngIf="!isAddMode" class="breadcrumb-item active">Edit</li>
         </ol>
         <div class="card mb-4">
           <div class="card-body">
@@ -54,6 +55,7 @@
                     formControlName="course"
                     class="form-select"
                   >
+                    <option value="">Select course</option>
                     <option
                       *ngFor="let course of courses"
                       value="{{ course._id }}"
@@ -79,6 +81,7 @@
                 </div>
                 <div class="col-sm-6">
                   <select id="user" formControlName="user" class="form-select">
+                    <option value="">Select batch manager</option>
                     <option
                       *ngFor="let userObj of users"
                       value="{{ userObj._id }}"
@@ -171,7 +174,7 @@
                     ></span>
                     Save
                   </button>
-                  <a routerLink="/backend/admin/courses" class="btn btn-link"
+                  <a routerLink="/backend/admin/batches" class="btn btn-link"
                     >Cancel</a
                   >
                 </div>
