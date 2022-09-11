@@ -8,13 +8,12 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 
-
 //var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/userRoutes");
 var courseRouter = require("./routes/courseRoutes");
 var batchRouter = require("./routes/batchRoutes");
 var applicationRouter = require("./routes/applicationRoutes");
-
+var miscRouter = require("./routes/miscRoutes");
 
 var app = express();
 app.use(cors());
@@ -49,7 +48,7 @@ app.use("/users", usersRouter);
 app.use("/courses", courseRouter);
 app.use("/batches", batchRouter);
 app.use("/applications", applicationRouter);
-
+app.use("/shared", miscRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
