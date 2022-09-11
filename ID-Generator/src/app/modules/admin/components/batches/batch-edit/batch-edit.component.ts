@@ -41,7 +41,7 @@ export class BatchEditComponent implements OnInit {
       .subscribe((res) => (this.courses = res));
 
     this.users = this.userService
-      .getUsersByRole('batchmanager')
+      .getUsersByRole('batchManager')
       .subscribe((res) => (this.users = res));
   }
 
