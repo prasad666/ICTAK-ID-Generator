@@ -137,6 +137,17 @@
               <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
               <mat-cell *matCellDef="let user">
                 <button
+                  #activateButton
+                  mat-icon-button
+                  class="mat-icon-button"
+                  [attr.data-id]="user._id"
+                  (click)="activateObject(activateButton)"
+                  title="Activate"
+                >
+                  <mat-icon color="secondary">check_circle</mat-icon>
+                </button>
+
+                <button
                   #editButton
                   mat-icon-button
                   class="mat-icon-button"

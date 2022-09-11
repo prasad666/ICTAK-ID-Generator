@@ -124,4 +124,24 @@ export class StudentListComponent implements OnInit {
         )
       );
   }
+
+  activateObject(el: any) {
+    let objId = el._elementRef.nativeElement.getAttribute('data-id');
+    this.confirmationDialogService
+      .confirm('Please confirm..', 'Do you really want to activate this user ?')
+      .then((confirmed) => {
+        console.log('User confirmed:', confirmed);
+        if (confirmed) {
+          this.userService.activate(objId).subscribe((res) => {
+            console.log(res);
+            this.loadUsersPage();
+          });
+        }
+      })
+      .catch(() =>
+        console.log(
+          'User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'
+        )
+      );
+  }
 }

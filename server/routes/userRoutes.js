@@ -69,8 +69,14 @@ router.put(
 router.delete(
   "/:id",
   authController.protect,
-  authController.restrictTo("student", "batchManager", "admin"),
+  authController.restrictTo("admin"),
   userController.remove
 );
 
+router.patch(
+  "/:id",
+  authController.protect,
+  authController.restrictTo("admin"),
+  userController.activate
+);
 module.exports = router;
