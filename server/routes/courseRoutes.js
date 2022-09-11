@@ -6,28 +6,54 @@ var authController = require("../controllers/authController");
 /*
  * GET
  */
-router.get("/", authController.protect, authController.restrictTo('student','batchManager','admin'), courseController.list);
+router.get(
+  "/",
+  authController.protect,
+  authController.restrictTo("student", "batchManager", "admin"),
+  courseController.list
+);
 
 router.get("/all", courseController.listAll);
+router.get("/all-enabled", courseController.listAllEnabled);
 
 /*
  * GET
  */
-router.get("/:id", authController.protect, authController.restrictTo('student','batchManager','admin'), courseController.show);
+router.get(
+  "/:id",
+  authController.protect,
+  authController.restrictTo("student", "batchManager", "admin"),
+  courseController.show
+);
 
 /*
  * POST
  */
-router.post("/", authController.protect, authController.restrictTo('batchManager','admin'), courseController.create);
+router.post(
+  "/",
+  authController.protect,
+  authController.restrictTo("batchManager", "admin"),
+  courseController.create
+);
 
 /*
  * PUT
  */
-router.put("/:id", authController.protect, authController.restrictTo('batchManager','admin'), courseController.update);
+router.put(
+  "/:id",
+  authController.protect,
+  authController.restrictTo("batchManager", "admin"),
+  courseController.update
+);
 
 /*
  * DELETE
  */
-router.delete("/:id", authController.protect, authController.restrictTo('batchManager','admin'), courseController.remove);
+router.delete(
+  "/:id",
+  authController.protect,
+  authController.restrictTo("batchManager", "admin"),
+  courseController.remove
+);
 
 module.exports = router;

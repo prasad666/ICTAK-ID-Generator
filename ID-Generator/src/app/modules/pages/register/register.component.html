@@ -17,82 +17,209 @@
         </div>
       </div>
       <div class="col-md-9">
-        <form (ngSubmit)="Registration()">
-          <div class="form-group" id="text">
-            <label for="name">Student Name</label>
-            <input
-              type="text"
-              class="form-control"
-              name="name"
-              [(ngModel)]="studentDetails.name"
-            />
+        <form (ngSubmit)="formSubmit()" *ngIf="isLoaded" [formGroup]="form">
+          <div class="row" *ngIf="submitSuccess">
+            <div
+              class="alert alert-success alert-dismissible fade show"
+              role="alert"
+            >
+              <strong>Registration successful!</strong> <br />Your application
+              is under review. You will be notified when the application is
+              processed.
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="alert"
+                aria-label="Close"
+              ></button>
+            </div>
+          </div>
+          <div class="row" *ngIf="submissionError">
+            <div
+              class="alert alert-danger alert-dismissible fade show"
+              role="alert"
+            >
+              <strong>Submission error!</strong> <br />There is an error occured
+              when submitting the form. Please try again.
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="alert"
+                aria-label="Close"
+              ></button>
+            </div>
+          </div>
+          <div class="row py-3">
+            <div class="form-group col-md-6" id="text">
+              <label for="first_name">First Name</label>
+              <input
+                type="text"
+                class="form-control"
+                formControlName="first_name"
+              />
+              <span
+                class="text-danger"
+                *ngIf="
+                  f['first_name'].touched  &&
+                  f['first_name'].errors?.['required']
+                "
+              >
+                First Name is required
+              </span>
+            </div>
+            <div class="form-group col-md-6" id="text">
+              <label for="name">Last Name</label>
+              <input
+                type="text"
+                class="form-control"
+                formControlName="last_name"
+              />
+              <span
+                class="text-danger"
+                *ngIf="
+                  f['last_name'].touched  &&
+                  f['last_name'].errors?.['required']
+                "
+              >
+                Last Name is required
+              </span>
+            </div>
           </div>
 
-          <div class="form-group" id="text">
-            <label for="alterEgo">Course Type</label>
+          <div class="form-group py-3" id="text">
+            <label for="alterEgo">Email Id</label>
+            <input type="email" class="form-control" formControlName="email" />
+            <span
+              class="text-danger"
+              *ngIf="
+              f['email'].touched &&
+              f['email'].errors?.['required']
+            "
+            >
+              Email address is required
+            </span>
+          </div>
+          <div class="form-group py-3" id="text">
+            <label for="alterEgo">Password</label>
             <input
-              type="text"
+              type="password"
               class="form-control"
-              [(ngModel)]="studentDetails.courseType"
-              name="courseType"
+              formControlName="password"
+            />
+            <span
+              class="text-danger"
+              *ngIf="
+              f['password'].touched  &&
+              f['password'].errors?.['required']
+            "
+            >
+              Password is required
+            </span>
+          </div>
+          <div class="form-group py-3" id="text">
+            <label for="alterEgo">Phone Number</label>
+            <input type="text" class="form-control" formControlName="phone" />
+            <span
+              class="text-danger"
+              *ngIf="
+              f['phone'].touched &&
+              f['phone'].errors?.['required']
+            "
+            >
+              Phone number is required
+            </span>
+          </div>
+          <div class="form-group py-3" id="text">
+            <label for="alterEgo">Course</label>
+            <select
+              class="form-select"
+              (change)="onCourseChange($any($event.target).value)"
+              formControlName="course"
+            >
+              <option value="">Please select course</option>
+              <option *ngFor="let course of courses" [value]="course._id">
+                {{ course.course_name }}
+              </option>
+            </select>
+            <span
+              class="text-danger"
+              *ngIf="
+              f['course'].touched &&
+              f['course'].errors?.['required']
+            "
+            >
+              Course is required
+            </span>
+          </div>
+          <div class="form-group py-3" id="text">
+            <label for="power">Batch</label>
+            <select
+              class="form-select"
+              name="batch"
+              (change)="onBatchChange($any($event.target).value)"
+              formControlName="batch"
+            >
+              <option value="">Please select Batch</option>
+              <option *ngFor="let batch of selectedBatches" [value]="batch._id">
+                {{ batch.batch_name }}
+              </option>
+            </select>
+            <span
+              class="text-danger"
+              *ngIf="
+              f['batch'].touched &&
+              f['batch'].errors?.['required']
+            "
+            >
+              Batch is required
+            </span>
+          </div>
+          <div class="form-group py-3" id="text">
+            <label for="alterEgo">Course starting date</label>
+            <input
+              type="date"
+              readonly
+              class="form-control"
+              formControlName="start_date"
             />
           </div>
-          <div class="form-group" id="text">
+          <div class="form-group py-3" id="text">
+            <label for="alterEgo">course ending date</label>
+            <input
+              type="date"
+              readonly
+              class="form-control"
+              formControlName="end_date"
+            />
+          </div>
+          <div class="form-group py-3" id="text">
             <label for="alterEgo">Photo</label>
             <input
               type="file"
               class="form-control"
-              [(ngModel)]="studentDetails.photo"
-              name="photo"
+              formControlName="photo"
+              (change)="getFile($event)"
             />
-          </div>
-          <div class="form-group" id="text">
-            <label for="alterEgo">Email Id</label>
-            <input
-              type="email"
-              class="form-control"
-              [(ngModel)]="studentDetails.emailId"
-              name="emailId"
-            />
-          </div>
-          <div class="form-group" id="text">
-            <label for="alterEgo">Phone Number</label>
-            <input
-              type="text"
-              class="form-control"
-              [(ngModel)]="studentDetails.phoneno"
-              name="phoneno"
-            />
-          </div>
-          <div class="form-group" id="text">
-            <label for="power">Batch</label>
-            <select class="form-control" id="power" name="batch" required>
-              >
-              <!-- [(ngModel)]="studentDetails.power" name="power"> -->
-              <!-- <option *ngFor="let pow of powers" [value]="pow">{{pow}}</option> -->
-            </select>
-          </div>
-          <div class="form-group" id="text">
-            <label for="alterEgo">course starting date</label>
-            <input
-              type="date"
-              class="form-control"
-              [(ngModel)]="studentDetails.courseStartDate"
-              name="courseStartDate"
-            />
-          </div>
-          <div class="form-group" id="text">
-            <label for="alterEgo">course ending date</label>
-            <input
-              type="date"
-              class="form-control"
-              [(ngModel)]="studentDetails.courseEndDate"
-              name="courseEndDate"
-            />
-          </div>
 
-          <div class="btn">
-            <button class="btn btn-primary" type="submit">REGISTER</button>
+            <span
+              class="text-danger"
+              *ngIf="
+            f['photo'].touched &&
+            f['photo'].errors?.['required']
+          "
+            >
+              Photo is required
+            </span>
+          </div>
+          <div>
+            <button
+              class="btn btn-lg btn-primary me-4"
+              type="submit"
+              [disabled]="form.invalid"
+            >
+              Register
+            </button>
+            <button class="btn btn-lg btn-primary" type="reset">Reset</button>
           </div>
         </form>
       </div>

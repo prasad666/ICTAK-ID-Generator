@@ -1,7 +1,8 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { map } from 'rxjs';
+import { map, Observable } from 'rxjs';
+import { Batch } from '../models/batch';
 
 @Injectable({
   providedIn: 'any',
@@ -36,5 +37,8 @@ export class BatchService {
   }
   getBatchesByBatchManager(batchManagerId:string){
     return this.http.get(this.API + 'batchmanager/' + batchManagerId);
+  }
+  getAllEnabledBatches(): Observable<Batch[]> {
+    return this.http.get<Batch[]>(this.API + 'all-enabled', {});
   }
 }

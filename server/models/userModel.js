@@ -6,28 +6,29 @@ var Schema = mongoose.Schema;
 var userSchema = new Schema(
   {
     first_name: {
-      type:String,
-      required:true
+      type: String,
+      required: true,
     },
     last_name: {
-      type:String,
-      required:true
+      type: String,
+      required: true,
     },
     password: {
-      type:String,
-      required:true
+      type: String,
+      required: true,
     },
     email: {
-      type:String,
-      required:true,
-      unique:true
+      type: String,
+      required: true,
+      unique: true,
     },
     role: {
-      type:String,
-      required:true,
-      default:'student',
-      enum:['student', 'batchManager', 'admin']
+      type: String,
+      required: true,
+      default: "student",
+      enum: ["student", "batchManager", "admin"],
     },
+    photo: String,
     enabled: Boolean,
     deleted: Boolean,
     deletedAt: Date,
