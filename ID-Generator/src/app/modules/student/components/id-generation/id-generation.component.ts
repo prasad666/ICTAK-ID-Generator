@@ -35,16 +35,22 @@ export class IdGenerationComponent implements OnInit {
     
   }
 
+  pdfLoading='';
+  pdfError='';
   onDownload(id:any){
+    this.pdfLoading=id;
     this.applicationService.getPdf(id)
     .subscribe({
       next:(data)=>{
         let downloadURL = window.URL.createObjectURL(data);
         saveAs(downloadURL);
+        this.pdfLoading='';
+
       },
       error:(err)=>{
         console.log(err);
-        
+        this.pdfLoading='';
+        this.pdfError=err?.message
       }
     })
   }

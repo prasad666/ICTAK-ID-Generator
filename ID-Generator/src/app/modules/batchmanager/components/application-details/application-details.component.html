@@ -1,74 +1,84 @@
 <mat-card class="example-card">
   <div class="card-head">
-    <mat-card-title>{{application.student_id.first_name+' '+application.student_id.last_name}}</mat-card-title>
-    <mat-card-subtitle>Application Id: {{application._id}}</mat-card-subtitle>
-  </div>  
-    <mat-card-content>
-      <table class="table1">
-        <tr>
-          <th>Full Name</th>
-          <td>{{application.student_id.first_name+' '+application.student_id.last_name}}</td>
-        </tr>
-        <tr>
-          <th>Email address</th>
-          <td> {{application.student_id.email}} </td>
-        </tr>
-        <tr>
-          <th>Student Id</th>
-          <td> {{application.student_id._id}} </td>
-        </tr>
-        <tr>
-          <th>Student registered on</th>
-          <td> {{application.student_id.createdAt| date: "dd.MM.y HH:mm:ss"}} </td>
-        </tr>
-        <tr>
-          <th>Course</th>
-          <td> {{application.batch_id.course.course_name}} </td>
-        </tr>
-        <tr>
-          <th>Course Id</th>
-          <td> {{application.batch_id.course._id}} </td>
-        </tr>
-        <tr>
-          <th>Is course active</th>
-          <td> {{application.batch_id.course.enabled}} </td>
-        </tr>
-        <tr>
-          <th>Batch</th>
-          <td> {{application.batch_id.batch_name}} </td>
-        </tr>
-        <tr>
-          <th>Batch Id</th>
-          <td> {{application.batch_id._id}} </td>
-        </tr>
-        <tr>
-          <th>Batch Manager Id</th>
-          <td> {{application.batch_id.user}} </td>
-        </tr>
-        <tr>
-          <th>Application Status</th>
-          <td> {{application.status}} </td>
-        </tr>
-        <tr>
-          <th>Application created on</th>
-          <td> {{application.createdAt| date: "dd.MM.y HH:mm:ss"}} </td>
-        </tr>
-        <tr>
-          <th>Application modified on</th>
-          <td> {{application.updatedAt| date: "dd.MM.y HH:mm:ss"}} </td>
-        </tr>
+    <mat-card-title>{{
+      application.student_id.first_name + " " + application.student_id.last_name
+    }}</mat-card-title>
+    <mat-card-subtitle>Application Id: {{ application._id }}</mat-card-subtitle>
+  </div>
+  <mat-card-content>
+    <table class="table1">
+      <tr>
+        <th>Full Name</th>
+        <td>
+          {{
+            application.student_id.first_name +
+              " " +
+              application.student_id.last_name
+          }}
+        </td>
+      </tr>
+      <tr>
+        <th>Email address</th>
+        <td>{{ application.student_id.email }}</td>
+      </tr>
+      <tr>
+        <th>Student Id</th>
+        <td>{{ application.student_id._id }}</td>
+      </tr>
+      <tr>
+        <th>Student registered on</th>
+        <td>
+          {{ application.student_id.createdAt | date: "dd.MM.y HH:mm:ss" }}
+        </td>
+      </tr>
+      <tr>
+        <th>Course</th>
+        <td>{{ application.batch_id.course.course_name }}</td>
+      </tr>
+      <tr>
+        <th>Course Id</th>
+        <td>{{ application.batch_id.course._id }}</td>
+      </tr>
+      <tr>
+        <th>Is course active</th>
+        <td>{{ application.batch_id.course.enabled }}</td>
+      </tr>
+      <tr>
+        <th>Batch</th>
+        <td>{{ application.batch_id.batch_name }}</td>
+      </tr>
+      <tr>
+        <th>Batch Id</th>
+        <td>{{ application.batch_id._id }}</td>
+      </tr>
+      <tr>
+        <th>Batch Manager Id</th>
+        <td>{{ application.batch_id.user }}</td>
+      </tr>
+      <tr>
+        <th>Application Status</th>
+        <td>{{ application.status }}</td>
+      </tr>
+      <tr>
+        <th>Application created on</th>
+        <td>{{ application.createdAt | date: "dd.MM.y HH:mm:ss" }}</td>
+      </tr>
+      <tr>
+        <th>Application modified on</th>
+        <td>{{ application.updatedAt | date: "dd.MM.y HH:mm:ss" }}</td>
+      </tr>
+    </table>
+  </mat-card-content>
 
-      </table>      
-      
-    </mat-card-content>
-    
-    <mat-card-actions class="card-actions" >
-      <input  class="remarks" placeholder="Remarks" [(ngModel)]="remarks">
-      <button mat-flat-button color="primary" (click)="onApprove()">Approve</button>
-      <button mat-flat-button color="warn" (click)="onReject()">Reject</button>
-    </mat-card-actions>
-    <mat-card-footer>
-      <div *ngIf="error" class="err">{{error}}</div>
-      <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
-    </mat-card-footer>
+  <mat-card-actions class="card-actions">
+    <input class="remarks" placeholder="Remarks" [(ngModel)]="remarks" />
+    <button mat-flat-button color="primary" (click)="onApprove()">
+      Approve
+    </button>
+    <button mat-flat-button color="warn" (click)="onReject()">Reject</button>
+  </mat-card-actions>
+  <mat-card-footer>
+    <div *ngIf="error" class="err">{{ error }}</div>
+    <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+  </mat-card-footer>
 </mat-card>

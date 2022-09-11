@@ -1,20 +1,24 @@
+
 <div class="main">
+
     <!-- <h3>Your application status is: {{data.status}}</h3>
     <p *ngIf="data.remarks">Remarks: {{data.remarks}}</p>
     <button mat-raised-button *ngIf="data.status==='approved'" (click)="this.onDownload()"> Download ID</button> -->
     <div class="card1"  *ngFor="let application of data">
-        <div>
-            <p>Course: {{application.batch_id.course.course_name}}</p>
-            <p>Batch: {{application.batch_id.batch_name}}</p>
-            <p>Applied on: {{application.updatedAt| date: "dd.MM.y HH:mm:ss"}}</p>
+        <div class="items">
+            <div class="text">Course: {{application.batch_id.course.course_name}}</div>
+            <div class="text">Batch: {{application.batch_id.batch_name}}</div>
+            <div class="text">Applied on: {{application.updatedAt| date: "dd.MM.y HH:mm:ss"}}</div>
 
         </div>
-        <div>
+        <div class="items">
             <div class="status">{{application.status| uppercase}}</div>
-            <p *ngIf="application.remarks">Remarks: {{application.remarks}}</p>
+            <div class="text" *ngIf="application.remarks">Remarks: {{application.remarks}}</div>
         </div>
-        <div class="download-button" *ngIf="application.status==='approved'">
+        <div class="download-button items" *ngIf="application.status==='approved'">
             <button mat-raised-button  (click)="this.onDownload(application._id)"> Download ID</button> 
+            <mat-progress-bar *ngIf="pdfLoading===application._id"  mode="indeterminate"></mat-progress-bar>
+
         </div>
     </div>
 </div>

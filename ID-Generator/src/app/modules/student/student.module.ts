@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { IdGenerationComponent } from './components/id-generation/id-generation.component';
 import { StudentHomeComponent } from './components/student-home/student-home.component';
 import { MatButtonModule } from '@angular/material/button';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { MatButtonModule } from '@angular/material/button';
     FormsModule,
     HttpClientModule,
     SharedModule,
-    MatButtonModule
+    MatButtonModule,
+    MatProgressBarModule
   ]
 })
 export class StudentModule { }
