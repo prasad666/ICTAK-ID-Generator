@@ -1,5 +1,20 @@
 <div class="main">
-    <h3>Your application status is: {{data.status}}</h3>
+    <!-- <h3>Your application status is: {{data.status}}</h3>
     <p *ngIf="data.remarks">Remarks: {{data.remarks}}</p>
-    <button mat-raised-button *ngIf="data.status==='approved'" (click)="this.onDownload()"> Download ID</button>
+    <button mat-raised-button *ngIf="data.status==='approved'" (click)="this.onDownload()"> Download ID</button> -->
+    <div class="card1"  *ngFor="let application of data">
+        <div>
+            <p>Course: {{application.batch_id.course.course_name}}</p>
+            <p>Batch: {{application.batch_id.batch_name}}</p>
+            <p>Applied on: {{application.updatedAt| date: "dd.MM.y HH:mm:ss"}}</p>
+
+        </div>
+        <div>
+            <h4>{{application.status}}</h4>
+            <p>Remarks: {{application.remarks}}</p>
+        </div>
+        <div *ngIf="application.status==='approved'">
+            <button mat-raised-button  (click)="this.onDownload(application._id)"> Download ID</button> 
+        </div>
+    </div>
 </div>

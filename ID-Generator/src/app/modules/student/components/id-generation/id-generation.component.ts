@@ -9,7 +9,15 @@ import { ApplicationService } from 'src/app/modules/core/services/application.se
 })
 export class IdGenerationComponent implements OnInit {
 
-  data:any={status:null, remarks:null};
+  data:any=[{
+    status:null,
+    remarks:null,
+    updatedAt:null,
+    batch_id:{
+      course:{course_name:null},
+      batch_name:null
+    },
+  }];
   constructor(private applicationService:ApplicationService) { }
 
   ngOnInit(): void {
@@ -17,6 +25,8 @@ export class IdGenerationComponent implements OnInit {
     .subscribe({
       next:(data)=>{
         this.data= data
+        console.log(data);
+        
       },
       error:(err)=>{
         console.log(err);
@@ -25,8 +35,8 @@ export class IdGenerationComponent implements OnInit {
     
   }
 
-  onDownload(){
-    this.applicationService.getPdf()
+  onDownload(id:any){
+    this.applicationService.getPdf(id)
     .subscribe({
       next:(data)=>{
         let downloadURL = window.URL.createObjectURL(data);

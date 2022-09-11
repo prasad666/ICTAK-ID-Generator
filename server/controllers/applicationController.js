@@ -229,7 +229,17 @@ module.exports = {
    */
      applicationStatus: function (req, res) {
        
-      ApplicationModel.findOne({ student_id: req.user.id }, function (err, application) {
+      ApplicationModel.find({ student_id: req.user.id })
+      .populate('student_id')
+      .populate({
+        path:'batch_id',
+        select:'batch_name',
+        populate:{
+          path:'course',
+          select:'course_name'
+        }
+       })
+      .exec(function (err, application) {
         if (err) {
           return res.status(500).json({
             message: "Error getting application status.",
@@ -251,8 +261,9 @@ module.exports = {
    * applicationController.getPdf()
    */
     getPdf: function (req, res) {
+       console.log(req.params.id);
        
-      ApplicationModel.findOne({ student_id: req.user.id })
+      ApplicationModel.findOne({ _id: req.params.id })
       .populate('student_id')
       .populate({
         path:'batch_id',
@@ -301,7 +312,7 @@ module.exports = {
             <div style="font-weight: bold;font-size:2rem;padding-bottom:.5rem">ICT Academy Kerala</div>
             <div style="display:flex;justify-content:space-between;align-items: center;">
               <div style="padding:0 0 0 5%  ">
-                <div style="font-weight: bold;font-size:1.5rem">${application.student_id.first_name} ${application.student_id.last_name}</div>
+                <div style="font-weight: bold;font-size:1.5rem;margin:1rem 0;">${application.student_id.first_name} ${application.student_id.last_name}</div>
                 <div style="font-weight: bold;">Student</div>
                 <div style="font-weight: bold;">Course: ${application.batch_id.course.course_name}</div>
                 <div >Batch: ${application.batch_id.batch_name}</div>

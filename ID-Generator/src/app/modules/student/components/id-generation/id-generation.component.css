@@ -2,3 +2,7 @@
     margin: 5%;
     
 }
+.card1{
+    display: flex;
+    flex-wrap: wrap;
+}

@@ -14,7 +14,7 @@ router.get("/status", authController.protect, authController.restrictTo('student
 /*
  * GET ID pdf if approved
  */
-router.get("/getPdf", authController.protect, authController.restrictTo('student','batchManager','admin'), applicationController.getPdf);
+router.get("/getPdf/:id", authController.protect, authController.restrictTo('student','batchManager','admin'), applicationController.getPdf);
 
 /*
  * history of approved/rejected applications

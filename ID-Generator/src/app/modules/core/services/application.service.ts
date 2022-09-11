@@ -41,8 +41,8 @@ export class ApplicationService {
     return this.http.get(`${this.API}/status`)
   }
 
-  getPdf(){
-    return this.http.get(`${this.API}/getPdf`,{responseType:'blob'})
+  getPdf(id:any){
+    return this.http.get(`${this.API}/getPdf/${id}`,{responseType:'blob'})
   }
 
 }
