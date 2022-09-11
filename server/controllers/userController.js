@@ -116,7 +116,6 @@ module.exports = {
   },
 
   register: async function (req, res) {
-    console.log(req);
     var password = await bcrypt.hash(req.body.password, 12);
     var user = new UserModel({
       first_name: req.body.first_name,
