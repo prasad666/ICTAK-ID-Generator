@@ -2,6 +2,7 @@ const bcrypt = require("bcrypt");
 const crypto = require("crypto");
 
 var UserModel = require("../models/userModel.js");
+var ApplicationModel = require("../models/applicationModel.js");
 
 /**
  * userController.js
@@ -137,7 +138,23 @@ module.exports = {
           error: err.code,
         });
       }
-      return res.status(201).json(user);
+
+      //Create application
+      var application = new ApplicationModel({
+        student_id: user._id,
+        batch_id: req.body.batch,
+        status: "pending",
+        remarks: "",
+      });
+      application.save(function (err, appl) {
+        if (err && err.message) {
+          return res.status(500).json({
+            message: err.message,
+            error: err.code,
+          });
+        }
+        return res.status(201).json(user);
+      });
     });
   },
 
