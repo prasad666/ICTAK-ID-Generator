@@ -7,40 +7,40 @@ const User = require("../models/userModel");
 const sendMail = require("../utils/email");
 
 //register user
-exports.register = async (req, res, next) => {
-  try {
-    //encrypt password
-    req.body.password = await bcrypt.hash(req.body.password, 12);
+// exports.register = async (req, res, next) => {
+//   try {
+//     //encrypt password
+//     req.body.password = await bcrypt.hash(req.body.password, 12);
 
-    //create and add user to DB
-    const user = await User.create({
-      first_name: req.body.first_name,
-      last_name: req.body.last_name,
-      email: req.body.email,
-      password: req.body.password,
-    });
+//     //create and add user to DB
+//     const user = await User.create({
+//       first_name: req.body.first_name,
+//       last_name: req.body.last_name,
+//       email: req.body.email,
+//       password: req.body.password,
+//     });
 
-    //sign jwt
-    const token = jwt.sign(
-      { id: user._id, role: user.role },
-      process.env.JWT_SECRET,
-      { expiresIn: "7d" }
-    );
+//     //sign jwt
+//     const token = jwt.sign(
+//       { id: user._id, role: user.role },
+//       process.env.JWT_SECRET,
+//       { expiresIn: "7d" }
+//     );
 
-    //prevent password sending back
-    user.password = undefined;
-    user.encryptedResetToken = undefined;
+//     //prevent password sending back
+//     user.password = undefined;
+//     user.encryptedResetToken = undefined;
 
-    //send response with token
-    res.status(201).json({
-      status: "success",
-      token: token,
-      user,
-    });
-  } catch (error) {
-    next(error);
-  }
-};
+//     //send response with token
+//     res.status(201).json({
+//       status: "success",
+//       token: token,
+//       user,
+//     });
+//   } catch (error) {
+//     next(error);
+//   }
+// };
 
 //login user
 exports.login = async (req, res, next) => {
@@ -166,6 +166,8 @@ exports.protect = async (req, res, next) => {
     next(error);
   }
 };
+
+exports.restrictSturent;
 
 //to restrict routes to specific user roles
 exports.restrictTo = (...roles) => {
