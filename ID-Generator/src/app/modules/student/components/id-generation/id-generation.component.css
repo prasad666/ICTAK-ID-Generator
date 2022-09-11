@@ -26,3 +26,7 @@
 .text{
     margin:.2rem
 }
+.pdfError{
+    padding: 1rem ;
+    color: rgb(210, 66, 66);
+}
