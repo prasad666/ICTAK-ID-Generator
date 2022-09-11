@@ -29,10 +29,14 @@ export class ApplicationsComponent implements OnInit {
     'AppliedOn',
   ];
   numberOfPendingApplications:any;
+  error:any;
+  loading=false;
+
 
 
 
   ngOnInit(): void {
+    this.loading=true;
     this.batchService.getBatchesByBatchManager(this.auth.currentUser._id)
     .subscribe({
       next:(data:any)=>{
@@ -55,14 +59,29 @@ export class ApplicationsComponent implements OnInit {
             this.dataSource = new MatTableDataSource<any>(modifiedData);
             this.dataSource.paginator = this.paginator;
             this.dataSource.sort = this.sort;
+            this.loading=false;
+
           },
           error: (err)=> {
             console.log(err);
+            this.error=
+              err.status === 500
+              ? 'Something went wrong at server'
+              : err.error.message ||
+                'Something went wrong.Please check your connection';
+            this.loading=false;
+
           }
         })        
       },
       error:(err)=>{
         console.log(err);
+        this.error=
+          err.status === 500
+          ? 'Something went wrong at server'
+          : err.error.message ||
+            'Something went wrong.Please check your connection';
+        this.loading=false;
       }
     })
     

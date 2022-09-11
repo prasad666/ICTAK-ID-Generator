@@ -1,3 +1,4 @@
+<mat-progress-bar class="bar" *ngIf="loading" mode="indeterminate"></mat-progress-bar>
 <div class="main">
   <h2 >Pending Applications</h2>
   <div class="search">
@@ -106,9 +107,13 @@
     <div  class="mat-row nodata" *matNoDataRow>
       <div *ngIf="numberOfPendingApplications" class="mat-cell " colspan="4">No data matching the filter "{{input.value}}"</div>
       <div *ngIf="!numberOfPendingApplications" class="mat-cell " colspan="4">No Pending Applications</div>
+
     </div>
 
   </mat-table>
+
+  <div class="error" *ngIf="error" >{{error}}</div>
+
   <mat-paginator class="paginator" [pageSizeOptions]="[5, 10, 20]"
                   showFirstLastButtons 
                   aria-label="Select page of periodic elements">

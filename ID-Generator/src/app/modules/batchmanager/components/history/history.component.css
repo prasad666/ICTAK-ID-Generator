@@ -47,4 +47,7 @@ mat-row:hover{
 .export{
   margin:0 1rem 1rem 0;
 }
-
+.error{
+  color: rgb(214, 70, 70);
+  padding: 1rem 0;
+}
