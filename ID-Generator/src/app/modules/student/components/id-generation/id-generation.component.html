@@ -10,10 +10,10 @@
 
         </div>
         <div>
-            <h4>{{application.status}}</h4>
-            <p>Remarks: {{application.remarks}}</p>
+            <div class="status">{{application.status| uppercase}}</div>
+            <p *ngIf="application.remarks">Remarks: {{application.remarks}}</p>
         </div>
-        <div *ngIf="application.status==='approved'">
+        <div class="download-button" *ngIf="application.status==='approved'">
             <button mat-raised-button  (click)="this.onDownload(application._id)"> Download ID</button> 
         </div>
     </div>

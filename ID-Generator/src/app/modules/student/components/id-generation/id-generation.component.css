@@ -5,4 +5,18 @@
 .card1{
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+    border: 1px solid grey;
+    border-radius: 5px;
+    margin:1rem;
+    padding:2rem;
+}
+.download-button{
+    align-self: center;
+}
+.status{
+    font-size: 1.2rem;
+    font-weight: bold;
+
 }
