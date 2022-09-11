@@ -14,7 +14,7 @@ import { AlertComponent } from './alert/alert.component';
 import { ToastComponent } from './toast/toast.component';
 import { ConfirmationDialogService } from './services/confirmation-dialog.service';
 import { ToastService } from './services/toast.service';
-
+import { MatIconModule } from '@angular/material/icon';
 @NgModule({
   declarations: [
     GuestNavComponent,
@@ -28,7 +28,7 @@ import { ToastService } from './services/toast.service';
     AlertComponent,
     ToastComponent,
   ],
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, MatIconModule],
   exports: [
     GuestNavComponent,
     GuestHeaderComponent,

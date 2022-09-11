@@ -66,7 +66,10 @@ export class BatchListComponent implements OnInit {
         debounceTime(150),
         distinctUntilChanged(),
         tap(() => {
-          if (this.input.nativeElement.value.length > 3) {
+          if (
+            this.input.nativeElement.value.length >= 3 ||
+            this.input.nativeElement.value.length == 0
+          ) {
             this.paginator.pageIndex = 0;
             this.loadBatchesPage();
           }
