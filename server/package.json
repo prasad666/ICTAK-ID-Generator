@@ -12,6 +12,9 @@
     "debug": "~2.6.9",
     "dotenv": "^16.0.1",
     "express": "~4.16.1",
+    "express-pdf": "^1.2.2",
+    "html-pdf": "^3.0.1",
+    "html-pdf-node": "^1.0.8",
     "http-errors": "~1.6.3",
     "jade": "~1.11.0",
     "jsonwebtoken": "^8.5.1",
@@ -21,6 +24,7 @@
     "multer": "^1.4.5-lts.1",
     "nodemailer": "^6.7.8",
     "nodemon": "^2.0.19",
+    "qrcode": "^1.5.1",
     "winston": "^3.1.0",
     "winston-daily-rotate-file": "^3.5.1"
   }

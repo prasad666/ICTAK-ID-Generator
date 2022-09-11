@@ -1,0 +1,32 @@
+.main{
+    margin: 5%;
+    
+}
+.card1{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+    border: 1px solid grey;
+    border-radius: 5px;
+    margin:1rem;
+    padding:2rem;
+}
+.download-button{
+    align-self: center;
+}
+.status{
+    font-size: 1.2rem;
+    font-weight: bold;
+
+}
+.items{
+    margin:1rem;
+}
+.text{
+    margin:.2rem
+}
+.pdfError{
+    padding: .7rem ;
+    color: rgb(210, 66, 66);
+}
