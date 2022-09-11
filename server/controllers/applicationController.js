@@ -2,6 +2,7 @@ var ApplicationModel = require("../models/applicationModel.js");
 var fs = require('fs');
 var path = require('path')
 var html_to_pdf = require('html-pdf-node');
+const { application } = require("express");
 
 /**
  * applicationController.js
@@ -261,7 +262,6 @@ module.exports = {
    * applicationController.getPdf()
    */
     getPdf: function (req, res) {
-       console.log(req.params.id);
        
       ApplicationModel.findOne({ _id: req.params.id })
       .populate('student_id')
@@ -274,6 +274,7 @@ module.exports = {
         }
        })
       .exec(function (err, application) {
+
         if (err) {
           return res.status(500).json({
             message: "Error when getting application.",
@@ -297,6 +298,9 @@ module.exports = {
           
         }
 
+        
+        const photo = application.student_id.photo?.split('/')[2]
+
         let qrData = 
         `        Name: ${application.student_id.first_name} ${application.student_id.last_name}, 
         Course: ${application.batch_id.course.course_name}, 
@@ -308,21 +312,22 @@ module.exports = {
 
           //pdf generate
           let html = 
-          `<div style="margin:7%;border:1px solid blue;border-radius:4px;padding:3%;font-family:Verdana, Geneva, Tahoma, sans-serif">
-            <div style="font-weight: bold;font-size:2rem;padding-bottom:.5rem">ICT Academy Kerala</div>
-            <div style="display:flex;justify-content:space-between;align-items: center;">
-              <div style="padding:0 0 0 5%  ">
+          `<div style="margin:7%;padding:3%;font-family:Verdana, Geneva, Tahoma, sans-serif">
+            <div style="font-weight: bold;font-size:2rem;padding-bottom:.5rem;text-align:center;">ICT ACADEMY KERALA</div>
+            <div style="display:flex;flex-direction:column;justify-content:space-evenly;align-items: center;">
+              <div style="text-align:center">
                 <div style="font-weight: bold;font-size:1.5rem;margin:1rem 0;">${application.student_id.first_name} ${application.student_id.last_name}</div>
                 <div style="font-weight: bold;">Student</div>
                 <div style="font-weight: bold;">Course: ${application.batch_id.course.course_name}</div>
                 <div >Batch: ${application.batch_id.batch_name}</div>
                 <div>ID:${application.student_id._id}</div>
               </div>
-              <div><img src='${qr}'/></div> 
-            </div>   
+              <div style="margin:5%"><img width="150px" src='${req.protocol}://${req.get('host')}/uploads/${photo}'/></div>
+              <div style="margin:5%"><img width="200px" src='${qr}'/></div>
+            </div>
           </div>`
          
-          let options = { format: 'A4', path:'./pdf/id.pdf' };
+          let options = { format: 'A5', path:'./pdf/id.pdf' };
           
           let file = { content: html };
           html_to_pdf.generatePdf(file, options).then(() => {
