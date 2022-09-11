@@ -322,18 +322,23 @@ module.exports = {
             </div>   
           </div>`
          
-          let options = { format: 'A4', path:'./pdf/test.pdf' };
+          let options = { format: 'A4', path:'./pdf/id.pdf' };
           
           let file = { content: html };
           html_to_pdf.generatePdf(file, options).then(() => {
             if (application.status==="approved") {
-               res.sendFile(path.resolve(__dirname +'/../pdf/test.pdf'));
+               res.sendFile(path.resolve(__dirname +'/../pdf/id.pdf'));
             }
           });
 
           
         })
-        .catch(err => {console.log(err)})
+        .catch(err => {
+          return res.status(500).json({
+            message: "Error when generating qr code.",
+            error: err
+          })
+        })
 
 
       });
