@@ -28,6 +28,7 @@ export class ApplicationsComponent implements OnInit {
     'registeredOn',
     'AppliedOn',
   ];
+  numberOfPendingApplications:any;
 
 
 
@@ -39,6 +40,7 @@ export class ApplicationsComponent implements OnInit {
         this.applications.getPendingApplications(this.batchesString)
         .subscribe({ 
           next: (data:any)=> {
+            this.numberOfPendingApplications= data.length;
             let modifiedData = data.map((e:any)=>{
               return {
                 '_id':e._id,

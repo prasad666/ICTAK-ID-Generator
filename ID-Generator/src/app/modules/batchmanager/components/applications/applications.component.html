@@ -103,8 +103,9 @@
     ></mat-row>
 
     <!-- Row shown when there is no matching data. -->
-    <div class="mat-row nodata" *matNoDataRow>
-      <div class="mat-cell " colspan="4">No data matching the filter "{{input.value}}"</div>
+    <div  class="mat-row nodata" *matNoDataRow>
+      <div *ngIf="numberOfPendingApplications" class="mat-cell " colspan="4">No data matching the filter "{{input.value}}"</div>
+      <div *ngIf="!numberOfPendingApplications" class="mat-cell " colspan="4">No Pending Applications</div>
     </div>
 
   </mat-table>
