@@ -2,6 +2,7 @@ const bcrypt = require("bcrypt");
 const crypto = require("crypto");
 
 var UserModel = require("../models/userModel.js");
+var ApplicationModel = require("../models/applicationModel.js");
 
 /**
  * userController.js
@@ -136,7 +137,23 @@ module.exports = {
           error: err.code,
         });
       }
-      return res.status(201).json(user);
+
+      //Create application
+      var application = new ApplicationModel({
+        student_id: user._id,
+        batch_id: req.body.batch,
+        status: "pending",
+        remarks: "",
+      });
+      application.save(function (err, appl) {
+        if (err && err.message) {
+          return res.status(500).json({
+            message: err.message,
+            error: err.code,
+          });
+        }
+        return res.status(201).json(user);
+      });
     });
   },
 
@@ -202,6 +219,37 @@ module.exports = {
       }
 
       return res.status(204).json();
+    });
+  },
+
+  activate: function (req, res) {
+    var id = req.params.id;
+    UserModel.findOne({ _id: id, role: "student" }, function (err, user) {
+      if (err) {
+        return res.status(500).json({
+          message: "Error when getting user",
+          error: err,
+        });
+      }
+
+      if (!user) {
+        return res.status(404).json({
+          message: "No such user",
+        });
+      }
+
+      user.activated = true;
+      user.enabled = true;
+      user.save(function (err, user) {
+        if (err) {
+          return res.status(500).json({
+            message: "Error when updating user.",
+            error: err,
+          });
+        }
+
+        return res.json(user);
+      });
     });
   },
 };

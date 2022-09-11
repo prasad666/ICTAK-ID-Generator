@@ -29,6 +29,7 @@ var userSchema = new Schema(
       enum: ["student", "batchManager", "admin"],
     },
     photo: String,
+    activated: { type: Boolean, default: false },
     enabled: Boolean,
     deleted: Boolean,
     deletedAt: Date,
