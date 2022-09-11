@@ -98,6 +98,15 @@
             >
               Email address is required
             </span>
+            <span
+              class="text-danger"
+              *ngIf="
+              f['email'].touched &&
+              f['email'].errors?.['email']
+            "
+            >
+              Email address is invalid
+            </span>
           </div>
           <div class="form-group py-3" id="text">
             <label for="alterEgo">Password</label>
@@ -115,6 +124,33 @@
             >
               Password is required
             </span>
+            <span
+              class="text-danger"
+              *ngIf="
+              f['password'].touched  &&
+              f['password'].errors?.['minlength']
+            "
+            >
+              Password required minimum 6 characters
+            </span>
+            <span
+              class="text-danger"
+              *ngIf="
+              f['password'].touched  &&
+              f['password'].errors?.['maxlength']
+            "
+            >
+              Password canhave maximum 16 characters
+            </span>
+            <span
+              class="text-danger"
+              *ngIf="
+              f['password'].touched  &&
+              f['password'].errors?.['pattern']
+            "
+            >
+              Password can not have white spaces
+            </span>
           </div>
           <div class="form-group py-3" id="text">
             <label for="alterEgo">Phone Number</label>
@@ -127,6 +163,15 @@
             "
             >
               Phone number is required
+            </span>
+            <span
+              class="text-danger"
+              *ngIf="
+              f['phone'].touched &&
+              f['phone'].errors?.['pattern']
+            "
+            >
+              Phone number is invalid
             </span>
           </div>
           <div class="form-group py-3" id="text">
