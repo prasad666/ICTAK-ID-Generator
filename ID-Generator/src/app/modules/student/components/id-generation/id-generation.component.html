@@ -1,9 +1,8 @@
 
 <div class="main">
-
-    <!-- <h3>Your application status is: {{data.status}}</h3>
-    <p *ngIf="data.remarks">Remarks: {{data.remarks}}</p>
-    <button mat-raised-button *ngIf="data.status==='approved'" (click)="this.onDownload()"> Download ID</button> -->
+    <h2>Application status</h2>
+    <div *ngIf="!numberOfApplications" class="card1">No applications found</div>
+    
     <div class="card1"  *ngFor="let application of data">
         <div class="items">
             <div class="text">Course: {{application.batch_id.course.course_name}}</div>

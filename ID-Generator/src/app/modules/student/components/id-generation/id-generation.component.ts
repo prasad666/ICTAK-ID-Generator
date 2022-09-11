@@ -18,13 +18,16 @@ export class IdGenerationComponent implements OnInit {
       batch_name:null
     },
   }];
+  numberOfApplications:any;
+
   constructor(private applicationService:ApplicationService) { }
 
   ngOnInit(): void {
     this.applicationService.applicationStatus()
     .subscribe({
-      next:(data)=>{
+      next:(data:any)=>{
         this.data= data
+        this.numberOfApplications= data.length
         console.log(data);
         
       },
