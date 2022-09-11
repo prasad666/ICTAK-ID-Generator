@@ -23,7 +23,13 @@ module.exports = {
     } = req.query;
     let queryObj = {};
     if (filter) {
-      queryObj = { first_name: new RegExp("^" + filter) };
+      queryObj = {
+        $or: [
+          { first_name: new RegExp("^" + filter) },
+          { last_name: new RegExp("^" + filter) },
+          { email: new RegExp("^" + filter) },
+        ],
+      };
     }
     if (role) {
       queryObj.role = role;
@@ -105,6 +111,32 @@ module.exports = {
         });
       }
 
+      return res.status(201).json(user);
+    });
+  },
+
+  register: async function (req, res) {
+    console.log(req);
+    var password = await bcrypt.hash(req.body.password, 12);
+    var user = new UserModel({
+      first_name: req.body.first_name,
+      last_name: req.body.last_name,
+      password: password,
+      email: req.body.email,
+      photo: req.file.path,
+      role: "student",
+      enabled: false,
+      deleted: false,
+      deletedAt: null,
+    });
+
+    user.save(function (err, user) {
+      if (err && err.message) {
+        return res.status(500).json({
+          message: err.message,
+          error: err.code,
+        });
+      }
       return res.status(201).json(user);
     });
   },

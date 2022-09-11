@@ -7,11 +7,7 @@ import { environment } from 'src/environments/environment';
 })
 export class RegistrationService {
   constructor(private http: HttpClient) {}
-  newStudent(item: any) {
-    return this.http
-      .post(environment.api_url + '/insert', { student: item })
-      .subscribe((data) => {
-        console.log(data);
-      });
+  newStudent(item: FormData) {
+    return this.http.post(environment.api_url + '/users/register', item);
   }
 }

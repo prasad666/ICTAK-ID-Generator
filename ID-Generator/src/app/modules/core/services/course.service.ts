@@ -30,6 +30,10 @@ export class CourseService {
     return this.http.get<Course[]>(this.API + 'all', {});
   }
 
+  getAllEnabledCourses(): Observable<Course[]> {
+    return this.http.get<Course[]>(this.API + 'all-enabled', {});
+  }
+
   create(data: any): any {
     return this.http.post(this.API, data);
   }
