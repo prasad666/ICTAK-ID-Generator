@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewChild,ElementRef  } from '@angular/core';
 import { FormBuilder, FormGroup, Validators,FormControl } from '@angular/forms';
 import { RegistrationService } from '../../registration.service';
+import { jsPDF} from 'jspdf'
 
 
 
@@ -12,7 +13,7 @@ import { RegistrationService } from '../../registration.service';
 export class RegistrationComponent implements OnInit {
   
 
-  constructor(private registration:RegistrationService,public fb:FormBuilder){}
+  constructor(private registration:RegistrationService,public fb:FormBuilder,public el:ElementRef){}
 
   batch:any=['FSDC','BLOCK CHAIN','ARTIFICIAL INTELIGENTS'];
   submitted = false;
@@ -52,5 +53,24 @@ export class RegistrationComponent implements OnInit {
     this.registration.newStudent(this.registerForm.value);
     console.log("Called");    
     alert("Success");
+  }
+  
+  
+  createPdf(){
+    if(this.registerForm.valid){
+      let pdf = new jsPDF('p', 'mm', [1500, 1500])
+    pdf.html(this.el.nativeElement,{
+      callback:(pdf)=>{
+        pdf.save("register form.pdf")
+      }
+    })
+    console.log("pdf created");
+
+    }else{
+      alert("Registration incomplete;unable to make copy")
+      return
+    }
+    
+    
   }
 }
