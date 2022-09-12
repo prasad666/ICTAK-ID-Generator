@@ -327,7 +327,7 @@ module.exports = {
             </div>
           </div>`
          
-          let options = { format: 'A5', path:'./pdf/id.pdf' };
+          let options = { format: 'A5', path:'./pdf/id.pdf',args: ['--no-sandbox', '--disable-setuid-sandbox']  };
           
           let file = { content: html };
           html_to_pdf.generatePdf(file, options).then(() => {
