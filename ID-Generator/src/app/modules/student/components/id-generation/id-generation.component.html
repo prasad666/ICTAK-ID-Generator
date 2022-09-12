@@ -17,8 +17,8 @@
             <div class="download-button items" *ngIf="application.status==='approved'">
                 <button mat-raised-button  (click)="this.onDownload(application._id)"> Download ID</button> 
                 <mat-progress-bar *ngIf="pdfLoading===application._id"  mode="indeterminate"></mat-progress-bar>
-                <div *ngIf="pdfError" class="pdfError">{{pdfError}}</div>
             </div>
+            <div *ngIf="pdfError" class="pdfError">{{pdfError}}</div>
         </div>
     </ng-container>
 </div>
