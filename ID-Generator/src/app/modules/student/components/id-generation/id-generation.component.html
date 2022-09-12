@@ -1,8 +1,8 @@
-
+<mat-progress-bar class="bar" *ngIf="numberOfApplications===-1" mode="indeterminate"></mat-progress-bar>
 <div class="main">
     <h2 class="head">Application status</h2>
-    <div *ngIf="!numberOfApplications" class="card1">No applications found</div>
-    <ng-container *ngIf="numberOfApplications" >
+    <div *ngIf="numberOfApplications===0" class="card1">No applications found</div>
+    <ng-container *ngIf="numberOfApplications>0" >
         <div class="card1"  *ngFor="let application of data">
             <div class="items">
                 <div class="text">Course: {{application.batch_id.course.course_name}}</div>

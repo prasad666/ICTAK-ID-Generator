@@ -18,7 +18,7 @@ export class IdGenerationComponent implements OnInit {
       batch_name:null
     },
   }];
-  numberOfApplications:any;
+  numberOfApplications:any= -1;
 
   constructor(private applicationService:ApplicationService) { }
 
