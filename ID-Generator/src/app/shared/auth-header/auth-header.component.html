@@ -3,11 +3,10 @@
   <a class="navbar-brand ps-3" href="index.html">{{ componentTitle }}</a>
   <!-- Sidebar Toggle-->
   <button
-    data-toggle="collapse"
-    data-target="#navbarNavDropdown"
     class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0"
     id="sidebarToggle"
     href="#!"
+    (click)="toggleClicked()"
   >
     <i class="fas fa-bars"></i>
   </button>
