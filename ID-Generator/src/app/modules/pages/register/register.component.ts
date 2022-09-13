@@ -105,7 +105,7 @@ export class RegisterComponent implements OnInit {
           this.form.reset();
         }
 
-        document.body.scrollTo({
+        window.scroll({
           top: 0,
           left: 0,
           behavior: 'smooth',

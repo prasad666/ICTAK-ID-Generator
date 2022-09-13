@@ -14,6 +14,8 @@ import { ContactService } from 'src/app/shared/services/contact.service';
 })
 export class ContactusComponent implements OnInit {
   FormData!: FormGroup;
+  submitSuccess = false;
+  submitError = false;
   constructor(private builder: FormBuilder, private contact: ContactService) {}
 
   ngOnInit(): void {
@@ -27,12 +29,21 @@ export class ContactusComponent implements OnInit {
 
   onSubmit(FormData: any) {
     console.log(FormData);
+    this.submitSuccess = false;
+    this.submitError = false;
     this.contact.PostMessage(FormData).subscribe(
       (response) => {
-        location.href = '/pages/contact';
+        this.submitSuccess = true;
+        this.FormData.reset();
         console.log(response);
+        window.scroll({
+          top: 0,
+          left: 0,
+          behavior: 'smooth',
+        });
       },
       (error) => {
+        this.submitError = true;
         console.warn(error.responseText);
         console.log({ error });
       }
