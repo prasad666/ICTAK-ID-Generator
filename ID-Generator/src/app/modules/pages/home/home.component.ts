@@ -35,17 +35,11 @@ export class HomeComponent implements OnInit {
         }
 
         if (data.user.role === 'student') {
-          this.router.navigate(['secure/student']).then(() => {
-            window.location.reload();
-          });
+          this.router.navigate(['secure/student']);
         } else if (data.user.role === 'batchManager') {
-          this.router.navigate(['backend/batchmanager']).then(() => {
-            window.location.reload();
-          });
+          this.router.navigate(['backend/batchmanager']);
         } else if (data.user.role === 'admin') {
-          this.router.navigate(['backend/admin']).then(() => {
-            window.location.reload();
-          });
+          this.router.navigate(['backend/admin']);
         } else {
           this.loginError = "Couldn't identify user";
         }
