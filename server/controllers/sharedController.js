@@ -10,7 +10,7 @@ Remarks:<br/>
 ${req.body.Comment}
     `;
     await sendMail({
-      mail: "prasad666@gmail.com",
+      mail: process.env.EMAIL,
       subject: "New contact form submission",
       message: message,
     }).then(() => res.json({ status: "success" }));
